@@ -12,12 +12,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     UserService(UserRepository userRepository){
+
         this.userRepository=userRepository;
     }
     @GetMapping("/count")
     public String countUsers(){
         int total=userRepository.countUsers();
-        return String.format("Tienes en total%susuarios.",total);
+        return String.format("Tienes en total % susuarios.",total);
     }
 
     @GetMapping("/getall")
