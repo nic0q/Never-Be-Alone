@@ -5,7 +5,7 @@ import com.example.fingeso.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@CrossOrigin(origins="")
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping(value = "users")
 public class UserService {
@@ -18,7 +18,7 @@ public class UserService {
     @GetMapping("/count")
     public String countUsers(){
         int total=userRepository.countUsers();
-        return String.format("Tienes en total % susuarios.",total);
+        return String.format("Tienes en total %s usuarios.",total);
     }
 
     @GetMapping("/getall")
