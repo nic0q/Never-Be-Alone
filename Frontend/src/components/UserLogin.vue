@@ -1,0 +1,25 @@
+<style>@import '../assets/loginStyles.css';</style>
+<template>
+<div class="container mt-5">
+<main class="form-signin">
+<form method="POST" action="">
+<h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+<div class="form-floating">
+<input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
+<label for="floatingUsername">Correo Electrónico</label>
+</div>
+<div class="form-floating">
+<input type="text" class="form-control" id="password" name="password" placeholder="name@example.com">
+<label for="floatingUsername">Contraseña</label>
+</div>
+<div class="checkbox mb-3">
+  <label>
+    <input type="checkbox" value="remember-me"> Recuerdame
+  </label>
+</div>
+<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+</form>
+</main>
+</div>
+
+</template>
