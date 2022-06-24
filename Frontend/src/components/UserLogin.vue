@@ -1,9 +1,10 @@
 <style>@import '../assets/loginStyles.css';</style>
 <template>
 <div class="container mt-5">
-<img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
+
 <main class="form-signin">
 <form method="POST" action="">
+  <ImagenLogo></ImagenLogo>
 <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
 <div class="form-floating">
 <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
@@ -25,3 +26,13 @@
 </div>
 
 </template>
+<script>
+// @ is an alias to /src
+import ImagenLogo from '../components/ImagenLogo'
+export default {
+  name: 'HomeView',
+  components: {
+    ImagenLogo
+  }
+}
+</script>
