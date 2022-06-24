@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserLogin from '../components/UserLogin'
 import DenunciasUsuario from '../components/DenunciasUsuario'
+import IngresarDenuncia from '../components/IngresarDenuncia'
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -20,6 +21,11 @@ export default new VueRouter({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    },
+    {
+      path: '/ingresar-denuncia',
+      name: 'ingresar-denuncia',
+      component: IngresarDenuncia
     }
   ]
 })
