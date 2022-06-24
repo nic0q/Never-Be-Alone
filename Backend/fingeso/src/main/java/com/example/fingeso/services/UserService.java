@@ -22,7 +22,7 @@ public class UserService {
     }
 
     @GetMapping("/getall")
-    public List<User>getAllDiploma() {
+    public List<User>getAllUsers() {
         return userRepository.getAllUsers();
     }
 }
