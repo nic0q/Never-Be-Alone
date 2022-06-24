@@ -1,6 +1,7 @@
 <style>@import '../assets/loginStyles.css';</style>
 <template>
 <div class="container mt-5">
+<img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
 <main class="form-signin">
 <form method="POST" action="">
 <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
@@ -19,6 +20,7 @@
 </div>
 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 </form>
+<p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </main>
 </div>
 
