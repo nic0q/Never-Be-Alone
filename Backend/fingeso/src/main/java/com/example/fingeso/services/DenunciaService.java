@@ -9,9 +9,5 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "denuncias")
 public class DenunciaService {
-    private final DenunciaService denunciaService;
-    DenunciaService(DenunciaService denunciaService){
-        this.denunciaService = denunciaService;
-    }
 
 }
