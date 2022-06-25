@@ -34,7 +34,7 @@ public class UserRepositoryImp implements UserRepository{
 
     @Override
     public List<User> getAllUsers(){
-        final String query = "select * from users";
+        final String query = "select * from user";
         final List<User> usersTotal;
         Connection conn = sql2o.open();
         try( conn ){
@@ -51,7 +51,7 @@ public class UserRepositoryImp implements UserRepository{
 
     @Override
     public List<User> getByRol(Integer rol){
-        final String query = "select * from users where rol =: rol";
+        final String query = "SELECT * FROM USER WHERE ROL =: rol";
         final List<User> usersRol;
         Connection conn = sql2o.open();
         try( conn ){

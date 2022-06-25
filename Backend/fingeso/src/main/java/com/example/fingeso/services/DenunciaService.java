@@ -20,21 +20,21 @@ public class DenunciaService {
         return String.format("Tienes en total %s denuncias.",total);
     }
 
-    @GetMapping("/get-by-fiscal")
+    @GetMapping("/get-by-fiscal/{fiscal}")
     @ResponseBody
-    public List<Denuncia> getByFiscal(User fiscal){
+    public List<Denuncia> getByFiscal(@PathVariable("fiscal") User fiscal){
         return denunciaRepository.getByFiscal(fiscal);
     }
 
-    @GetMapping("/get-denuncias-denunciante")
+    @GetMapping("/get-denuncias-denunciante/{user}")
     @ResponseBody
-    public List<Denuncia> findDenunciaDenunciante(User user){
+    public List<Denuncia> findDenunciaDenunciante(@PathVariable("user") User user){
         return denunciaRepository.findDenunciaDenunciante(user);
     }
 
-    @GetMapping("/get-denuncias-denunciado")
+    @GetMapping("/get-denuncias-denunciado/{user}")
     @ResponseBody
-    public List<Denuncia> findDenunciaDenunciado(User user){
+    public List<Denuncia> findDenunciaDenunciado(@PathVariable("user") User user){
         return denunciaRepository.findDenunciaDenunciado(user);
     }
 
