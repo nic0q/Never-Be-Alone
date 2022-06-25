@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import UserLogin from '../components/UserLogin'
 import DenunciasUsuario from '../components/DenunciasUsuario'
 import IngresarDenuncia from '../components/IngresarDenuncia'
+import ActualizarDenuncia from '../components/ActualizarDenuncia'
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -26,6 +27,12 @@ export default new VueRouter({
       path: '/ingresar-denuncia',
       name: 'ingresar-denuncia',
       component: IngresarDenuncia
+    },
+    {
+      path: '/actualizar-denuncia',
+      name: 'actualizar-denuncia',
+      component: ActualizarDenuncia
+
     }
   ]
 })
