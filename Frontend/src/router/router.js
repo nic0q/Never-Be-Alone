@@ -4,6 +4,7 @@ import UserLogin from '../components/UserLogin'
 import DenunciasUsuario from '../components/DenunciasUsuario'
 import IngresarDenuncia from '../components/IngresarDenuncia'
 import ActualizarDenuncia from '../components/ActualizarDenuncia'
+import BloqueoRol from '../components/BloqueoRol'
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -33,6 +34,11 @@ export default new VueRouter({
       name: 'actualizar-denuncia',
       component: ActualizarDenuncia
 
+    },
+    {
+      path: '/bloqueo-rol',
+      name: 'bloqueo-rol',
+      component: BloqueoRol
     }
   ]
 })
