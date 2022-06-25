@@ -1,8 +1,7 @@
 <style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
-<div class="mt-5">
+<div class="">
 <div>
-  <ImagenLogo></ImagenLogo>
   <NavBar></NavBar>
 </div>
 <div class = "container">
@@ -31,19 +30,18 @@
 </template>
 <script>
 // @ is an alias to /src
-import ImagenLogo from '../components/ImagenLogo'
 import NavBar from '@/components/NavBar'
 export default {
   name: 'HomeView',
   components: {
-    NavBar,
-    ImagenLogo
+    NavBar
   }
 }
 </script>
 <style scooped>
 .container{
   display: flex;
+  margin-top: 100px;
 }
 
 </style>
