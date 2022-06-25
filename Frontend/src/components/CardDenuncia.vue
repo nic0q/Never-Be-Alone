@@ -8,7 +8,7 @@
 .card{
   width: 200px;
   height: 200px;
-  background-color: orange;
+  background-color: #FF9900;
   display: flex;
   margin: 5px;
 }
