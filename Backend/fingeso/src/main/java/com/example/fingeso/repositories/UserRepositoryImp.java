@@ -35,11 +35,28 @@ public class UserRepositoryImp implements UserRepository{
     @Override
     public List<User> getAllUsers(){
         final String query = "select * from users";
-        final List<User> diplomas;
+        final List<User> usersTotal;
         Connection conn = sql2o.open();
         try( conn ){
-            diplomas = conn.createQuery(query).executeAndFetch(User.class);
-            return diplomas;
+            usersTotal = conn.createQuery(query).executeAndFetch(User.class);
+            return usersTotal;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
+
+    @Override
+    public List<User> getByRol(Integer rol){
+        final String query = "select * from users where rol =: rol";
+        final List<User> usersRol;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersRol = conn.createQuery(query).executeAndFetch(User.class);
+            return usersRol;
         } catch (Exception e){
             System.out.println(e.getMessage());
             return null;

@@ -3,6 +3,8 @@ package com.example.fingeso.services;
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.geom.QuadCurve2D;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -24,5 +26,10 @@ public class UserService {
     @GetMapping("/getall")
     public List<User>getAllUsers() {
         return userRepository.getAllUsers();
+    }
+
+    @GetMapping("/get-by-rol")
+    public List<User> getByRol(Integer rol){
+        return userRepository.getByRol(rol);
     }
 }

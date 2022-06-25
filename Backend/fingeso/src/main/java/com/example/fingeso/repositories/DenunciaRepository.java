@@ -9,6 +9,7 @@ import java.util.List;
 public interface DenunciaRepository {
     int countDenuncias();
     List<Denuncia> getAllDenuncias();
+    List<Denuncia> getByFiscal(User fiscal);
     List<Denuncia> findDenunciaDenunciante(User user);
     List<Denuncia> findDenunciaDenunciado(User user);
 }

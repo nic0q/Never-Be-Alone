@@ -49,6 +49,22 @@ public class DenunciaRepositoryImp {
         }
     }
 
+    public List<Denuncia> getByFiscal(User fiscalACargo){
+        final String query = "select * from denuncias where fiscal =: fiscalACargo";
+        final List<Denuncia> denuncias;
+        Connection conn = sql2o.open();
+        try( conn ){
+            denuncias = conn.createQuery(query).executeAndFetch(Denuncia.class);
+            return denuncias;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
+
     //@Override
     List<Denuncia> findDenunciaDenunciante(User user){
         Integer IDuser;
