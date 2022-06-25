@@ -5,7 +5,6 @@
   <ImagenLogo></ImagenLogo>
   <NavBar></NavBar>
 </div>
-
 <div class = "container">
     <div class=" m-2">
     <label for="floatingUsername">Nombres</label>
@@ -22,8 +21,8 @@
   <input type="text" class="form-control " id="last_name_one" name="last_name_one">
   </div>
 <div class=" m-2">
-  <label for="floatingUsername">Apellido Materno</label>
-  <input type="text" class="form-control" id="last_name_two" name="last_name_two">
+<label for="floatingUsername">Apellido Materno</label>
+<input type="text" class="form-control" id="last_name_two" name="last_name_two">
 </div>
 </div>
 <button class="w-90 s-30 btn btn-lg btn-primary" type="submit">Guardar y enviar</button>
