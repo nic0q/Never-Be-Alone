@@ -14,6 +14,12 @@ import java.util.List;
 public class DenunciaService {
     private DenunciaRepository denunciaRepository;
 
+
+    DenunciaService(DenunciaRepository denunciaRepository){
+
+        this.denunciaRepository = denunciaRepository;
+    }
+
     @GetMapping("/count")
     public String countDenuncias(){
         int total=denunciaRepository.countDenuncias();

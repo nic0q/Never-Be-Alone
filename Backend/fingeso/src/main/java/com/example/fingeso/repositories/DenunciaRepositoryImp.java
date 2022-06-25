@@ -11,7 +11,7 @@ import org.sql2o.Sql2o;
 import java.util.List;
 
 @Repository
-public class DenunciaRepositoryImp {
+public class DenunciaRepositoryImp implements DenunciaRepository {
     @Autowired
     private Sql2o sql2o;
 
@@ -20,7 +20,7 @@ public class DenunciaRepositoryImp {
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIA").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIAS").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -32,7 +32,7 @@ public class DenunciaRepositoryImp {
         }
     }
 
-    //@Override
+    @Override
     public List<Denuncia> getAllDenuncias(){
         final String query = "select * from denuncias";
         final List<Denuncia> denuncias;
@@ -48,7 +48,7 @@ public class DenunciaRepositoryImp {
             conn.close();
         }
     }
-
+    @Override
     public List<Denuncia> getByFiscal(User fiscalACargo){
         final String query = "select * from denuncias where fiscal =: fiscalACargo";
         final List<Denuncia> denuncias;
@@ -65,8 +65,8 @@ public class DenunciaRepositoryImp {
         }
     }
 
-    //@Override
-    List<Denuncia> findDenunciaDenunciante(User user){
+    @Override
+    public List<Denuncia> findDenunciaDenunciante(User user){
         Integer IDuser;
         final String query = "select * from denuncias where denuncianteID =: IDuser";
         final List<Denuncia> denuncias;
@@ -83,8 +83,8 @@ public class DenunciaRepositoryImp {
         }
     }
 
-    //@Override
-    List<Denuncia> findDenunciaDenunciado(User user){
+    @Override
+    public List<Denuncia> findDenunciaDenunciado(User user){
         Integer IDuser;
         final String query = "select * from denuncias where denunciadoID =: IDuser";
         final List<Denuncia> denuncias;
