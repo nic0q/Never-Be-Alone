@@ -3,13 +3,15 @@ package com.example.fingeso.services;
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
-@CrossOrigin(origins="")
+
+import java.awt.geom.QuadCurve2D;
+import java.util.*;
+
+@CrossOrigin(origins="*")
 @RestController
-@RequestMapping(value = "users")
+@RequestMapping(value = "user")
 public class UserService {
-
     private final UserRepository userRepository;
     UserService(UserRepository userRepository){
 
@@ -18,11 +20,17 @@ public class UserService {
     @GetMapping("/count")
     public String countUsers(){
         int total=userRepository.countUsers();
-        return String.format("Tienes en total % susuarios.",total);
+        System.out.println("aaaaaaaa");
+        return String.format("Tienes en total %s usuarios.",total);
     }
 
     @GetMapping("/getall")
-    public List<User>getAllDiploma() {
+    public List<User>getAllUsers() {
         return userRepository.getAllUsers();
+    }
+
+    @GetMapping(value = "/get-by-rol/{rol}")
+    public List<User> getByRol(@PathVariable("rol") Integer rol){
+        return userRepository.getByRol(rol);
     }
 }
