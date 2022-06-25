@@ -49,8 +49,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository {
         }
     }
     @Override
-    public List<Denuncia> getByFiscal(User fiscalACargo){
-        final String query = "select * from denuncias where fiscal =: fiscalACargo";
+    public List<Denuncia> getByFiscal(Integer fiscalID){
+        final String query = "select * from denuncias where fiscalID = '" + fiscalID +"'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -66,9 +66,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository {
     }
 
     @Override
-    public List<Denuncia> findDenunciaDenunciante(User user){
-        Integer IDuser;
-        final String query = "select * from denuncias where denuncianteID =: IDuser";
+    public List<Denuncia> findDenunciaDenunciante(Integer userID){
+        final String query = "select * from denuncias where denuncianteID = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -84,9 +83,10 @@ public class DenunciaRepositoryImp implements DenunciaRepository {
     }
 
     @Override
-    public List<Denuncia> findDenunciaDenunciado(User user){
-        Integer IDuser;
-        final String query = "select * from denuncias where denunciadoID =: IDuser";
+    public List<Denuncia> findDenunciaDenunciado(Integer userID){
+
+        final String query = "select * from denuncias where denunciadoID = '" + userID + "'";
+        System.out.println("aaa");
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){

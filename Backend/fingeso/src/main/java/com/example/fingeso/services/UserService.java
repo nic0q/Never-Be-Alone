@@ -20,7 +20,6 @@ public class UserService {
     @GetMapping("/count")
     public String countUsers(){
         int total=userRepository.countUsers();
-        System.out.println("aaaaaaaa");
         return String.format("Tienes en total %s usuarios.",total);
     }
 
