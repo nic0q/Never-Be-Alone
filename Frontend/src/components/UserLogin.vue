@@ -5,7 +5,7 @@
 <main class="form-signin">
 <form method="POST" action="">
   <ImagenLogo></ImagenLogo>
-<h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+<h1 class="h3 mt-4 mb-3 fw-normal">Iniciar Sesión</h1>
 <div class="form-floating">
 <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
 <label for="floatingUsername">Correo Electrónico</label>

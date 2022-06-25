@@ -10,6 +10,7 @@
   height: 200px;
   background-color: orange;
   display: flex;
+  margin: 5px;
 }
 .buttoon{
   border-radius: 40%;
