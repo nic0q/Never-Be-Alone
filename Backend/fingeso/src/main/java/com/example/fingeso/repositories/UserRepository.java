@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserRepository{
     int countUsers();
     List<User>getAllUsers();
+    List<User>getByRol(Integer rol);
 }
