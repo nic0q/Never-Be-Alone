@@ -23,16 +23,34 @@
 </form>
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </main>
+<button v-on:click='countUsers'>a</button>
+<p>
+  {{users}}
+</p>
 </div>
-
 </template>
 <script>
 // @ is an alias to /src
 import ImagenLogo from '../components/ImagenLogo'
+import axios from 'axios'
+
 export default {
   name: 'HomeView',
   components: {
     ImagenLogo
+  },
+  data () {
+    return {
+      users: ''
+    }
+  },
+  methods: {
+    countUsers () {
+      axios.get('http://localhost:8080/user/count').then(response => {
+        this.users = response.data
+        console.log(response)
+      })
+    }
   }
 }
 </script>
