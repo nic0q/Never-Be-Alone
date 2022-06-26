@@ -81,18 +81,22 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
+    // Returns
+    // 0: Exito
+    // -1: Fallido
     public Integer postUser(@RequestBody User user){
+        Connection con = sql2o.open();
         final String query  =
                 "insert into usuario (id_usuario,email,password,id_rol,id_estamento)"+
                 "VALUES (:id_usuario, :email,:password,:id_rol,:id_estamento)";
-        Connection con = sql2o.open();
+        int total = countUsers();
         try ( con ) {
             con.createQuery(query)
-                    .addParameter("id_usuario", user.getId())
+                    .addParameter("id_usuario", total)
                     .addParameter("email", user.getCorreo())
                     .addParameter("password", user.getContrasenia())
                     .addParameter("id_rol",user.getRol())
-                    .addParameter("id_estamento",5)
+                    .addParameter("id_estamento",user.getEstamento())
                     .executeUpdate();
             return 0;
         }

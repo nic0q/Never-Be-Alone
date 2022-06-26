@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping(value = "denuncias")
+@RequestMapping(value = "denuncia")
 public class DenunciaService {
     private DenunciaRepository denunciaRepository;
     DenunciaService(DenunciaRepository denunciaRepository){
@@ -26,6 +26,7 @@ public class DenunciaService {
     public List<Denuncia>getAllDenuncias() {
         return denunciaRepository.getAllDenuncias();
     }
+    /*
     @GetMapping("/get-by-fiscal/{fiscal}")
     @ResponseBody
     public List<Denuncia> getByFiscal(@PathVariable("fiscal") User fiscal){
@@ -42,7 +43,7 @@ public class DenunciaService {
     @ResponseBody
     public List<Denuncia> findDenunciaDenunciado(@PathVariable("user") User user){
         return denunciaRepository.findDenunciaDenunciado(user);
-    }
+    }*/
     @PostMapping(value = "/post-denuncia")
     public Integer postUser(@RequestBody Denuncia denuncia){return denunciaRepository.insertDenounce(denuncia);}
 }

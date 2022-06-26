@@ -11,5 +11,5 @@ public interface UserRepository{
     List<User>getAllUsers();
     List<User>getByRol(Integer rol);
     List<User>getById(Integer id);
-    Integer postUser(@RequestBody User user);
+    Integer postUser(User user);
 }

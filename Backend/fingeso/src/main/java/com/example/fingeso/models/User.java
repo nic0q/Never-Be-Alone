@@ -6,10 +6,10 @@ public class User {
     private String password;
     private Integer id_rol;
     private Integer id_estamento;
-    public User(Integer id, String correo, String contrasenia, Integer id_rol, Integer id_estamento) {
+    public User(Integer id, String email, String password, Integer id_rol, Integer id_estamento) {
         this.id_usuario = id;
-        this.email = correo;
-        this.password = contrasenia;
+        this.email = email;
+        this.password = password;
         this.id_rol = id_rol;
         this.id_estamento = id_estamento;
     }

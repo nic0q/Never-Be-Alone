@@ -18,7 +18,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIAS").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIA").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -31,7 +31,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     }
     //@Override
     public List<Denuncia> getAllDenuncias(){
-        final String query = "select * from denuncias";
+        final String query = "select * from denuncia";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -46,7 +46,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
 
-    public List<Denuncia> getByFiscal(User fiscalACargo){
+    /*public List<Denuncia> getByFiscal(User fiscalACargo){
         final String query = "select * from denuncias where fiscal =: fiscalACargo";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
@@ -97,6 +97,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    */
     /*
      * Se establece codigos de validez
      * 0 : correcto ingreso
@@ -107,18 +108,17 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     public Integer insertDenounce(@RequestBody Denuncia denuncia){
         Connection conn = sql2o.open();
         int total = countDenuncias();
-        final String query = "insert into denuncias (denuncianteID,estamento,hechos,medidasPrevencion,denunciadoID,estado,fiscalID)"+
-                "values (:denuncianteID, :estamento, :hechos, :medidasPrevencion, :denunciadoID, :estado,:fiscalID)";
+        final String query = "insert into denuncia (id_denuncia,id_denunciante,id_denunciado,id_estamento_denunciado,descripcion,medidas,id_estado)"+
+                "values (:id_denuncia,:id_denunciante, :id_denunciado, :id_estamento_denunciado, :descripcion, :medidas, :id_estado)";
         try (conn) {
-            System.out.println(denuncia.getIdDenunciante());
             conn.createQuery(query)
-                    .addParameter("denuncianteID",1)
-                    .addParameter("estamento",2)
-                    .addParameter("hechos",3)
-                    .addParameter("medidasPrevencion",4)
-                    .addParameter("denunciadoID",5)
-                    .addParameter("estado",6)
-                    .addParameter("fiscalID",7)
+                    .addParameter("id_denuncia",total)
+                    .addParameter("id_denunciante",1)
+                    .addParameter("id_denunciado",2)
+                    .addParameter("id_estamento_denunciado",44)
+                    .addParameter("descripcion","3")
+                    .addParameter("medidas","4")
+                    .addParameter("id_estado",5)
                     .executeUpdate();
             return 0;
         } catch (Exception e) {
