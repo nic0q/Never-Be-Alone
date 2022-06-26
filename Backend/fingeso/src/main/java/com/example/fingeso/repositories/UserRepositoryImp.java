@@ -49,7 +49,6 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
-
     @Override
     public List<User> getByRol(Integer rol){
         final String query = "SELECT * FROM usuario WHERE id_rol = '" + rol + "'";
@@ -58,6 +57,21 @@ public class UserRepositoryImp implements UserRepository{
         try( conn ){
             usersRol = conn.createQuery(query).executeAndFetch(User.class);
             return usersRol;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
+    public List<User> getByEmail(String email){
+        final String query = "SELECT * FROM usuario WHERE email = '" + email + "'";
+        final List<User> usersMail;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersMail = conn.createQuery(query).executeAndFetch(User.class);
+            return usersMail;
         } catch (Exception e){
             System.out.println(e.getMessage());
             return null;

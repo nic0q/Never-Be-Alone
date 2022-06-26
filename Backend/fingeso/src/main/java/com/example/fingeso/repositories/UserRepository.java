@@ -10,6 +10,7 @@ public interface UserRepository{
     int countUsers();
     List<User>getAllUsers();
     List<User>getByRol(Integer rol);
+    List<User>getByEmail(String email);
     List<User>getById(Integer id);
     Integer postUser(User user);
 }

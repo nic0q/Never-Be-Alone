@@ -12,5 +12,5 @@ public interface DenunciaRepository {
     //List<Denuncia> getByFiscal(User fiscal);
     //List<Denuncia> findDenunciaDenunciante(User user);
     //List<Denuncia> findDenunciaDenunciado(User user);
-    Integer insertDenounce(Denuncia denuncia);
+    Integer postDenuncia(Denuncia denuncia);
 }

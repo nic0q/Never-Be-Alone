@@ -22,6 +22,10 @@ public class UserService {
     public List<User>getAllUsers() {
         return userRepository.getAllUsers();
     }
+    @GetMapping(value = "/get-by-email/{email}")
+    public List<User> getByEmail(@PathVariable("email") String email){
+        return userRepository.getByEmail(email);
+    }
     @GetMapping(value = "/get-by-rol/{rol}")
     public List<User> getByRol(@PathVariable("rol") Integer rol){
         return userRepository.getByRol(rol);

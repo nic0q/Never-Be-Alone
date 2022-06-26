@@ -105,7 +105,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
      * 2: error en correo denunciado
      * -1: error al ingreso en la base de datos
      * */
-    public Integer insertDenounce(@RequestBody Denuncia denuncia){
+    public Integer postDenuncia(@RequestBody Denuncia denuncia){
         Connection conn = sql2o.open();
         int total = countDenuncias();
         final String query = "insert into denuncia (id_denuncia,id_denunciante,id_denunciado,id_estamento_denunciado,descripcion,medidas,id_estado)"+
@@ -113,8 +113,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         try (conn) {
             conn.createQuery(query)
                     .addParameter("id_denuncia",total)
-                    .addParameter("id_denunciante",1)
-                    .addParameter("id_denunciado",2)
+                    .addParameter("id_denunciante",denuncia.getIdDenunciante())
+                    .addParameter("id_denunciado",denuncia.getIdDenunciado())
                     .addParameter("id_estamento_denunciado",44)
                     .addParameter("descripcion","3")
                     .addParameter("medidas","4")

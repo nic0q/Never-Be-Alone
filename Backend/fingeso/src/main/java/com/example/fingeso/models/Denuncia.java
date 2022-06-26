@@ -8,7 +8,8 @@ public class Denuncia {
     private String descripcion;
     private String medidas;
     private Integer id_estado;
-    public Denuncia(Integer id_denuncia, Integer id_denunciante, Integer id_denunciado, Integer id_estamento_denunciado, String descripcion, String medidas, Integer id_estado) {
+    private Integer id_fiscal;
+    public Denuncia(Integer id_denuncia, Integer id_denunciante, Integer id_denunciado, Integer id_estamento_denunciado, String descripcion, String medidas, Integer id_estado, Integer id_fiscal) {
         this.id_denuncia = id_denuncia;
         this.id_denunciante = id_denunciante;
         this.id_denunciado = id_denunciado;
@@ -16,6 +17,7 @@ public class Denuncia {
         this.descripcion=descripcion;
         this.medidas=medidas;
         this.id_estado=id_estado;
+        this.id_fiscal = id_fiscal;
     }
     public Integer getIdDenuncia() {
         return id_denuncia;
@@ -32,5 +34,6 @@ public class Denuncia {
     public Integer getIdEstado() {
         return id_estado;
     }
+    public Integer getIdFiscal(){return id_fiscal;}
 
 }

@@ -45,5 +45,5 @@ public class DenunciaService {
         return denunciaRepository.findDenunciaDenunciado(user);
     }*/
     @PostMapping(value = "/post-denuncia")
-    public Integer postUser(@RequestBody Denuncia denuncia){return denunciaRepository.insertDenounce(denuncia);}
+    public Integer postUser(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 }

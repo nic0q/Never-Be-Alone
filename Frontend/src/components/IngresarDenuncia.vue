@@ -23,6 +23,10 @@
 <label for="floatingUsername">Apellido Materno</label>
 <input type="text" class="form-control" id="last_name_two" name="last_name_two">
 </div>
+<div class=" m-2">
+<label for="floatingUsername">Correo Denunciado</label>
+<input type="text" class="form-control" id="last_name_two" name="last_name_two">
+</div>
 </div>
 <button class="w-90 s-30 btn btn-lg btn-primary" type="submit">Guardar y enviar</button>
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
