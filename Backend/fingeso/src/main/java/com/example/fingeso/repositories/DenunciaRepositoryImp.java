@@ -115,10 +115,10 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                     .addParameter("id_denuncia",total)
                     .addParameter("id_denunciante",denuncia.getIdDenunciante())
                     .addParameter("id_denunciado",denuncia.getIdDenunciado())
-                    .addParameter("id_estamento_denunciado",44)
-                    .addParameter("descripcion","3")
-                    .addParameter("medidas","4")
-                    .addParameter("id_estado",5)
+                    .addParameter("id_estamento_denunciado",denuncia.getIdEstamentoDenunciado())
+                    .addParameter("descripcion",denuncia.getDescripcion())
+                    .addParameter("medidas",denuncia.getMedidas())
+                    .addParameter("id_estado",denuncia.getIdEstado())
                     .executeUpdate();
             return 0;
         } catch (Exception e) {
