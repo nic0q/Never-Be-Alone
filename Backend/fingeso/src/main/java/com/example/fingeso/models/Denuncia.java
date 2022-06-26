@@ -11,18 +11,17 @@ public class Denuncia {
     private Integer denunciadoID;
 
     private Integer estado;
-    private User fiscal;
+    private Integer fiscalID;
 
-    public Denuncia(Integer denuncianteID, String hechos, Integer estamento, String medidasPrevencion, Integer denunciadoID, Integer estado, User fiscal) {
+    public Denuncia(Integer denuncianteID, String hechos, Integer estamento, String medidasPrevencion, Integer denunciadoID, Integer estado, Integer fiscal) {
         this.denuncianteID = denuncianteID;
         this.estamento = estamento;
         this.hechos = hechos;
         this.medidasPrevencion = medidasPrevencion;
         this.denunciadoID = denunciadoID;
         this.estado = estado;
-        this.fiscal = fiscal;
+        this.fiscalID = fiscal;
     }
-
     public Integer getIdDenunciante() {
         return denuncianteID;
     }
@@ -47,8 +46,8 @@ public class Denuncia {
         return estado;
     }
 
-    public User getFiscal() {
-        return fiscal;
+    public Integer getFiscal() {
+        return fiscalID;
     }
 
     public void setEstado(Integer estado) {

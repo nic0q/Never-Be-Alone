@@ -4,6 +4,7 @@ import com.example.fingeso.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -20,7 +21,7 @@ public class UserRepositoryImp implements UserRepository{
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM USER").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM usuario").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -34,7 +35,7 @@ public class UserRepositoryImp implements UserRepository{
 
     @Override
     public List<User> getAllUsers(){
-        final String query = "select * from user";
+        final String query = "select * from usuario";
         final List<User> usersTotal;
         Connection conn = sql2o.open();
         try( conn ){
@@ -51,7 +52,7 @@ public class UserRepositoryImp implements UserRepository{
 
     @Override
     public List<User> getByRol(Integer rol){
-        final String query = "SELECT * FROM USER WHERE ROL =: rol";
+        final String query = "SELECT * FROM usuario WHERE id_rol = '" + rol + "'";
         final List<User> usersRol;
         Connection conn = sql2o.open();
         try( conn ){
@@ -65,4 +66,43 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
+    public List<User> getById(Integer id){
+        final String query = "SELECT * FROM usuario WHERE id_usuario = '" + id + "'";
+        final List<User> usersRol;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersRol = conn.createQuery(query).executeAndFetch(User.class);
+            return usersRol;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
+    public Integer postUser(@RequestBody User user){
+        final String query  =
+                "insert into usuario (id_usuario,email,password,id_rol,id_estamento)"+
+                "VALUES (:id_usuario, :email,:password,:id_rol,:id_estamento)";
+        Connection con = sql2o.open();
+        try ( con ) {
+            con.createQuery(query)
+                    .addParameter("id_usuario", user.getId())
+                    .addParameter("email", user.getCorreo())
+                    .addParameter("password", user.getContrasenia())
+                    .addParameter("id_rol",user.getRol())
+                    .addParameter("id_estamento",5)
+                    .executeUpdate();
+            return 0;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        finally {
+            con.close();
+        }
+    }
 }
+

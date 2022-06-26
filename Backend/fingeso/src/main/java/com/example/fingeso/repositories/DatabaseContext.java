@@ -17,7 +17,6 @@ public class DatabaseContext {
         private String dbUser;
         @Value("${database.password}")
         private String dbPass;
-
         @Bean
         public Sql2o sql2o() {
             return new Sql2o(dbUrl, dbUser, dbPass);
