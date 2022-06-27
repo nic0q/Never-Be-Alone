@@ -200,4 +200,37 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             return 0;
         }
     }
+    /*
+    -1 representa ID de estado erroneo
+    0 implica que hubo un error
+    1 representa una actualizacion exitosa
+     */
+    @Override
+    public Integer updateDenuncia(Integer id_denuncia, Integer id_estado){
+        if (!(id_estado.equals(1) || id_estado.equals(2))){
+            if(!(id_estado.equals(3))){
+                return -1;
+            }
+        }
+        List<Denuncia> verificacion_denuncia = getById(id_denuncia);
+        Integer estado_actual = verificacion_denuncia.get(0).getIdEstado();
+        if(estado_actual == 3 || estado_actual > id_estado){
+            return -1;
+        }
+        final String query =  "update denuncia set id_estado = :id_estado where id_denuncia = :id_denuncia";
+        Connection conn = sql2o.open();
+        try(conn){
+            conn.createQuery(query)
+                    .addParameter( "id_denuncia", id_denuncia)
+                    .addParameter("id_estado", id_estado)
+                    .executeUpdate();
+            return 1;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        finally {
+            conn.close();
+        }
+    }
 }
