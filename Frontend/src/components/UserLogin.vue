@@ -41,11 +41,12 @@ export default {
   },
   data () {
     return {
-      users: '',
-      usuario: '',
-      password: '',
-      error: false,
-      error_msg: ''
+      id_denunciante: '',
+      id_denunciado: '',
+      id_estamento_denunciado: '',
+      descripcion: '',
+      medidas: '',
+      id_estado: ''
     }
   },
   methods: {

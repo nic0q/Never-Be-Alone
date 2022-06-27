@@ -47,5 +47,5 @@ public class DenunciaService {
     }
 
     @PostMapping(value = "/post-denuncia")
-    public Integer postUser(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
+    public Integer postDenuncia(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 }
