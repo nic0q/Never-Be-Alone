@@ -14,4 +14,5 @@ public interface UserRepository{
     List<User>getById(Integer id);
     Integer postUser(User user);
     int updateRolUser(Integer id_usuario, Integer id_rol);
+    Boolean autenticacion(String correo, String pass);
 }
