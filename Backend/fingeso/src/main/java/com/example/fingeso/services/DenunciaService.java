@@ -3,6 +3,7 @@ package com.example.fingeso.services;
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.DenunciaRepository;
+import com.example.fingeso.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -10,16 +11,12 @@ import java.util.List;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping(value = "denuncias")
+@RequestMapping(value = "denuncia")
 public class DenunciaService {
     private DenunciaRepository denunciaRepository;
-
-
     DenunciaService(DenunciaRepository denunciaRepository){
-
-        this.denunciaRepository = denunciaRepository;
+        this.denunciaRepository=denunciaRepository;
     }
-
     @GetMapping("/count")
     public String countDenuncias(){
         int total=denunciaRepository.countDenuncias();
@@ -49,4 +46,6 @@ public class DenunciaService {
         return denunciaRepository.findDenunciaDenunciado(id);
     }
 
+    @PostMapping(value = "/post-denuncia")
+    public Integer postUser(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 }

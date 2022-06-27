@@ -1,57 +1,39 @@
 package com.example.fingeso.models;
 
 public class Denuncia {
-    // Denunciante
-    private Integer denuncianteID;
-    private Integer estamento;
-    private String hechos;
-    private String medidasPrevencion;
-
-    // Denunciado
-    private Integer denunciadoID;
-
-    private Integer estado;
-    private Integer fiscalID;
-
-    public Denuncia(Integer denuncianteID, String hechos, Integer estamento, String medidasPrevencion, Integer denunciadoID, Integer estado, Integer fiscal) {
-        this.denuncianteID = denuncianteID;
-        this.estamento = estamento;
-        this.hechos = hechos;
-        this.medidasPrevencion = medidasPrevencion;
-        this.denunciadoID = denunciadoID;
-        this.estado = estado;
-        this.fiscalID = fiscal;
+    private Integer id_denuncia;
+    private Integer id_denunciante;
+    private Integer id_denunciado;
+    private Integer id_estamento_denunciado;
+    private String descripcion;
+    private String medidas;
+    private Integer id_estado;
+    private Integer id_fiscal;
+    public Denuncia(Integer id_denuncia, Integer id_denunciante, Integer id_denunciado, Integer id_estamento_denunciado, String descripcion, String medidas, Integer id_estado, Integer id_fiscal) {
+        this.id_denuncia = id_denuncia;
+        this.id_denunciante = id_denunciante;
+        this.id_denunciado = id_denunciado;
+        this.id_estamento_denunciado = id_estamento_denunciado;
+        this.descripcion=descripcion;
+        this.medidas=medidas;
+        this.id_estado=id_estado;
+        this.id_fiscal = id_fiscal;
     }
-
+    public Integer getIdDenuncia() {
+        return id_denuncia;
+    }
     public Integer getIdDenunciante() {
-        return denuncianteID;
+        return id_denunciante;
     }
-
-    public Integer getEstamento() {
-        return estamento;
-    }
-
-    public String getHechos() {
-        return hechos;
-    }
-
-    public String getMedidas() {
-        return medidasPrevencion;
-    }
-
     public Integer getIdDenunciado() {
-        return denunciadoID;
+        return id_denunciado;
     }
+    public Integer getIdEstamentoDenunciado(){return id_estamento_denunciado;}
+    public String getDescripcion(){return descripcion;}
+    public String getMedidas(){return medidas;}
+    public Integer getIdEstado() {
+        return id_estado;
+    }
+    public Integer getIdFiscal(){return id_fiscal;}
 
-    public Integer getEstado() {
-        return estado;
-    }
-
-    public Integer getFiscal() {
-        return fiscalID;
-    }
-
-    public void setEstado(Integer estado) {
-        this.estado = estado;
-    }
 }

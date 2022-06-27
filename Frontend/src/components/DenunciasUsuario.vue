@@ -1,34 +1,31 @@
-<style>@import '../assets/denunciasStyles.css';</style>
 <template>
 <div>
-  <ImagenLogo></ImagenLogo>
   <NavBar></NavBar>
-  <button v-on:click="countUsers">Presioname</button>
-  {{ users }}
+  <div class="container">
+    <CardDenunciaVue></CardDenunciaVue>
+    <CardDenunciaVue></CardDenunciaVue>
+    <CardDenunciaVue></CardDenunciaVue>
+  </div>
 </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import NavBar from '@/components/NavBar'
-import ImagenLogo from '../components/ImagenLogo'
-import axios from 'axios'
+import CardDenunciaVue from './CardDenuncia.vue'
 export default {
   name: 'HomeView',
   components: {
     NavBar,
-    ImagenLogo
-  },
-  methods: {
-    countUsers () {
-      axios.get('http://localhost:8080/user/count')
-        .then(response => {
-          this.users = response.data
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
+    CardDenunciaVue
   }
 }
 </script>
+<style scoped>
+  .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+  }
+</style>
