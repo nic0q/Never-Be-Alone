@@ -13,4 +13,5 @@ public interface UserRepository{
     List<User>getByEmail(String email);
     List<User>getById(Integer id);
     Integer postUser(User user);
+    Boolean autenticacion(String correo, String pass);
 }

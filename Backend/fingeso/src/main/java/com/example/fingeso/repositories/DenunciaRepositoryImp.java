@@ -1,6 +1,7 @@
 package com.example.fingeso.repositories;
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.User;
+import com.example.fingeso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,13 +13,14 @@ import java.util.List;
 public class DenunciaRepositoryImp implements DenunciaRepository{
     @Autowired
     private Sql2o sql2o;
+    private UserRepository userRepository;
 
     //@Override
     public int countDenuncias(){
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIAS").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIA").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -48,7 +50,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     }
     @Override
     public List<Denuncia> getByFiscal(Integer fiscalID){
-        final String query = "select * from denuncias where fiscalID = '" + fiscalID +"'";
+        // ARREGLAR COLUMNA ID FISCAL
+        final String query = "select * from denuncia where id_fiscal = '" + fiscalID +"'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -65,7 +68,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
 
     @Override
     public List<Denuncia> findDenunciaDenunciante(Integer userID){
-        final String query = "select * from denuncias where denuncianteID = '" + userID + "'";
+        final String query = "select * from denuncia where id_denunciante = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -83,7 +86,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     @Override
     public List<Denuncia> findDenunciaDenunciado(Integer userID){
 
-        final String query = "select * from denuncias where denunciadoID = '" + userID + "'";
+        final String query = "select * from denuncia where id_denunciado = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -97,6 +100,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    */
     /*
      * Se establece codigos de validez
      * 0 : correcto ingreso
@@ -104,6 +108,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
      * 2: error en correo denunciado
      * -1: error al ingreso en la base de datos
      * */
+    @Override
     public Integer postDenuncia(@RequestBody Denuncia denuncia){
         Connection conn = sql2o.open();
         int total = countDenuncias();
@@ -126,6 +131,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
         finally{
             conn.close();
+        }
+    }
+
+    @Override
+    public Boolean verificaCorreo(String correo, String nombre, String apellido1, String apellido2){
+        List<User> users = userRepository.getByEmail(correo);
+        User user = users.get(0);
+        String nombreReal = user.getNombre();
+        String apellido1Real = user.getPrimerApellido();
+        String apellido2Real = user.getSegundoApellido();
+        if(nombreReal == nombre && apellido1Real == apellido1 && apellido2Real == apellido2){
+            return true;
+        }else{
+            return false;
         }
     }
 }
