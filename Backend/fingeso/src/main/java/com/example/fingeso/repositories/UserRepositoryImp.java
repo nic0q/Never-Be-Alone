@@ -53,6 +53,7 @@ public class UserRepositoryImp implements UserRepository{
     public List<User> getByRol(Integer rol){
         final String query = "SELECT * FROM usuario WHERE id_rol = '" + rol + "'";
         final List<User> usersRol;
+
         Connection conn = sql2o.open();
         try( conn ){
             usersRol = conn.createQuery(query).executeAndFetch(User.class);

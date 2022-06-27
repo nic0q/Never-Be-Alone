@@ -22,28 +22,30 @@ public class DenunciaService {
         int total=denunciaRepository.countDenuncias();
         return String.format("Tienes en total %s denuncias.",total);
     }
+
     @GetMapping("/getall")
     public List<Denuncia>getAllDenuncias() {
         return denunciaRepository.getAllDenuncias();
     }
-    /*
-    @GetMapping("/get-by-fiscal/{fiscal}")
+
+    @GetMapping("/get-by-fiscal/{id}")
     @ResponseBody
-    public List<Denuncia> getByFiscal(@PathVariable("fiscal") User fiscal){
-        return denunciaRepository.getByFiscal(fiscal);
+    public List<Denuncia> getByFiscal(@PathVariable("id") Integer id){
+        return denunciaRepository.getByFiscal(id);
     }
 
-    @GetMapping("/get-denuncias-denunciante/{user}")
+    @GetMapping("/get-denuncias-denunciante/{id}")
     @ResponseBody
-    public List<Denuncia> findDenunciaDenunciante(@PathVariable("user") User user){
-        return denunciaRepository.findDenunciaDenunciante(user);
+    public List<Denuncia> findDenunciaDenunciante(@PathVariable("id") Integer id){
+        return denunciaRepository.findDenunciaDenunciante(id);
     }
 
-    @GetMapping("/get-denuncias-denunciado/{user}")
+    @GetMapping("/get-denuncias-denunciado/{id}")
     @ResponseBody
-    public List<Denuncia> findDenunciaDenunciado(@PathVariable("user") User user){
-        return denunciaRepository.findDenunciaDenunciado(user);
-    }*/
+    public List<Denuncia> findDenunciaDenunciado(@PathVariable("id") Integer id){
+        return denunciaRepository.findDenunciaDenunciado(id);
+    }
+
     @PostMapping(value = "/post-denuncia")
     public Integer postUser(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 }

@@ -9,8 +9,8 @@ import java.util.List;
 public interface DenunciaRepository {
     int countDenuncias();
     List<Denuncia> getAllDenuncias();
-    //List<Denuncia> getByFiscal(User fiscal);
-    //List<Denuncia> findDenunciaDenunciante(User user);
-    //List<Denuncia> findDenunciaDenunciado(User user);
+    List<Denuncia> getByFiscal(Integer fiscalID);
+    List<Denuncia> findDenunciaDenunciante(Integer userID);
+    List<Denuncia> findDenunciaDenunciado(Integer userID);
     Integer postDenuncia(Denuncia denuncia);
 }

@@ -18,7 +18,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIA").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIAS").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -29,7 +29,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-    //@Override
+
+    @Override
     public List<Denuncia> getAllDenuncias(){
         final String query = "select * from denuncia";
         final List<Denuncia> denuncias;
@@ -45,9 +46,9 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
-    /*public List<Denuncia> getByFiscal(User fiscalACargo){
-        final String query = "select * from denuncias where fiscal =: fiscalACargo";
+    @Override
+    public List<Denuncia> getByFiscal(Integer fiscalID){
+        final String query = "select * from denuncias where fiscalID = '" + fiscalID +"'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -62,10 +63,9 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
 
-    //@Override
-    public List<Denuncia> findDenunciaDenunciante(User user){
-        Integer IDuser;
-        final String query = "select * from denuncias where denuncianteID =: IDuser";
+    @Override
+    public List<Denuncia> findDenunciaDenunciante(Integer userID){
+        final String query = "select * from denuncias where denuncianteID = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -80,10 +80,10 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
 
-    //@Override
-    public List<Denuncia> findDenunciaDenunciado(User user){
-        Integer IDuser;
-        final String query = "select * from denuncias where denunciadoID =: IDuser";
+    @Override
+    public List<Denuncia> findDenunciaDenunciado(Integer userID){
+
+        final String query = "select * from denuncias where denunciadoID = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
