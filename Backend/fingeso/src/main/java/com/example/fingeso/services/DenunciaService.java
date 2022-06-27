@@ -1,6 +1,7 @@
 package com.example.fingeso.services;
 
 import com.example.fingeso.models.Denuncia;
+import com.example.fingeso.models.IngresarDenuncia;
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.DenunciaRepository;
 import com.example.fingeso.repositories.UserRepository;
@@ -49,4 +50,6 @@ public class DenunciaService {
     int updateDenuncia(@RequestParam Integer id_denuncia, Integer id_estado){
         return denunciaRepository.updateDenuncia(id_denuncia, id_estado);
     }
+    @PostMapping(value = "/crear-denuncia")
+    public Integer crearDenuncia(@RequestBody IngresarDenuncia denuncia){return denunciaRepository.crearDenuncia(denuncia);}
 }

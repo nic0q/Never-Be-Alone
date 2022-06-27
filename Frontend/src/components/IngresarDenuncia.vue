@@ -5,15 +5,38 @@
   <NavBar></NavBar>
 </div>
 <div class="f mx-5">
+<label>Denunciante</label>
 <form>
   <div class="row">
     <div class="col">
       <label for="exampleFormControlTextarea1">Primer Nombre</label>
-      <input v-model="nombres" type="text" class="form-control">
+      <input v-model="nombre1" type="text" class="form-control">
     </div>
     <div class="col">
       <label for="exampleFormControlTextarea1">Apellidos</label>
-      <input v-model="apellidos" type="text" class="form-control">
+      <input v-model="apellido1" type="text" class="form-control">
+    </div>
+  </div>
+  <br>
+    <div class="row">
+    <div class="col">
+      <label for="exampleFormControlTextarea1">Correo Denunciado</label>
+      <input v-model="mail1" type="text" class="form-control">
+    </div>
+    <div class="col">
+      <label for="exampleFormControlTextarea1">Estamento</label>
+      <input v-model="estamento" type="text" class="form-control">
+    </div>
+    </div>
+    <br>
+      <div class="row">
+    <div class="col">
+      <label for="exampleFormControlTextarea1">Primer Nombre</label>
+      <input v-model="nombres2" type="text" class="form-control">
+    </div>
+    <div class="col">
+      <label for="exampleFormControlTextarea1">Apellidos</label>
+      <input v-model="apellido2" type="text" class="form-control">
     </div>
   </div>
 </form>
@@ -21,19 +44,16 @@
 <form>
   <div class="row">
     <div class="col">
-      <label for="exampleFormControlTextarea1">Correo Denunciado</label>
-      <input v-model="mailDenunciado" type="text" class="form-control">
-    </div>
-    <div class="col">
       <label for="exampleFormControlTextarea1">Correo Denunciante</label>
-      <input v-model="mailDenunciante" type="text" class="form-control">
+      <input v-model="mail2" type="text" class="form-control">
     </div>
+    <br>
   </div>
 </form>
 <br>
 <div class="form-group">
   <label for="exampleFormControlTextarea1" >Descripción</label>
-  <textarea v-model='descripcion' class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+  <textarea v-model='desc' class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
 </div>
 <br>
 <div class="form-group">
@@ -41,7 +61,7 @@
   <textarea v-model='medidas' class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
 </div>
 <br><br>
-<button class="w-90 s-30 btn btn-lg btn-primary" v-on:click='sendData' type="submit">Guardar y enviar</button>
+<button class="w-90 s-30 btn btn-lg btn-primary" v-on:click='sendData' type="submit">Crear Denuncia</button>
 </div>
 <br>
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
@@ -57,23 +77,29 @@ export default {
   },
   data () {
     return {
-      mail_denunciante: '',
-      mail_denunciado: '',
-      estamento_denunciado: '',
-      descripcion: '',
-      medidas: '',
-      id_estado: ''
+      nombre1: '',
+      apellido1: '',
+      nombre2: '',
+      apellido2: '',
+      mail1: '',
+      mail2: '',
+      estamento: '',
+      desc: '',
+      medidas: ''
     }
   },
   methods: {
     sendData () {
-      axios.post('http://localhost:8080/denuncia/post-denuncia', {
-        id_denunciante: this.id_denunciante,
-        id_denunciado: this.id_denunciado,
-        id_estamento_denunciado: this.id_estamento_denunciado,
-        descripcion: this.descripcion,
-        medidas: this.medidas,
-        id_estado: this.id_estado
+      axios.post('http://localhost:8080/denuncia/crear-denuncia', {
+        nombre1: this.nombre1,
+        apellido1: this.apellido1,
+        nombre2: this.nombre2,
+        apellido2: this.apellido2,
+        mail1: this.mail1,
+        mail2: this.mail2,
+        estamento: this.estamento,
+        desc: this.desc,
+        medidas: this.medidas
       })
         .then(data => {
           console.log(data)

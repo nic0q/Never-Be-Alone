@@ -1,5 +1,6 @@
 package com.example.fingeso.repositories;
 import com.example.fingeso.models.Denuncia;
+import com.example.fingeso.models.IngresarDenuncia;
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     @Autowired
     private Sql2o sql2o;
     private UserRepository userRepository;
-
+    DenunciaRepositoryImp(UserRepository userRepository){
+        this.userRepository=userRepository;
+    }
     //@Override
     public int countDenuncias(){
         Integer total = 0;
@@ -82,7 +85,6 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
     @Override
     public List<Denuncia> findDenunciaDenunciado(Integer userID){
 
@@ -100,7 +102,6 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
     /*
      * Se establece codigos de validez
      * 0 : correcto ingreso
@@ -133,10 +134,40 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
+    public List<Denuncia> getByEmail(String email){
+        final String query = "SELECT * FROM denuncia WHERE email = '" + email + "'";
+        final List<Denuncia> usersMail;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersMail = conn.createQuery(query).executeAndFetch(Denuncia.class);
+            return usersMail;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
+    public List<Denuncia> getById(Integer id){
+        final String query = "SELECT * FROM denuncia WHERE id_denuncia = '" + id + "'";
+        final List<Denuncia> usersRol;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersRol = conn.createQuery(query).executeAndFetch(Denuncia.class);
+            return usersRol;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
     @Override
     public Boolean verificaCorreo(String correo, String nombre, String apellido1, String apellido2){
-        List<User> users = userRepository.getByEmail(correo);
+        List<User> users = this.userRepository.getByEmail(correo);
+        System.out.println(users.toString());
         User user = users.get(0);
         String nombreReal = user.getNombre();
         String apellido1Real = user.getPrimerApellido();
@@ -147,54 +178,26 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             return false;
         }
     }
-
-    public List<Denuncia> getById(Integer id){
-        final String query = "SELECT * FROM denuncia WHERE id_denuncia = '" + id + "'";
-        final List<Denuncia> denuncia1;
-        Connection conn = sql2o.open();
-        try( conn ){
-            denuncia1 = conn.createQuery(query).executeAndFetch(Denuncia.class);
-            return denuncia1;
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-        finally {
-            conn.close();
-        }
-    }
-
-    /*
-    -1 representa ID de estado erroneo
-    0 implica que hubo un error
-    1 representa una actualizacion exitosa
+    /**
+     * Se ingresa la denuncia verificando si el correo y los nombre y apellido ingresados existen
      */
-    @Override
-    public Integer updateDenuncia(Integer id_denuncia, Integer id_estado){
-        if (!(id_estado.equals(1) || id_estado.equals(2))){
-            if(!(id_estado.equals(3))){
-                return -1;
+    public Integer crearDenuncia(IngresarDenuncia denuncia){
+        System.out.println(denuncia.getMail1());
+        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),denuncia.getApellido1(),denuncia.getApellido2())){
+            List <Denuncia> a;
+            a = getByEmail(denuncia.getMail1());
+            if(a == null){
+                return 0;
             }
-        }
-        List<Denuncia> verificacion_denuncia = getById(id_denuncia);
-        Integer estado_actual = verificacion_denuncia.get(0).getIdEstado();
-        if(estado_actual == 3 || estado_actual > id_estado){
-            return -1;
-        }
-        final String query =  "update denuncia set id_estado = :id_estado where id_denuncia = :id_denuncia";
-        Connection conn = sql2o.open();
-        try(conn){
-            conn.createQuery(query)
-                    .addParameter( "id_denuncia", id_denuncia)
-                    .addParameter("id_estado", id_estado)
-                    .executeUpdate();
+            Denuncia den = a.get(0);
+            Denuncia denu = new Denuncia(countDenuncias(),den.getIdDenunciante(),den.getIdDenunciado(),den.getIdEstamentoDenunciado(),den.getDescripcion(),den.getMedidas(),den.getIdEstado(),den.getIdFiscal());
+            postDenuncia(denu);
+            System.out.println("EXITOSO");
             return 1;
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return -1;
         }
-        finally {
-            conn.close();
+        else{
+            System.out.println("FALSO");
+            return 0;
         }
     }
 }
