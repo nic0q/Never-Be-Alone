@@ -18,7 +18,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIAS").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM DENUNCIA").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -48,7 +48,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     }
     @Override
     public List<Denuncia> getByFiscal(Integer fiscalID){
-        final String query = "select * from denuncias where fiscalID = '" + fiscalID +"'";
+        // ARREGLAR COLUMNA ID FISCAL
+        final String query = "select * from denuncia where id_fiscal = '" + fiscalID +"'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -65,7 +66,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
 
     @Override
     public List<Denuncia> findDenunciaDenunciante(Integer userID){
-        final String query = "select * from denuncias where denuncianteID = '" + userID + "'";
+        final String query = "select * from denuncia where id_denunciante = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -83,7 +84,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     @Override
     public List<Denuncia> findDenunciaDenunciado(Integer userID){
 
-        final String query = "select * from denuncias where denunciadoID = '" + userID + "'";
+        final String query = "select * from denuncia where id_denunciado = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
         try( conn ){
@@ -97,7 +98,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-    */
+
     /*
      * Se establece codigos de validez
      * 0 : correcto ingreso
