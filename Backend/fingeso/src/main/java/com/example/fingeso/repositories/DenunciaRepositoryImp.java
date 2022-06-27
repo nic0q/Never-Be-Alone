@@ -165,14 +165,15 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
     @Override
-    public Boolean verificaCorreo(String correo, String nombre, String apellido1, String apellido2){
+    public Boolean verificaCorreo(String correo, String nombre, String apellido1){
         List<User> users = this.userRepository.getByEmail(correo);
-        System.out.println(users.toString());
+        if(users.isEmpty()){
+            return false;
+        }
         User user = users.get(0);
         String nombreReal = user.getNombre();
-        String apellido1Real = user.getPrimerApellido();
-        String apellido2Real = user.getSegundoApellido();
-        if(nombreReal == nombre && apellido1Real == apellido1 && apellido2Real == apellido2){
+        String apellido1Real = user.getApellidos();
+        if(nombreReal.equals(nombre) && apellido1Real.equals(apellido1)){
             return true;
         }else{
             return false;
@@ -182,21 +183,27 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
      * Se ingresa la denuncia verificando si el correo y los nombre y apellido ingresados existen
      */
     public Integer crearDenuncia(IngresarDenuncia denuncia){
-        System.out.println(denuncia.getMail1());
-        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),denuncia.getApellido1(),denuncia.getApellido2())){
-            List <Denuncia> a;
-            a = getByEmail(denuncia.getMail1());
-            if(a == null){
+        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),denuncia.getApellido1()) &&
+                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2(),denuncia.getApellido2())){
+            String mail = denuncia.getMail1();
+            String mail2 = denuncia.getMail2();
+            if(mail.equals(mail2)){
+                System.out.println("No está permitido que una persona se autodenuncie");
                 return 0;
             }
-            Denuncia den = a.get(0);
-            Denuncia denu = new Denuncia(countDenuncias(),den.getIdDenunciante(),den.getIdDenunciado(),den.getIdEstamentoDenunciado(),den.getDescripcion(),den.getMedidas(),den.getIdEstado(),den.getIdFiscal());
-            postDenuncia(denu);
+            List <User> usuario = userRepository.getByEmail(mail);
+            List <User> usuario2 = userRepository.getByEmail(mail2);
+            User user1 = usuario.get(0);
+            User user2 = usuario2.get(0);
+            Integer usuarioId = user1.getId();
+            Integer usuarioId2 = user2.getId();
+            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDescrip(),denuncia.getMedidas(),0,0);
+            postDenuncia(newDen);
             System.out.println("EXITOSO");
             return 1;
         }
         else{
-            System.out.println("FALSO");
+            System.out.println("correos no existen");
             return 0;
         }
     }

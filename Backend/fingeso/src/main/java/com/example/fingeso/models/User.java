@@ -3,18 +3,16 @@ package com.example.fingeso.models;
 public class User {
     private Integer id_usuario;
     private String email;
-    private String nombre;
-    private String primerApellido;
-    private String segundoApellido;
+    private String nombres;
+    private String apellidos;
     private String password;
     private Integer id_rol;
     private Integer id_estamento;
-    public User(Integer id, String email, String nombre, String primerApellido, String segundoApellido, String password, Integer id_rol, Integer id_estamento) {
+    public User(Integer id, String email, String nombres, String apellidos, String password, Integer id_rol, Integer id_estamento) {
         this.id_usuario = id;
         this.email = email;
-        this.nombre = nombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
         this.password = password;
         this.id_rol = id_rol;
         this.id_estamento = id_estamento;
@@ -26,13 +24,10 @@ public class User {
         return email;
     }
     public String getNombre() {
-        return nombre;
+        return nombres;
     }
-    public String getPrimerApellido() {
-        return primerApellido;
-    }
-    public String getSegundoApellido() {
-        return segundoApellido;
+    public String getApellidos() {
+        return apellidos;
     }
     public String getContrasenia() {
         return password;

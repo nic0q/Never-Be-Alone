@@ -32,7 +32,7 @@
       <div class="row">
     <div class="col">
       <label for="exampleFormControlTextarea1">Primer Nombre</label>
-      <input v-model="nombres2" type="text" class="form-control">
+      <input v-model="nombre2" type="text" class="form-control">
     </div>
     <div class="col">
       <label for="exampleFormControlTextarea1">Apellidos</label>
