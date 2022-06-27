@@ -183,8 +183,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
      * Se ingresa la denuncia verificando si el correo y los nombre y apellido ingresados existen
      */
     public Integer crearDenuncia(IngresarDenuncia denuncia){
-        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),denuncia.getApellido1()) &&
-                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2(),denuncia.getApellido2())){
+        String[] splited1 = denuncia.getApellido1().split("\\s+");
+        String[] splited2 = denuncia.getApellido2().split("\\s+");
+        if(splited1.length == 1) {
+            splited1[1]="";
+        }
+        if(splited2.length == 1) {
+            splited2[1]="";
+        }
+        String mixApellidos1 =splited1[0]+splited1[1];
+        String mixApellidos2 =splited2[0]+splited2[1];
+        System.out.println(mixApellidos1);
+        System.out.println(mixApellidos2);
+        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),mixApellidos1) &&
+                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2(),mixApellidos2)){
             String mail = denuncia.getMail1();
             String mail2 = denuncia.getMail2();
             if(mail.equals(mail2)){
@@ -199,11 +211,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             Integer usuarioId2 = user2.getId();
             Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDescrip(),denuncia.getMedidas(),0,0);
             postDenuncia(newDen);
-            System.out.println("EXITOSO");
+            System.out.println("Denuncia Ingresada Correctamente");
             return 1;
         }
         else{
-            System.out.println("correos no existen");
+            System.out.println("Correos no encontrados");
             return 0;
         }
     }

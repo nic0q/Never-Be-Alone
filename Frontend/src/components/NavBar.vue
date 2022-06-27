@@ -8,12 +8,11 @@
 <div class="img">
   <ImagenLogo></ImagenLogo>
 </div>
-<div class="nav-container">
-  <div class="nav-buttons">
+<div class="nava">
     <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Mis Denuncias</button></div>
     <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">User@usach</button></div>
+    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Rol</button></div>
     <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Cerrar Sesión</button></div>
-  </div>
 </div>
 <div class="br3"></div>
 </div>
@@ -21,44 +20,45 @@
 <style scoped>
 *{
   font-family: sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
+  color: hsl(210,8%,35%);
 }
-
 body{
-  background-color: grey;
+  background-color: rgb(233, 221, 221);
   margin: 0px;
 }
 .img{
-  padding-top: 10px;
-  left: 0;
+  padding-top: 15px;
+  width: 300px;
+  height: 100px;
   position: absolute;
 }
 .br {
   position: absolute;
-    height: 10px;
-    width: 2000px;
-    background: blue;
+  height: 10px;
+  width: 100%;
+  background: #FF9900;
+}
+.nava{
+  margin-top: 40px;
+  padding: 0;
+  font-size: large;
 }
 .br2 {
   position: absolute;
-    height: 10px;
-    width: 1000px;
-    background: #FF9900;
+  height: 10px;
+  width: 500px;
+  background: blue;
 }
 .br3{
   position: absolute;
-    margin-top: 60px;
-    height: 1px;
-    width: 2000px;
-    background: rgb(87, 87, 87);
+  height: 0.5px;
+  width: 100%;
+  border: solid rgb(191, 190, 190) 0.5px;
 }
 .colors{
   display: flex;
-}
-.nav-container{
-  padding-top: 80px;
-  width: 100%;
-  height: 75px;
-  background-color: #ffffff;
 }
 .nav-buttons{
   justify-content: center;
@@ -69,12 +69,38 @@ body{
 }
 .nv-btn{
   border: transparent;
-  border-radius: 5px;
-  height: 30px;
+  background-color: transparent;
+  border-radius: 100px;
   width: 150px;
+  padding-top: 6px;
+  background-color: #f4f5f7;
+  padding-bottom: 2px;
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 18.75px;
+  margin-top: 10px;
+}
+:hover.nv-btn{
+  background-color: #E3E6E8;
+  color: rgba(0, 0, 0, 0.961);
+}
+@media(max-width: 1300px){
+  .nava{
+    margin-top: 80px;
+  }
+}
+@media(max-width: 435px){
+  .nava{
+    margin-top: 10px;
+  }
+  .img{
+    visibility: hidden;
+  }
+  .br2 {
+  position: absolute;
+  height: 10px;
+  width: 100px;
+  background: blue;
+}
 }
 </style>
 <script>
