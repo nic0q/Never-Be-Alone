@@ -126,5 +126,19 @@ public class UserRepositoryImp implements UserRepository{
             con.close();
         }
     }
+
+    public Boolean autenticacion(String correo, String pass){
+        List<User> users = getByEmail(correo);
+        if(users.isEmpty()){
+            return false;
+        }
+        User user = users.get(0);
+        String contrasenia = user.getContrasenia();
+        if(contrasenia == pass){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
