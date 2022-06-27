@@ -97,7 +97,6 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-    */
     /*
      * Se establece codigos de validez
      * 0 : correcto ingreso
