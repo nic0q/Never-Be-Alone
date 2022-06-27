@@ -123,5 +123,26 @@ public class UserRepositoryImp implements UserRepository{
             con.close();
         }
     }
+
+    @Override
+    public int updateRolUser(Integer id_usuario, Integer id_rol){
+
+        //final String query = "update usuario set id_rol = '" + id_rol + "' where id_usuario = '" + id_usuario + "'";
+        final String query = "update usuario set id_rol = :id_rol where id_usuario = :id_usuario";
+        Connection conn = sql2o.open();
+        try (conn) {
+            conn.createQuery(query)
+                    .addParameter("id_rol", id_rol)
+                    .addParameter("id_usuario", id_usuario)
+                    .executeUpdate();
+            return 0;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        finally{
+            conn.close();
+        }
+    }
 }
 

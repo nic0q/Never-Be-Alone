@@ -13,4 +13,5 @@ public interface UserRepository{
     List<User>getByEmail(String email);
     List<User>getById(Integer id);
     Integer postUser(User user);
+    int updateRolUser(Integer id_usuario, Integer id_rol);
 }

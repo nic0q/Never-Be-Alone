@@ -1,22 +1,23 @@
 package com.example.fingeso.repositories;
 
-import com.example.fingeso.models.Estado;
+import com.example.fingeso.models.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
 import java.util.List;
 
-public class EstadoRepositoryImp implements EstadoRepository{
+public class RolRepositoryImp implements RolRepository{
+
     @Autowired
     private Sql2o sql2o;
 
     @Override
-    public int countEstados() {
+    public int countRoles() {
         Integer total = 0;
         Connection conn = sql2o.open();
         try( conn ){
-            total = conn.createQuery( "SELECT COUNT(*) FROM estado").executeScalar(Integer.class);
+            total = conn.createQuery( "SELECT COUNT(*) FROM rol").executeScalar(Integer.class);
             return total;
         }
         catch(Exception e){
@@ -29,18 +30,17 @@ public class EstadoRepositoryImp implements EstadoRepository{
     }
 
     @Override
-    public List<Estado> getAllEstados() {
-        final String query = "select * from estado";
-        final List<Estado> estadoTotal;
+    public List<Rol> getAllRoles() {
+        final String query = "select * from rol";
+        final List<Rol> rolTotal;
         Connection conn = sql2o.open();
-        try( conn ){
-            estadoTotal = conn.createQuery(query).executeAndFetch(Estado.class);
-            return estadoTotal ;
-        } catch (Exception e){
+        try (conn) {
+            rolTotal = conn.createQuery(query).executeAndFetch(Rol.class);
+            return rolTotal;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
-        }
-        finally {
+        } finally {
             conn.close();
         }
     }

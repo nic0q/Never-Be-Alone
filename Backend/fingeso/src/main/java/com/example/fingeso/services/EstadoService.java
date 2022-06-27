@@ -11,7 +11,7 @@ public class EstadoService {
     private final EstadoRepository estadoRepository;
     EstadoService(EstadoRepository estadoRepository){this.estadoRepository=estadoRepository;}
     @GetMapping("/count")
-    public String countEstamentos(){
+    public String countEstados(){
         int total=estadoRepository.countEstados();
         return String.format("Tienes en total %s estados.",total);
     }

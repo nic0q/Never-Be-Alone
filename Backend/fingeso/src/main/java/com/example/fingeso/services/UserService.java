@@ -36,4 +36,10 @@ public class UserService {
     }
     @PostMapping(value = "/post-user")
     public Integer postUser(@RequestBody User user){return userRepository.postUser(user);}
+
+    @GetMapping(value = "/update-rol")
+    @ResponseBody
+    int updateRolUser(@RequestParam Integer id_usuario, Integer id_rol){
+        return userRepository.updateRolUser(id_usuario, id_rol);
+    }
 }
