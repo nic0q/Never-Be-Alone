@@ -1,6 +1,7 @@
 package com.example.fingeso.repositories;
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.User;
+import com.example.fingeso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +13,7 @@ import java.util.List;
 public class DenunciaRepositoryImp implements DenunciaRepository{
     @Autowired
     private Sql2o sql2o;
+    private UserRepository userRepository;
 
     //@Override
     public int countDenuncias(){
@@ -106,6 +108,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
      * 2: error en correo denunciado
      * -1: error al ingreso en la base de datos
      * */
+    @Override
     public Integer postDenuncia(@RequestBody Denuncia denuncia){
         Connection conn = sql2o.open();
         int total = countDenuncias();
@@ -128,6 +131,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
         finally{
             conn.close();
+        }
+    }
+
+    @Override
+    public Boolean verificaCorreo(String correo, String nombre, String apellido1, String apellido2){
+        List<User> users = userRepository.getByEmail(correo);
+        User user = users.get(0);
+        String nombreReal = user.getNombre();
+        String apellido1Real = user.getPrimerApellido();
+        String apellido2Real = user.getSegundoApellido();
+        if(nombreReal == nombre && apellido1Real == apellido1 && apellido2Real == apellido2){
+            return true;
+        }else{
+            return false;
         }
     }
 }

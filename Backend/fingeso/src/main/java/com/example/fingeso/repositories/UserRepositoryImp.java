@@ -102,13 +102,16 @@ public class UserRepositoryImp implements UserRepository{
     public Integer postUser(@RequestBody User user){
         Connection con = sql2o.open();
         final String query  =
-                "insert into usuario (id_usuario,email,password,id_rol,id_estamento)"+
-                "VALUES (:id_usuario, :email,:password,:id_rol,:id_estamento)";
+                "insert into usuario (id_usuario,email,nombre,primerApellido,segundoApellido,password,id_rol,id_estamento)"+
+                "VALUES (:id_usuario, :email,:nombre,:primerApellido,:segundoApellido,:password,:id_rol,:id_estamento)";
         int total = countUsers();
         try ( con ) {
             con.createQuery(query)
                     .addParameter("id_usuario", total)
                     .addParameter("email", user.getCorreo())
+                    .addParameter("nombre",user.getNombre())
+                    .addParameter("primerApellido",user.getPrimerApellido())
+                    .addParameter("segundoApellido",user.getSegundoApellido())
                     .addParameter("password", user.getContrasenia())
                     .addParameter("id_rol",user.getRol())
                     .addParameter("id_estamento",user.getEstamento())
