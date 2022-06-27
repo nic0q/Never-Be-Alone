@@ -43,4 +43,10 @@ public class DenunciaService {
     }
     @PostMapping(value = "/post-denuncia")
     public Integer postDenuncia(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
+
+    @GetMapping("/update-denuncia")
+    @ResponseBody
+    int updateDenuncia(@RequestParam Integer id_denuncia, Integer id_estado){
+        return denunciaRepository.updateDenuncia(id_denuncia, id_estado);
+    }
 }

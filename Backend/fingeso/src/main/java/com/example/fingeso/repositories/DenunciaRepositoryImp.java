@@ -100,7 +100,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-    */
+
     /*
      * Se establece codigos de validez
      * 0 : correcto ingreso
@@ -145,6 +145,28 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             return true;
         }else{
             return false;
+        }
+    }
+
+    @Override
+    public Integer updateDenuncia(Integer id_denuncia, Integer id_estado){
+        if (id_estado.equals(0) || id_estado.equals(3)){
+            return -1;
+        }
+        final String query = "update denuncia set id_estado = '" + id_estado + "'where id_denuncia = '" + id_denuncia + "'";
+        Connection conn = sql2o.open();
+        try(conn){
+            conn.createQuery(query)
+                    .addParameter("id_estado", id_estado)
+                    .addParameter("id_denuncia", id_denuncia)
+                    .executeUpdate();
+            return 1;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return -9;
+        }
+        finally {
+            conn.close();
         }
     }
 }

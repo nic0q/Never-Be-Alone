@@ -14,4 +14,5 @@ public interface DenunciaRepository {
     List<Denuncia> findDenunciaDenunciado(Integer userID);
     Integer postDenuncia(Denuncia denuncia);
     Boolean verificaCorreo(String correo, String nombre, String apellido1, String apellido2);
+    Integer updateDenuncia(Integer id_denuncia, Integer id_estado);
 }
