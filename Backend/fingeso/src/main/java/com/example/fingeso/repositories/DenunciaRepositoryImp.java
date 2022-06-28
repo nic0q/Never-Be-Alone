@@ -68,7 +68,6 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
     @Override
     public List<Denuncia> findDenunciaDenunciante(Integer userID){
         final String query = "select * from denuncia where id_denunciante = '" + userID + "'";
@@ -87,7 +86,6 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     }
     @Override
     public List<Denuncia> findDenunciaDenunciado(Integer userID){
-
         final String query = "select * from denuncia where id_denunciado = '" + userID + "'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
@@ -181,27 +179,19 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     }
     /**
      * Se ingresa la denuncia verificando si el correo y los nombre y apellido ingresados existen
+     * -1: error
+     * 0: exitoso
      */
     public Integer crearDenuncia(IngresarDenuncia denuncia){
-        String[] splited1 = denuncia.getApellido1().split("\\s+");
-        String[] splited2 = denuncia.getApellido2().split("\\s+");
-        if(splited1.length == 1) {
-            splited1[1]="";
-        }
-        if(splited2.length == 1) {
-            splited2[1]="";
-        }
-        String mixApellidos1 =splited1[0]+splited1[1];
-        String mixApellidos2 =splited2[0]+splited2[1];
-        System.out.println(mixApellidos1);
-        System.out.println(mixApellidos2);
+        String mixApellidos1 = denuncia.getApellido11()+denuncia.getApellido12();
+        String mixApellidos2 = denuncia.getApellido21()+denuncia.getApellido22();
         if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),mixApellidos1) &&
                 verificaCorreo(denuncia.getMail2(),denuncia.getNombre2(),mixApellidos2)){
             String mail = denuncia.getMail1();
             String mail2 = denuncia.getMail2();
             if(mail.equals(mail2)){
                 System.out.println("No está permitido que una persona se autodenuncie");
-                return 0;
+                return -1;
             }
             List <User> usuario = userRepository.getByEmail(mail);
             List <User> usuario2 = userRepository.getByEmail(mail2);
@@ -209,14 +199,14 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             User user2 = usuario2.get(0);
             Integer usuarioId = user1.getId();
             Integer usuarioId2 = user2.getId();
-            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDescrip(),denuncia.getMedidas(),0,0);
+            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,0);
             postDenuncia(newDen);
             System.out.println("Denuncia Ingresada Correctamente");
-            return 1;
+            return 0;
         }
         else{
             System.out.println("Correos no encontrados");
-            return 0;
+            return -1;
         }
     }
     /*

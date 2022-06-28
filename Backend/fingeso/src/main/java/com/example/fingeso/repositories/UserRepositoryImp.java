@@ -1,5 +1,6 @@
 package com.example.fingeso.repositories;
 import com.example.fingeso.models.User;
+import com.example.fingeso.models.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -123,23 +124,24 @@ public class UserRepositoryImp implements UserRepository{
         }
     }
 
-    public Boolean autenticacion(String correo, String pass){
-        List<User> users = getByEmail(correo);
+    public Integer autenticacion(String mail, String pass){
+        List<User> users = getByEmail(mail);
         if(users.isEmpty()){
-            return false;
+            return -1;
         }
         User user = users.get(0);
         String contrasenia = user.getContrasenia();
-        if(contrasenia == pass){
-            return true;
+        if(contrasenia.equals(pass)){
+            System.out.println("Logeado Correctamente");
+            return 0;
         }else{
-            return false;
+            System.out.println("Credenciales Inválidas");
+            return -1;
         }
     }
 
     @Override
-    public int updateRolUser(Integer id_usuario, Integer id_rol){
-
+    public Integer updateRolUser(Integer id_usuario, Integer id_rol){
         //final String query = "update usuario set id_rol = '" + id_rol + "' where id_usuario = '" + id_usuario + "'";
         final String query = "update usuario set id_rol = :id_rol where id_usuario = :id_usuario";
         Connection conn = sql2o.open();

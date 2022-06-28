@@ -2,6 +2,7 @@ package com.example.fingeso.services;
 
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.UserRepository;
+import com.example.fingeso.models.Login;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -38,8 +39,9 @@ public class UserService {
     public Integer postUser(@RequestBody User user){return userRepository.postUser(user);}
 
     @GetMapping(value = "/update-rol")
-    @ResponseBody
-    int updateRolUser(@RequestParam Integer id_usuario, Integer id_rol){
+    Integer updateRolUser(@RequestParam Integer id_usuario, Integer id_rol){
         return userRepository.updateRolUser(id_usuario, id_rol);
     }
+    @PostMapping(value = "/auth")
+    public Integer autenticacion(@RequestParam String mail, String pass){return userRepository.autenticacion(mail,pass);}
 }

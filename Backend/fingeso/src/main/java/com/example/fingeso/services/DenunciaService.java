@@ -2,9 +2,7 @@ package com.example.fingeso.services;
 
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.IngresarDenuncia;
-import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.DenunciaRepository;
-import com.example.fingeso.repositories.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 

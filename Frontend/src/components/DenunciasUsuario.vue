@@ -2,18 +2,17 @@
 <div>
   <NavBar></NavBar>
   <div class="container">
-    <CardDenunciaVue></CardDenunciaVue>
-    <CardDenunciaVue></CardDenunciaVue>
-    <CardDenunciaVue></CardDenunciaVue>
-    <button v-on:click='getDenuncias'>a</button>
+  <div v-for="den in dens" :key="den.idDenuncia">
+    <CardDenunciaVue :id=den.idDenuncia :desc=den.descripcion :med=den.medidas></CardDenunciaVue>
+  </div>
   </div>
 </div>
 </template>
 <script>
-// @ is an alias to /src
 import NavBar from '@/components/NavBar'
 import CardDenunciaVue from './CardDenuncia.vue'
 import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:3000'
 export default {
   name: 'HomeView',
   components: {
@@ -22,16 +21,17 @@ export default {
   },
   data () {
     return {
-      denuncias: []
+      dens: [],
+      nombreDenunciado: '',
+      estado: ''
     }
   },
-  methods: {
-    getDenuncias () {
-      axios.get('http://localhost:8080/denuncia/getall').then(response => {
-        this.denuncias = response.data
-        console.log(response.data[0].idDenunciado)
+  mounted () {
+    axios.get(`http://localhost:8080/denuncia/get-denuncias-denunciante/${localStorage.getItem('token')}`)
+      .then(response => {
+        this.dens = response.data
+        console.log(this.dens)
       })
-    }
   }
 }
 </script>
@@ -40,6 +40,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     margin-top: 80px;
   }
 </style>

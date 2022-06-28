@@ -1,6 +1,6 @@
 <style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
-<div class="">
+<div>
 <div>
   <NavBar></NavBar>
 </div>
@@ -95,6 +95,15 @@
 <button class="w-90 s-30 btn btn-lg btn-primary" v-on:click='sendData' type="submit">Crear Denuncia</button>
 </div>
 </div>
+<div class = "alerts">
+  <br>
+<div class="alert alert-danger" v-if="error === 1">
+  Error al crear la denuncia, verifique los datos ingresados
+</div>
+<div class="alert alert-success" v-if="error === 0">
+  Denuncia Creada Satisfactoriamente
+</div>
+</div>
 <br>
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
@@ -119,7 +128,8 @@ export default {
       mail2: '',
       estamento: '',
       desc: '',
-      medidas: ''
+      medidas: '',
+      error: -1
     }
   },
   methods: {
@@ -139,6 +149,13 @@ export default {
       })
         .then(data => {
           console.log(data)
+          if (data.data === -1) {
+            this.error = 1
+            console.error('Error')
+          } else {
+            this.error = 0
+            console.log('Denuncia creada')
+          }
         })
     }
   }
@@ -146,6 +163,10 @@ export default {
 </script>
 <style scooped>
 *{color: hsl(210,8%,35%);}
+.alerts{
+  margin-left: 300px;
+  margin-right: 300px;
+}
 .f{
   margin-top: 50px;
   border: 1px solid rgb(200, 198, 198);

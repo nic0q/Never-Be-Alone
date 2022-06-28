@@ -9,14 +9,19 @@
   <ImagenLogo></ImagenLogo>
 </div>
 <div class="nava">
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Mis Denuncias</button></div>
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">User@usach</button></div>
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Rol</button></div>
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Cerrar Sesión</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Mis Denuncias</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">{{mail}}</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Rol</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick='(function(){localStorage.removeItem("token");localStorage.removeItem("rol");location.href="/login"})();' type="button">Cerrar Sesión</button></div>
 </div>
 <div class="br3"></div>
 </div>
 </template>
+<script>
+export default {
+  name: 'HomeView'
+}
+</script>
 <style scoped>
 *{
   font-family: sans-serif;

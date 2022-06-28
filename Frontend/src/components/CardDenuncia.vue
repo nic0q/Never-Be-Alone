@@ -1,26 +1,31 @@
 <template>
-<div class = "card">
-  <h3>Denunciado</h3>
-  <button type="button" class="button btn btn-primary">Estado Actual</button>
+<div class="card">
+  <div class="card-body">
+    <div>
+    <h5 class="card-title">Dirigida a</h5>
+    <div>
+      <a href="#" class="btn btn-primary">Actualizar el estado</a>
+    </div>
+    <p>{{id}}</p>
+    <p>{{med}}</p>
+    <p>{{desc}}</p>
+    </div>
+  </div>
 </div>
 </template>
 <style scoped>
-.card{
-  width: 200px;
-  height: 200px;
-  background-color: #FF9900;
-  display: flex;
-  margin: 5px;
-}
-.buttoon{
-  border-radius: 40%;
-  background-color: rgb(54, 54, 214);
-  border-style: none;
-  color: white;
-  padding: 15px;
-  position: absolute;
-  left: 20%;
-  bottom: 0;
-  margin-bottom: 10px;
-}
+  .card{
+    margin: 5px;
+    width: 18rem;
+    height: 18rem;
+  }
 </style>
+<script>
+export default {
+  props: {
+    id: Number,
+    med: String,
+    desc: String
+  }
+}
+</script>

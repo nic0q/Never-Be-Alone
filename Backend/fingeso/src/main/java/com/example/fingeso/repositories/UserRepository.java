@@ -1,8 +1,8 @@
 package com.example.fingeso.repositories;
 
 import com.example.fingeso.models.User;
+import com.example.fingeso.models.Login;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 @Repository
@@ -13,6 +13,6 @@ public interface UserRepository{
     List<User>getByEmail(String email);
     List<User>getById(Integer id);
     Integer postUser(User user);
-    int updateRolUser(Integer id_usuario, Integer id_rol);
-    Boolean autenticacion(String correo, String pass);
+    Integer updateRolUser(Integer id_usuario, Integer id_rol);
+    Integer autenticacion(String mail, String pass);
 }
