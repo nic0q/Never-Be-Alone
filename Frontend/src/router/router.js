@@ -5,11 +5,16 @@ import DenunciasUsuario from '../components/DenunciasUsuario'
 import IngresarDenuncia from '../components/IngresarDenuncia'
 import ActualizarDenuncia from '../components/ActualizarDenuncia'
 import BloqueoRol from '../components/BloqueoRol'
+import NavBar from '../components/NavBar'
 Vue.use(VueRouter)
-
 export default new VueRouter({
   mode: 'history',
   routes: [
+    {
+      path: '/nv',
+      name: 'nv',
+      component: NavBar
+    },
     {
       path: '/login',
       name: 'login',
@@ -19,10 +24,6 @@ export default new VueRouter({
       path: '/denuncias',
       name: 'denuncias',
       component: DenunciasUsuario
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      // component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
     },
     {
       path: '/ingresar-denuncia',

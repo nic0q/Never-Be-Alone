@@ -5,60 +5,69 @@
   <div class="br"></div>
   <div class="br2"></div>
 </div>
-<div class="img">
-  <ImagenLogo></ImagenLogo>
-</div>
-<div class="nav-container">
-  <div class="nav-buttons">
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Mis Denuncias</button></div>
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">User@usach</button></div>
-    <div class="nav-button"><button class="nv-btn"  onclick="location.href='#'" type="button">Cerrar Sesión</button></div>
-  </div>
+<div class="nbb">
+<img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
+<div class="nava">
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Mis Denuncias</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">@usach.cl</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Rol</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick='(function(){localStorage.removeItem("token");localStorage.removeItem("mail");location.href="/login"})();' type="button">Cerrar Sesión</button></div>
 </div>
 <div class="br3"></div>
 </div>
+</div>
 </template>
+<script>
+export default {
+  name: 'HomeView',
+  data () {
+    return {
+      mail: ''
+    }
+  },
+  mounted () {
+    this.mail = localStorage.getItem('mail')
+  }
+}
+</script>
 <style scoped>
 *{
   font-family: sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
+  color: hsl(210,8%,35%);
 }
-
-body{
-  background-color: grey;
-  margin: 0px;
-}
-.img{
+img{
   padding-top: 10px;
-  left: 0;
+  width: 250px;
+  height: 70px;
+  left: 120px;
   position: absolute;
 }
 .br {
   position: absolute;
-    height: 10px;
-    width: 2000px;
-    background: blue;
+  height: 5px;
+  width: 100%;
+  background: #FF9900;
+}
+.nava{
+  margin-top: 20px;
+  padding: 0;
+  font-size: large;
 }
 .br2 {
   position: absolute;
-    height: 10px;
-    width: 1000px;
-    background: #FF9900;
+  height: 5px;
+  width: 500px;
+  background: blue;
 }
 .br3{
   position: absolute;
-    margin-top: 60px;
-    height: 1px;
-    width: 2000px;
-    background: rgb(87, 87, 87);
-}
-.colors{
-  display: flex;
-}
-.nav-container{
-  padding-top: 80px;
+  border-radius: 100px;
+  margin-top: 5px;
+  height: 1px;
   width: 100%;
-  height: 75px;
-  background-color: #ffffff;
+  background-color: black;
 }
 .nav-buttons{
   justify-content: center;
@@ -68,13 +77,38 @@ body{
   display: inline-block;
 }
 .nv-btn{
+  font-weight: bold;
   border: transparent;
-  border-radius: 5px;
-  height: 30px;
+  background-color: transparent;
+  border-radius: 100px;
   width: 150px;
+  padding-top: 6px;
+  padding-bottom: 2px;
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 18.75px;
+  margin-top: 10px;
+}
+:hover.nv-btn{
+  background-color: #E3E6E8;
+  color: rgba(0, 0, 0, 0.961);
+}
+@media(max-width: 1400px){
+  .nava{
+    margin-top: 70px;
+  }
+}
+@media(max-width: 435px){
+  .nava{
+    margin-top: 15px;
+  }
+  img{
+    visibility: hidden;
+  }
+  .br2 {
+  position: absolute;
+  width: 100px;
+  background: blue;
+}
 }
 </style>
 <script>
