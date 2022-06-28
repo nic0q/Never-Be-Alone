@@ -4,6 +4,6 @@
 <style scoped>
 img {
   width: 300px;
-  height: 60px;
+  height: 70px;
 }
 </style>

@@ -14,18 +14,6 @@
   <input type="password" class="form-control" id="password" name="password" placeholder="name@example.com" v-model="pass">
   <label for="floatingUsername">Contraseña</label>
 </div>
-<div>
-  <div class="rol">
-    <label>Rol</label>
-  </div>
-<select class="form-select" aria-label="Default select example">
-  <option selected>Usuario</option>
-  <option value="1">DGDE</option>
-  <option value="2">Administrador</option>
-  <option value="3">Fiscal</option>
-</select>
-<br>
-</div>
 <div class="alert alert-danger" v-if="error === 1">
   Credenciales Inválidas
 </div>
@@ -74,7 +62,7 @@ export default {
                 this.id = data.data[0].id
                 window.localStorage.setItem('token', this.id)
                 this.$router.push('denuncias')
-                console.log('Login Correcto')
+                console.log('Login Exitoso')
               })
           }
         })

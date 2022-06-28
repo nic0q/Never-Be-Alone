@@ -5,11 +5,16 @@ import DenunciasUsuario from '../components/DenunciasUsuario'
 import IngresarDenuncia from '../components/IngresarDenuncia'
 import ActualizarDenuncia from '../components/ActualizarDenuncia'
 import BloqueoRol from '../components/BloqueoRol'
+import NavBar from '../components/NavBar'
 Vue.use(VueRouter)
-
 export default new VueRouter({
   mode: 'history',
   routes: [
+    {
+      path: '/nv',
+      name: 'nv',
+      component: NavBar
+    },
     {
       path: '/login',
       name: 'login',

@@ -5,21 +5,29 @@
   <div class="br"></div>
   <div class="br2"></div>
 </div>
-<div class="img">
-  <ImagenLogo></ImagenLogo>
-</div>
+<div class="nbb">
+<img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
 <div class="nava">
     <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Mis Denuncias</button></div>
-    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">{{mail}}</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">@usach.cl</button></div>
     <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Rol</button></div>
-    <div class="nav-button"><button class="nv-btn" onclick='(function(){localStorage.removeItem("token");localStorage.removeItem("rol");location.href="/login"})();' type="button">Cerrar Sesión</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick='(function(){localStorage.removeItem("token");localStorage.removeItem("mail");location.href="/login"})();' type="button">Cerrar Sesión</button></div>
 </div>
 <div class="br3"></div>
+</div>
 </div>
 </template>
 <script>
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  data () {
+    return {
+      mail: ''
+    }
+  },
+  mounted () {
+    this.mail = localStorage.getItem('mail')
+  }
 }
 </script>
 <style scoped>
@@ -29,41 +37,37 @@ export default {
   max-width: 100%;
   color: hsl(210,8%,35%);
 }
-body{
-  background-color: rgb(233, 221, 221);
-  margin: 0px;
-}
-.img{
-  padding-top: 15px;
-  width: 300px;
-  height: 100px;
+img{
+  padding-top: 10px;
+  width: 250px;
+  height: 70px;
+  left: 120px;
   position: absolute;
 }
 .br {
   position: absolute;
-  height: 10px;
+  height: 5px;
   width: 100%;
   background: #FF9900;
 }
 .nava{
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 0;
   font-size: large;
 }
 .br2 {
   position: absolute;
-  height: 10px;
+  height: 5px;
   width: 500px;
   background: blue;
 }
 .br3{
   position: absolute;
-  height: 0.5px;
+  border-radius: 100px;
+  margin-top: 5px;
+  height: 1px;
   width: 100%;
-  border: solid rgb(191, 190, 190) 0.5px;
-}
-.colors{
-  display: flex;
+  background-color: black;
 }
 .nav-buttons{
   justify-content: center;
@@ -73,12 +77,12 @@ body{
   display: inline-block;
 }
 .nv-btn{
+  font-weight: bold;
   border: transparent;
   background-color: transparent;
   border-radius: 100px;
   width: 150px;
   padding-top: 6px;
-  background-color: #f4f5f7;
   padding-bottom: 2px;
   margin-left: 30px;
   margin-right: 30px;
@@ -88,21 +92,20 @@ body{
   background-color: #E3E6E8;
   color: rgba(0, 0, 0, 0.961);
 }
-@media(max-width: 1300px){
+@media(max-width: 1400px){
   .nava{
-    margin-top: 80px;
+    margin-top: 70px;
   }
 }
 @media(max-width: 435px){
   .nava{
-    margin-top: 10px;
+    margin-top: 15px;
   }
-  .img{
+  img{
     visibility: hidden;
   }
   .br2 {
   position: absolute;
-  height: 10px;
   width: 100px;
   background: blue;
 }
