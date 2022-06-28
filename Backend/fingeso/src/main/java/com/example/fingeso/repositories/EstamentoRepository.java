@@ -1,5 +1,6 @@
 package com.example.fingeso.repositories;
 import com.example.fingeso.models.Estamento;
+import com.example.fingeso.models.User;
 import com.example.fingeso.services.EstamentoService;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -7,5 +8,6 @@ import java.util.List;
 public interface EstamentoRepository {
     int countEstamentos();
     List<Estamento>getAllEstamentos();
+    List<Estamento>getById(Integer id);
     Integer postEstamento(Estamento estamento);
 }

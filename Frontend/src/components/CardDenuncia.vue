@@ -2,13 +2,16 @@
 <div class="card">
   <div class="card-body">
     <div>
-    <h5 class="card-title">Dirigida a</h5>
+    <h5 class="card-title">Dirigida a {{nombre}} {{apellido}}</h5>
+    <h6>Correo {{mail}}</h6>
     <div>
       <a href="#" class="btn btn-primary">Actualizar el estado</a>
     </div>
     <p>{{id}}</p>
-    <p>{{med}}</p>
+    <p>Medidas de Proteccion {{med}}</p>
+    <h6>Fecha de Ingreso {{fecha}}</h6>
     <p>{{desc}}</p>
+    <p>Estamento {{estamento}}</p>
     </div>
   </div>
 </div>
@@ -31,8 +34,13 @@
 export default {
   props: {
     id: Number,
+    nombre: String,
+    apellido: String,
     med: String,
-    desc: String
+    mail: String,
+    estamento: String,
+    desc: String,
+    fecha: String
   }
 }
 </script>

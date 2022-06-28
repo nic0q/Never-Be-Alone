@@ -135,15 +135,15 @@ export default {
   methods: {
     sendData () {
       axios.post('http://localhost:8080/denuncia/crear-denuncia', {
-        nombre1: this.nombre1,
-        apellido11: this.apellido11,
-        apellido12: this.apellido12,
-        nombre2: this.nombre2,
-        apellido21: this.apellido21,
-        apellido22: this.apellido22,
-        mail1: this.mail1,
-        mail2: this.mail2,
-        estamento: this.estamento,
+        nombre1: this.nombre1.trim(),
+        apellido11: this.apellido11.trim(),
+        apellido12: this.apellido12.trim(),
+        nombre2: this.nombre2.trim(),
+        apellido21: this.apellido21.trim(),
+        apellido22: this.apellido22.trim(),
+        mail1: this.mail1.trim(),
+        mail2: this.mail2.trim(),
+        estamento: this.estamento.trim(),
         desc: this.desc,
         medidas: this.medidas
       })

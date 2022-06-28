@@ -4,8 +4,7 @@ import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.IngresarDenuncia;
 import com.example.fingeso.repositories.DenunciaRepository;
 import org.springframework.web.bind.annotation.*;
-
-
+import com.example.fingeso.models.VerDenuncia;
 import java.util.List;
 
 @CrossOrigin(origins="*")
@@ -50,4 +49,6 @@ public class DenunciaService {
     }
     @PostMapping(value = "/crear-denuncia")
     public Integer crearDenuncia(@RequestBody IngresarDenuncia denuncia){return denunciaRepository.crearDenuncia(denuncia);}
+    @GetMapping("/show-denuncia/{id}")
+    public List<VerDenuncia>showDenuncia(@PathVariable("id") Integer id) {return denunciaRepository.showDenuncia(id);}
 }

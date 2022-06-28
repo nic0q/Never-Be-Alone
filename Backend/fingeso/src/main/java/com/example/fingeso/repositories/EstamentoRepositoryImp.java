@@ -46,6 +46,21 @@ public class EstamentoRepositoryImp implements EstamentoRepository{
             conn.close();
         }
     }
+    public List<Estamento> getById(Integer id){
+        final String query = "SELECT * FROM estamento WHERE id_estamento = '" + id + "'";
+        final List<Estamento> usersRol;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersRol = conn.createQuery(query).executeAndFetch(Estamento.class);
+            return usersRol;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
     public Integer postEstamento(@RequestBody Estamento estamento){
         Connection con = sql2o.open();
         final String query  =

@@ -1,10 +1,11 @@
 <template>
-<div v-if="activesec!==null">
+<div v-if="activesec !== null">
   <NavBar></NavBar>
   <div class="container">
-  <div v-for="den in dens" :key="den.idDenuncia">
-    <CardDenunciaVue :id=den.idDenuncia :desc=den.descripcion :med=den.medidas></CardDenunciaVue>
-  </div>
+    <div v-if="this.len===0" class="alert alert-warning" role="alert">
+    <h1>Usted no posee denuncias</h1></div>
+  <div v-else v-for="den in dens" :key="den.idDenuncia">
+    <CardDenunciaVue :mail=den.mailDenunciado :id=den.idDenuncia :apellido=den.apellidosDenunciado :estamento=den.estamento :nombre=den.nombreDenunciado :desc=den.descripcion :med=den.medidas :fecha=den.fecha></CardDenunciaVue></div>
   </div>
 </div>
 <div v-else>
@@ -27,23 +28,32 @@ export default {
   data () {
     return {
       dens: [],
+      len: '',
       nombreDenunciado: '',
+      apellidosDenunciado: '',
+      mailDenunciado: '',
+      estamento: '',
       estado: '',
       activesec: localStorage.getItem('token')
     }
   },
   mounted () {
-    axios.get(`http://localhost:8080/denuncia/get-denuncias-denunciante/${localStorage.getItem('token')}`)
+    axios.get(`http://localhost:8080/denuncia/show-denuncia/${localStorage.getItem('token')}`)
       .then(response => {
         this.dens = response.data
+        console.log(this.dens)
+        this.len = this.dens.length
       })
   }
 }
 </script>
 <style scoped>
+  .alert{
+    padding: 50px;
+  }
   .container{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     margin-top: 80px;

@@ -1,4 +1,10 @@
 package com.example.fingeso.models;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 public class Denuncia {
     private Integer id_denuncia;
@@ -9,6 +15,7 @@ public class Denuncia {
     private String medidas;
     private Integer id_estado;
     private Integer id_fiscal;
+    private String fecha;
     public Denuncia(Integer id_denuncia, Integer id_denunciante, Integer id_denunciado, Integer id_estamento_denunciado, String descripcion, String medidas, Integer id_estado, Integer id_fiscal) {
         this.id_denuncia = id_denuncia;
         this.id_denunciante = id_denunciante;
@@ -18,6 +25,10 @@ public class Denuncia {
         this.medidas=medidas;
         this.id_estado=id_estado;
         this.id_fiscal = id_fiscal;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
+        this.fecha = dtf.format(now);
     }
     public Integer getIdDenuncia() {
         return id_denuncia;
@@ -35,5 +46,6 @@ public class Denuncia {
         return id_estado;
     }
     public Integer getIdFiscal(){return id_fiscal;}
+    public String getFecha(){return fecha;}
 
 }

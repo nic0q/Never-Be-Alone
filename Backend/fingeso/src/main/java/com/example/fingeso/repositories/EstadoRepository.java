@@ -1,6 +1,7 @@
 package com.example.fingeso.repositories;
 
 import com.example.fingeso.models.Estado;
+import com.example.fingeso.models.User;
 
 import java.util.List;
 

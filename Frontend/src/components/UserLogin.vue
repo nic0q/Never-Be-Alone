@@ -1,7 +1,6 @@
 <style>@import '../assets/loginStyles.css';</style>
 <template>
-<div class="container mt-5">
-
+<div v-if="activesec === null">
 <main class="form-signin">
 <form v-on:submit.prevent="login">
   <ImagenLogo></ImagenLogo>
@@ -25,15 +24,18 @@
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </main>
 </div>
+<AlreadyLogedVue v-else></AlreadyLogedVue>
 </template>
 <script>
 // @ is an alias to /src
 import ImagenLogo from '../components/ImagenLogo'
 import axios from 'axios'
+import AlreadyLogedVue from './AlreadyLoged.vue'
 export default {
   name: 'HomeView',
   components: {
-    ImagenLogo
+    ImagenLogo,
+    AlreadyLogedVue
   },
   data () {
     return {
@@ -41,14 +43,15 @@ export default {
       pass: '',
       rol: '',
       id: '',
-      error: -1
+      error: -1,
+      activesec: localStorage.getItem('token')
     }
   },
   methods: {
     sendData () {
       const bodyFormData = new FormData()
-      bodyFormData.append('mail', this.mail)
-      bodyFormData.append('pass', this.pass)
+      bodyFormData.append('mail', this.mail.trim())
+      bodyFormData.append('pass', this.pass.trim())
       axios.post('http://localhost:8080/user/auth', bodyFormData)
         .then(data => {
           console.log(data)

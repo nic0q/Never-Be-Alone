@@ -8,9 +8,9 @@
 <div class="nbb">
 <img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
 <div class="nava">
-    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Mis Denuncias</button></div>
-    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">@usach.cl</button></div>
-    <div class="nav-button"><button class="nv-btn" onclick="location.href='#'" type="button">Rol</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href=''" type="button">Mis Denuncias</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href=''" type="button">@usach.cl</button></div>
+    <div class="nav-button"><button class="nv-btn" onclick="location.href=''" type="button">Rol</button></div>
     <div class="nav-button"><button class="nv-btn" onclick='(function(){localStorage.removeItem("token");localStorage.removeItem("mail");location.href="/login"})();' type="button">Cerrar Sesión</button></div>
 </div>
 <div class="br3"></div>
@@ -41,7 +41,7 @@ img{
   padding-top: 10px;
   width: 250px;
   height: 70px;
-  left: 120px;
+  left: 30px;
   position: absolute;
 }
 .br {
@@ -92,9 +92,12 @@ img{
   background-color: #E3E6E8;
   color: rgba(0, 0, 0, 0.961);
 }
-@media(max-width: 1400px){
+@media(max-width: 1115px){
   .nava{
-    margin-top: 70px;
+    margin-top: 58px;
+  }
+  .br3{
+    margin-top: 0;
   }
 }
 @media(max-width: 435px){
@@ -108,7 +111,7 @@ img{
   position: absolute;
   width: 100px;
   background: blue;
-}
+  }
 }
 </style>
 <script>
