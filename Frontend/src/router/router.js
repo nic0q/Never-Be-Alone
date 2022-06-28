@@ -4,6 +4,7 @@ import UserLogin from '../components/UserLogin'
 import DenunciasUsuario from '../components/DenunciasUsuario'
 import IngresarDenuncia from '../components/IngresarDenuncia'
 import ActualizarDenuncia from '../components/ActualizarDenuncia'
+import HomeUser from '../components/HomeUser'
 import BloqueoRol from '../components/BloqueoRol'
 import NavBar from '../components/NavBar'
 Vue.use(VueRouter)
@@ -19,6 +20,11 @@ export default new VueRouter({
       path: '/login',
       name: 'login',
       component: UserLogin
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeUser
     },
     {
       path: '/denuncias',

@@ -41,7 +41,6 @@ export default {
     axios.get(`http://localhost:8080/denuncia/show-denuncia/${localStorage.getItem('token')}`)
       .then(response => {
         this.dens = response.data
-        console.log(this.dens)
         this.len = this.dens.length
       })
   }

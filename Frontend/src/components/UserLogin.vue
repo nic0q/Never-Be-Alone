@@ -54,17 +54,16 @@ export default {
       bodyFormData.append('pass', this.pass.trim())
       axios.post('http://localhost:8080/user/auth', bodyFormData)
         .then(data => {
-          console.log(data)
           if (data.data === -1) {
             this.error = 1
-            console.error('Error')
+            console.error('Error login')
           } else {
             this.error = 0
             axios.get(`http://localhost:8080/user/get-by-email/${this.mail}`)
               .then(data => {
                 this.id = data.data[0].id
                 window.localStorage.setItem('token', this.id)
-                this.$router.push('denuncias')
+                this.$router.push('home')
                 console.log('Login Exitoso')
               })
           }
