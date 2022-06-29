@@ -1,8 +1,8 @@
 <style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
+<div v-if="activesec === ''">
 <div>
-<div>
-  <NavBarDGDE></NavBarDGDE>
+  <NavBar></NavBar>
 </div>
 <div class="f">
   <div class="s">
@@ -107,14 +107,19 @@
 <br>
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
+<div v-else>
+<ErrorPage :url='"/home"'></ErrorPage>
+</div>
 </template>
 <script>
-import NavBarDGDE from '@/components/NavBarDGDE'
+import NavBar from '@/components/NavBar'
+import ErrorPage from '@/components/ErrorPage'
 import axios from 'axios'
 export default {
   name: 'HomeView',
   components: {
-    NavBarDGDE
+    NavBar,
+    ErrorPage
   },
   data () {
     return {
@@ -129,7 +134,8 @@ export default {
       estamento: '',
       desc: '',
       medidas: '',
-      error: -1
+      error: -1,
+      activesec: localStorage.getItem('token')
     }
   },
   methods: {

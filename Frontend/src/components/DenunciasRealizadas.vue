@@ -3,9 +3,9 @@
   <NavBar></NavBar>
   <div class="container">
     <div v-if="this.len===0" class="alert alert-warning" role="alert">
-    <h1>No se encontraron denuncias</h1><br><div><button type="button" v-on:click="()=>this.$router.push('/mis-denuncias')" class="btn btn-warning">Regresar</button></div></div>
-  <div v-else v-for="den in dens" :key="den.idDenuncia">
-    <CardDenunciaVue :mail=den.mailDenunciado :id=den.idDenuncia :apellido=den.apellidosDenunciado :estamento=den.estamento :nombre=den.nombreDenunciado :desc=den.descripcion :med=den.medidas :fecha=den.fecha></CardDenunciaVue></div>
+    <h1>Usted no posee denuncias</h1></div>
+  <div v-else v-for="den in dens" :key="den.id">
+    <CardDenunciaVue :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciantee :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
   </div>
 </div>
 <div v-else>
@@ -46,11 +46,12 @@ export default {
         axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
           .then(data => {
             this.rol = data.data[0].nombre
-            if (this.rol === 'user' || this.rol === 'dgde' || this.rol === 'admin') { // EL FISCAL PUEDE TENER DENUNCIAS???
-              console.log('no soi fiscal')
+            if (this.rol === 'fiscal') {
+              console.log('soi user normal')
               this.error = 1
               axios.get(`http://localhost:8080/denuncia/show-denuncia-realizada/${localStorage.getItem('token')}`).then(response => {
                 this.dens = response.data
+                console.log(this.dens)
                 this.len = this.dens.length
               })
             } else {
@@ -70,7 +71,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 80px;
+    margin-top: 60px;
   }
     @media(max-width: 768px){
     .container{

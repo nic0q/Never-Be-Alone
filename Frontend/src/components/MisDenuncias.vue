@@ -14,11 +14,19 @@
 </div>
 <div class="card">
   <div class="card-body">
-    <h5 class="text-dark">Denuncias en Contra</h5>
-    <br>
-    <div type="button" v-on:click="()=>this.$router.push('denuncias-contra')">
+    <div v-if="this.rol === 'fiscal'" >
+    <h5 class="text-dark">Denuncias Asignadas</h5><br>
+        <div type="button" v-on:click="()=>this.$router.push('denuncias-fiscal')">
       <a class="btn btn-primary">Ver</a>
     </div>
+    </div>
+    <div v-else>
+      <h5 class="text-dark">Denuncias Asignadaas</h5><br>
+      <div type="button" v-on:click="()=>this.$router.push('denuncias-contra')">
+      <a class="btn btn-primary">Ver</a>
+    </div>
+    </div>
+    <br>
   </div>
 </div>
 </div>
@@ -55,8 +63,20 @@ export default {
   },
   data () {
     return {
-      activesec: localStorage.getItem('token')
+      id: localStorage.getItem('token'),
+      rol: ''
     }
+  },
+  mounted () {
+    axios.get(`http://localhost:8080/user/get-by-id/${this.id}`)
+      .then(data => {
+        this.mail = data.data[0].correo
+        axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
+          .then(data => {
+            this.rol = data.data[0].nombre
+            console.log(this.rol)
+          })
+      })
   }
 }
 </script>

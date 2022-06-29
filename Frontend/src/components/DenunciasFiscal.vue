@@ -5,7 +5,7 @@
     <div v-if="this.len===0" class="alert alert-warning" role="alert">
     <h1>No se encontraron denuncias</h1><br><div><button type="button" v-on:click="()=>this.$router.push('/mis-denuncias')" class="btn btn-warning">Regresar</button></div></div>
   <div v-else v-for="den in dens" :key="den.id">
-    <CardDenunciaVue :mail=den.mailDenunciado :id=den.id :apellido=den.apellidosDenunciado :estamento=den.estamento :nombre=den.nombreDenunciado :desc=den.descripcion :med=den.medidas :fecha=den.fecha></CardDenunciaVue></div>
+    <CardDenunciaVue :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciantee :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
   </div>
 </div>
 <div v-else>
