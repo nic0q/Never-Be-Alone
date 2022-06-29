@@ -7,6 +7,7 @@ import ActualizarDenuncia from '../components/ActualizarDenuncia'
 import HomeUser from '../components/HomeUser'
 import BloqueoRol from '../components/BloqueoRol'
 import NavBar from '../components/NavBar'
+import MisDenuncias from '../components/MisDenuncias'
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -46,6 +47,11 @@ export default new VueRouter({
       path: '/bloqueo-rol',
       name: 'bloqueo-rol',
       component: BloqueoRol
+    },
+    {
+      path: '/mis-denuncias',
+      name: 'mis-denuncias',
+      component: MisDenuncias
     }
   ]
 })
