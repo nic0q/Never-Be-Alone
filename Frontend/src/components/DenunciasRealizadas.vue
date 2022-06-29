@@ -46,17 +46,12 @@ export default {
         axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
           .then(data => {
             this.rol = data.data[0].nombre
-            if (this.rol === 'fiscal') {
-              console.log('soi user normal')
-              this.error = 1
-              axios.get(`http://localhost:8080/denuncia/show-denuncia-realizada/${localStorage.getItem('token')}`).then(response => {
-                this.dens = response.data
-                console.log(this.dens)
-                this.len = this.dens.length
-              })
-            } else {
-              this.error = 0
-            }
+            this.error = 1
+            axios.get(`http://localhost:8080/denuncia/show-denuncia-realizada/${localStorage.getItem('token')}`).then(response => {
+              this.dens = response.data
+              console.log(this.dens)
+              this.len = this.dens.length
+            })
           })
       })
   }

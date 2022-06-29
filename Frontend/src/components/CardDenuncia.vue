@@ -43,7 +43,7 @@
   .card{
     margin: 5px;
     width: 18rem;
-    background-color: #FF9900;
+    background-color: #ffbf60;
     z-index: 1;
   }
   .updateS{

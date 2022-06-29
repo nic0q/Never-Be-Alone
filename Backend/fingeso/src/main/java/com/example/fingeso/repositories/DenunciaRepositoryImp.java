@@ -3,11 +3,7 @@ import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.IngresarDenuncia;
 import com.example.fingeso.models.VerDenuncia;
 import com.example.fingeso.models.User;
-import com.example.fingeso.models.Estamento;
-import com.example.fingeso.repositories.UserRepository;
-import com.example.fingeso.repositories.EstamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
@@ -15,7 +11,6 @@ import org.sql2o.Sql2o;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Repository
 public class DenunciaRepositoryImp implements DenunciaRepository{
@@ -45,7 +40,6 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
     @Override
     public List<Denuncia> getAllDenuncias(){
         final String query = "select * from denuncia";
