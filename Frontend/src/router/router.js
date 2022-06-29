@@ -6,7 +6,6 @@ import MisDenuncias from '../components/MisDenuncias'
 import DenunciasRealizadas from '../components/DenunciasRealizadas'
 import DenunciasContra from '../components/DenunciasContra'
 import DenunciasFiscal from '../components/DenunciasFiscal'
-import HomeUser from '../components/HomeUser'
 import BloqueoRol from '../components/BloqueoRol'
 import NavBar from '../components/NavBar'
 
@@ -23,11 +22,6 @@ export default new VueRouter({
       path: '/login',
       name: 'login',
       component: UserLogin
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: HomeUser
     },
     {
       path: '/mis-denuncias',
