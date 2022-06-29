@@ -2,7 +2,7 @@
 <template>
 <div>
 <div>
-  <NavBar></NavBar>
+  <NavBarDGDE></NavBarDGDE>
 </div>
 <div class="f">
   <div class="s">
@@ -109,12 +109,12 @@
 </div>
 </template>
 <script>
-import NavBar from '@/components/NavBar'
+import NavBarDGDE from '@/components/NavBarDGDE'
 import axios from 'axios'
 export default {
   name: 'HomeView',
   components: {
-    NavBar
+    NavBarDGDE
   },
   data () {
     return {
