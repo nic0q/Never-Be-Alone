@@ -21,7 +21,7 @@
     </div>
     </div>
     <div v-else>
-      <h5 class="text-dark">Denuncias Asignadaas</h5><br>
+      <h5 class="text-dark">Denuncias en Contra</h5><br>
       <div type="button" v-on:click="()=>this.$router.push('denuncias-contra')">
       <a class="btn btn-primary">Ver</a>
     </div>
