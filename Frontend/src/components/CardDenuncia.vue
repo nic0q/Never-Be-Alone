@@ -7,6 +7,7 @@
     <h5 class="text-dark"><p class="font-weight-bold"><strong>Fecha de Ingreso: </strong></p></h5>
     <h6 class="text-dark">{{fecha}}</h6>
     <h5 class="text-dark" ><p><strong>Dirigida a: </strong></p>{{nombre1}} {{apellido1}}</h5>
+    <h5 class="text-dark" ><p><strong>Estamento: </strong></p></h5>
     <h6 class="text-dark">{{estamento}}</h6>
     <h6 class="text-dark">{{mail1}} </h6>
     <div type="button" v-if="this.rol === 'fiscal'">
@@ -31,7 +32,7 @@
     <h6 class="text-dark">{{medidas}}</h6>
     <div><button type="button" class="btn btn-dark">{{estado}}</button></div>
     <br>
-    <div><button type="button" class="btn btn-primary" v-on:click='update' >Actualizar Estado</button></div>
+    <div><button  v-if= "this.rol === 'fiscal'" type="button" class="btn btn-primary" v-on:click='update' >Actualizar Estado</button></div>
     </div>
   </div>
 </div>
