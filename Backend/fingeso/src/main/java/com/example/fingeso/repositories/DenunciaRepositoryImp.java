@@ -22,9 +22,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     private Sql2o sql2o;
     private UserRepository userRepository;
     private EstamentoRepository estamentoRepository;
-    DenunciaRepositoryImp(UserRepository userRepository, EstamentoRepositoryImp estamentoRepository){
+    private EstadoRepository estadoRepository;
+    DenunciaRepositoryImp(UserRepository userRepository, EstamentoRepositoryImp estamentoRepository, EstadoRepositoryImp estadoRepository){
         this.userRepository=userRepository;
         this.estamentoRepository=estamentoRepository;
+        this.estadoRepository = estadoRepository;
     }
     //@Override
     public int countDenuncias(){
@@ -258,15 +260,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     public List<VerDenuncia> showDenuncia(Integer idDenucia){
         List <Denuncia >den = getById(idDenucia);
         List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
-        String name = userRepository.getById(den.get(0).getIdDenunciado()).get(0).getNombre();
-        String apellidos = userRepository.getById(den.get(0).getIdDenunciado()).get(0).getApellidos();
-        String mail = userRepository.getById(den.get(0).getIdDenunciado()).get(0).getCorreo();
-        Integer est = userRepository.getById(den.get(0).getIdDenunciante()).get(0).getEstamento();
-        String estamento = estamentoRepository.getById(est).get(0).getNombre();
+        String name1 = userRepository.getById(den.get(0).getIdDenunciante()).get(0).getNombre();
+        String apellidos1 = userRepository.getById(den.get(0).getIdDenunciante()).get(0).getApellidos();
+        String mail1 = userRepository.getById(den.get(0).getIdDenunciante()).get(0).getCorreo();
+        String name2 = userRepository.getById(den.get(0).getIdDenunciado()).get(0).getNombre();
+        String apellidos2 = userRepository.getById(den.get(0).getIdDenunciado()).get(0).getApellidos();
+        String mail2 = userRepository.getById(den.get(0).getIdDenunciado()).get(0).getCorreo();
+        Integer estamentoID = userRepository.getById(den.get(0).getIdDenunciante()).get(0).getEstamento();
+        String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+        Integer estadoID = den.get(0).getIdEstado();
+        String estado = estadoRepository.getById(estadoID).get(0).getNombre();
         String date = den.get(0).getFecha();
         String desc = den.get(0).getDescripcion();
         String med = den.get(0).getMedidas();
-        VerDenuncia denu2 = new VerDenuncia(idDenucia,name,apellidos,mail,estamento,"est",date,desc,med);
+        VerDenuncia denu2 = new VerDenuncia(idDenucia,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
         denuncia2.add(denu2);
         return denuncia2;
     }
@@ -280,15 +287,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
             Integer id = denuncia.get(i).getIdDenuncia();
-            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
-            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
-            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
-            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
-            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            String name1 = userRepository.getById(den.getIdDenunciante()).get(0).getNombre();
+            String apellidos1 = userRepository.getById(den.getIdDenunciante()).get(0).getApellidos();
+            String mail1 = userRepository.getById(den.getIdDenunciante()).get(0).getCorreo();
+            String name2 = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos2 = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail2 = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer estamentoID = userRepository.getById(den.getIdDenunciado()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+            Integer estadoID = denuncia.get(i).getIdEstado();
+            String estado = estadoRepository.getById(estadoID).get(0).getNombre();
             String date = denuncia.get(i).getFecha();
             String desc = denuncia.get(i).getDescripcion();
             String med = denuncia.get(i).getMedidas();
-            VerDenuncia den2 = new VerDenuncia(id,name,apellidos,mail,estamento,"est",date,desc,med);
+            VerDenuncia den2 = new VerDenuncia(id,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
             denuncia2.add(den2);
         }
         System.out.println("Se muestran las denucias");
@@ -304,15 +316,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
             Integer id = denuncia.get(i).getIdDenuncia();
-            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
-            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
-            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
-            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
-            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            String name1 = userRepository.getById(den.getIdDenunciante()).get(0).getNombre();
+            String apellidos1 = userRepository.getById(den.getIdDenunciante()).get(0).getApellidos();
+            String mail1 = userRepository.getById(den.getIdDenunciante()).get(0).getCorreo();
+            String name2 = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos2 = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail2 = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer estamentoID = userRepository.getById(den.getIdDenunciado()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+            Integer estadoID = denuncia.get(i).getIdEstado();
+            String estado = estadoRepository.getById(estadoID).get(0).getNombre();
             String date = denuncia.get(i).getFecha();
             String desc = denuncia.get(i).getDescripcion();
             String med = denuncia.get(i).getMedidas();
-            VerDenuncia den2 = new VerDenuncia(id,name,apellidos,mail,estamento,"est",date,desc,med);
+            VerDenuncia den2 = new VerDenuncia(id,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
             denuncia2.add(den2);
         }
         System.out.println("Se muestran las denucias");
@@ -328,15 +345,20 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
             Integer id = denuncia.get(i).getIdDenuncia();
-            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
-            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
-            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
-            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
-            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            String name1 = userRepository.getById(den.getIdDenunciante()).get(0).getNombre();
+            String apellidos1 = userRepository.getById(den.getIdDenunciante()).get(0).getApellidos();
+            String mail1 = userRepository.getById(den.getIdDenunciante()).get(0).getCorreo();
+            String name2 = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos2 = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail2 = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer estamentoID = userRepository.getById(den.getIdDenunciado()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+            Integer estadoID = denuncia.get(i).getIdEstado();
+            String estado = estadoRepository.getById(estadoID).get(0).getNombre();
             String date = denuncia.get(i).getFecha();
             String desc = denuncia.get(i).getDescripcion();
             String med = denuncia.get(i).getMedidas();
-            VerDenuncia den2 = new VerDenuncia(id,name,apellidos,mail,estamento,"est",date,desc,med);
+            VerDenuncia den2 = new VerDenuncia(id,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
             denuncia2.add(den2);
         }
         System.out.println("Se muestran las denucias");

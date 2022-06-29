@@ -2,20 +2,25 @@
 <div class="card">
   <div class="card-body">
     <div>
-    <h5 class="card-title">Dirigida a {{nombre}} {{apellido}}</h5>
+    <h5>Denuncia hecha por {{nombre2}} {{apellido2}}</h5>
+    <h6>{{mail2}} </h6>
+    <h5>Fecha de Ingreso </h5>
+    <h6>{{fecha}}</h6>
+    <h5>Dirigida a {{nombre1}} {{apellido1}}</h5>
+    <h6>{{estamento}}</h6>
+    <h6>{{mail1}} </h6>
         <div type="button" class="update" v-if="this.rol === 'fiscal'">
-        <select required v-model="estado" class="form-select update" aria-label="Default select example">
+        <select required v-model="state" class="form-select update" aria-label="Default select example">
           <option class="update" value="0" selected>Ingresada</option>
           <option value="1">Asignada a Fiscal</option>
           <option value="2">Investigando</option>
           <option value="3">Finalizada</option>
         </select>
     </div>
-    <h6>Correo {{mail}}</h6>
-    <p>Medidas de Proteccion {{med}}</p>
-    <h6>Fecha de Ingreso {{fecha}}</h6>
-    <p>{{desc}}</p>
-    <p>Estamento {{estamento}}</p>
+    <h5>Descripcion</h5>
+    <h6>{{descripcion}}</h6>
+    <h5>Medidas de Protección</h5>
+    <h6>{{medidas}}</h6>
     <div><button type="button" v-on:click="()=>this.$router.push(`denuncia/`+id)" class="btn btn-primary">Desplegar</button></div>
     </div>
   </div>
@@ -52,7 +57,7 @@ export default {
   },
   methods: {
     enable () {
-      this.estado = 1
+      this.state = 1
     }
   },
   mounted () {
@@ -66,12 +71,16 @@ export default {
   },
   props: {
     id: Number,
-    nombre: String,
-    apellido: String,
-    med: String,
-    mail: String,
+    nombre1: String,
+    apellido1: String,
+    mail1: String,
+    nombre2: String,
+    apellido2: String,
+    mail2: String,
+    medidas: String,
     estamento: String,
-    desc: String,
+    estado: String,
+    descripcion: String,
     fecha: String
   }
 }

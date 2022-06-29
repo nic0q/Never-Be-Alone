@@ -23,5 +23,4 @@ public interface DenunciaRepository {
     List<VerDenuncia> showDenuncia(Integer idDenucia);
     Integer updateDenuncia(Integer id_denuncia, Integer id_estado);
     Integer crearDenuncia(IngresarDenuncia denuncia);
-
 }

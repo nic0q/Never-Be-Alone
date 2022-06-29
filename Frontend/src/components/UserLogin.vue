@@ -62,8 +62,11 @@ export default {
             axios.get(`http://localhost:8080/user/get-by-email/${this.mail}`)
               .then(data => {
                 this.id = data.data[0].id
+                this.rol = data.data[0].rol
                 window.localStorage.setItem('token', this.id)
-                this.$router.push('home')
+                window.localStorage.setItem('rol', this.rol)
+                console.log(this.rol)
+                this.$router.push('mis-denuncias')
                 console.log('Login Exitoso')
               })
           }

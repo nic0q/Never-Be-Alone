@@ -7,6 +7,22 @@ public class VerDenuncia {
     Integer id;
     String apellidosDenunciado;
     String mailDenunciado;
+    String nombreDenunciante;
+    String apellidosDenunciante;
+    String mailDenunciante;
+
+    public String getNombreDenunciante() {
+        return nombreDenunciante;
+    }
+
+    public String getApellidosDenunciante() {
+        return apellidosDenunciante;
+    }
+
+    public String getMailDenunciante() {
+        return mailDenunciante;
+    }
+
     public String getNombreDenunciado() {
         return nombreDenunciado;
     }
@@ -40,8 +56,11 @@ public class VerDenuncia {
         return medidas;
     }
 
-    public VerDenuncia(Integer id,String nombreDenunciado, String apellidosDenunciado, String mailDenunciado, String estamento, String estado, String fecha, String descripcion, String medidas) {
+    public VerDenuncia(Integer id,String nombreDenunciado, String apellidosDenunciado, String mailDenunciado, String nombreDenunciante, String apellidosDenunciante, String mailDenunciante, String estamento, String estado, String fecha, String descripcion, String medidas) {
         this.id = id;
+        this.nombreDenunciante = nombreDenunciante;
+        this.apellidosDenunciante = apellidosDenunciante;
+        this.mailDenunciante = mailDenunciante;
         this.nombreDenunciado = nombreDenunciado;
         this.apellidosDenunciado = apellidosDenunciado;
         this.mailDenunciado = mailDenunciado;
