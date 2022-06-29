@@ -255,8 +255,31 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-    public List<VerDenuncia>showDenuncia(Integer idDenuncia){
+    public List<VerDenuncia>showDenunciaRealizada(Integer idDenuncia){
         List <Denuncia> denuncia = findDenunciaDenunciante(idDenuncia);
+        if(denuncia.isEmpty()){
+            System.out.println("No fue posible mostrar las denuncias");
+            return null;
+        }
+        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        for(int i = 0; i < denuncia.size();i++){
+            Denuncia den = denuncia.get(i);
+            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            String date = denuncia.get(i).getFecha();
+            String desc = denuncia.get(i).getDescripcion();
+            String med = denuncia.get(i).getMedidas();
+            VerDenuncia den2 = new VerDenuncia(name,apellidos,mail,estamento,"est",date,desc,med);
+            denuncia2.add(den2);
+        }
+        System.out.println("Se muestran las denucias");
+        return denuncia2;
+    }
+    public List<VerDenuncia>showDenunciaContra(Integer idDenuncia){
+        List <Denuncia> denuncia = findDenunciaDenunciado(idDenuncia);
         if(denuncia.isEmpty()){
             System.out.println("No fue posible mostrar las denuncias");
             return null;

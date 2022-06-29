@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserLogin from '../components/UserLogin'
-import DenunciasUsuario from '../components/DenunciasUsuario'
 import IngresarDenuncia from '../components/IngresarDenuncia'
 import ActualizarDenuncia from '../components/ActualizarDenuncia'
+import MisDenuncias from '../components/MisDenuncias'
+import DenunciasRealizadas from '../components/DenunciasRealizadas'
+import DenunciasContra from '../components/DenunciasContra'
+import DenunciasFiscal from '../components/DenunciasFiscal'
 import HomeUser from '../components/HomeUser'
 import BloqueoRol from '../components/BloqueoRol'
 import NavBar from '../components/NavBar'
-import MisDenuncias from '../components/MisDenuncias'
+
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
@@ -28,9 +31,9 @@ export default new VueRouter({
       component: HomeUser
     },
     {
-      path: '/denuncias',
-      name: 'denuncias',
-      component: DenunciasUsuario
+      path: '/mis-denuncias',
+      name: '/mis-denuncias',
+      component: MisDenuncias
     },
     {
       path: '/ingresar-denuncia',
@@ -49,9 +52,19 @@ export default new VueRouter({
       component: BloqueoRol
     },
     {
-      path: '/mis-denuncias',
-      name: 'mis-denuncias',
-      component: MisDenuncias
+      path: '/denuncias-realizadas',
+      name: 'denuncias-realizadas',
+      component: DenunciasRealizadas
+    },
+    {
+      path: '/denuncias-contra',
+      name: 'denuncias-contra',
+      component: DenunciasContra
+    },
+    {
+      path: '/denuncias-fiscal',
+      name: 'denuncias-fiscal',
+      component: DenunciasFiscal
     }
   ]
 })

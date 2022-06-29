@@ -1,19 +1,14 @@
 <template>
 <div v-if="activesec !== null">
   <NavBar></NavBar>
-  <br>
-<br>
-  <br>
-<br>
-<br>
-<br>
+  <br><br><br><br> <br><br><br>
   <div class="row justify-content-around">
   <div class="card text-center">
   <div class="card-body">
     <h5 class="text-dark">Denuncias Realizadas</h5>
     <br>
-    <div>
-      <a href="/denuncias" class="btn btn-primary">Ver</a>
+    <div type="button" v-on:click="()=>this.$router.push('denuncias-realizadas')">
+      <a class="btn btn-primary">Ver</a>
     </div>
 </div>
 </div>
@@ -21,18 +16,17 @@
   <div class="card-body">
     <h5 class="text-dark">Denuncias en Contra</h5>
     <br>
-    <div>
-      <a href="#" class="btn btn-primary">Ver</a>
+    <div type="button" v-on:click="()=>this.$router.push('denuncias-contra')">
+      <a class="btn btn-primary">Ver</a>
     </div>
   </div>
 </div>
 </div>
   </div>
 <div v-else>
-  <ErrorPage></ErrorPage>
+  <ErrorPage :url='"/login"'></ErrorPage>
 </div>
 </template>
-
 <style scoped>
   .card{
     margin: 5px;
@@ -48,23 +42,21 @@
     }
   }
 </style>
-
 <script>
 import NavBar from '@/components/NavBar'
+import ErrorPage from '@/components/ErrorPage'
 import axios from 'axios'
-
 axios.defaults.baseURL = 'http://localhost:3000'
 export default {
   name: 'HomeView',
   components: {
-    NavBar
+    NavBar,
+    ErrorPage
   },
-  mounted () {
-    axios.get(`http://localhost:8080/denuncia/show-denuncia/${localStorage.getItem('token')}`)
-      .then(response => {
-        this.dens = response.data
-        this.len = this.dens.length
-      })
+  data () {
+    return {
+      activesec: localStorage.getItem('token')
+    }
   }
 }
 </script>

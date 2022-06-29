@@ -51,12 +51,8 @@ export default {
                 this.dens = response.data
                 this.len = this.dens.length
               })
-            } else if (this.rol === 'user') {
-              console.log('soi user normal')
-              axios.get(`http://localhost:8080/denuncia/show-denuncia/${localStorage.getItem('token')}`).then(response => {
-                this.dens = response.data
-                this.len = this.dens.length
-              })
+            } else {
+              this.error = 0
             }
           })
       })

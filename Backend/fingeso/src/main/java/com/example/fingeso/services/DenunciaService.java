@@ -49,8 +49,10 @@ public class DenunciaService {
     }
     @PostMapping(value = "/crear-denuncia")
     public Integer crearDenuncia(@RequestBody IngresarDenuncia denuncia){return denunciaRepository.crearDenuncia(denuncia);}
-    @GetMapping("/show-denuncia/{id}")
-    public List<VerDenuncia>showDenuncia(@PathVariable("id") Integer id) {return denunciaRepository.showDenuncia(id);}
+    @GetMapping("/show-denuncia-realizada/{id}")
+    public List<VerDenuncia>showDenunciaRealizada(@PathVariable("id") Integer id) {return denunciaRepository.showDenunciaRealizada(id);}
+    @GetMapping("/show-denuncia-contra/{id}")
+    public List<VerDenuncia>showDenunciaContra(@PathVariable("id") Integer id) {return denunciaRepository.showDenunciaContra(id);}
     @GetMapping("/show-denuncia-fiscal/{id}")
-    public List<VerDenuncia>showDenunciaFiscal(@PathVariable("id") Integer id) {return denunciaRepository.showDenuncia(id);}
+    public List<VerDenuncia>showDenunciaFiscal(@PathVariable("id") Integer id) {return denunciaRepository.showDenunciaFiscal(id);}
 }
