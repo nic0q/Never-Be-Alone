@@ -4,7 +4,7 @@
   <h1>401</h1></div>
   <div><h2> Unauthorized Page</h2></div>
   <br>
-  <div><button type="button"  v-on:click="()=>this.$router.push(url)" class="btn btn-warning">Login</button></div>
+  <div><button type="button" v-on:click="()=>this.$router.push(url)" class="btn btn-warning">{{name}}</button></div>
 </div>
 </template>
 <script>

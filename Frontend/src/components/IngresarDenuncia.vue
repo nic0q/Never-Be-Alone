@@ -1,6 +1,6 @@
 <style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
-<div v-if="activesec !== ''">
+<div v-if="this.rol === 'dgde'">
 <div>
   <NavBar></NavBar>
 </div>
@@ -108,7 +108,7 @@
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
 <div v-else>
-<ErrorPage :url='"/home"'></ErrorPage>
+<ErrorPage :name = '"Home"' :url='"/home"'></ErrorPage>
 </div>
 </template>
 <script>
@@ -135,8 +135,20 @@ export default {
       desc: '',
       medidas: '',
       error: -1,
-      activesec: localStorage.getItem('token')
+      activesec: localStorage.getItem('token'),
+      rol: ''
     }
+  },
+  mounted () {
+    axios.get(`http://localhost:8080/user/get-by-id/${this.activesec}`)
+      .then(data => {
+        this.mail = data.data[0].correo
+        axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
+          .then(data => {
+            this.rol = data.data[0].nombre
+            console.log(this.rol)
+          })
+      })
   },
   methods: {
     sendData () {
