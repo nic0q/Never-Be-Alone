@@ -15,4 +15,6 @@ public interface UserRepository{
     Integer postUser(User user);
     Integer updateRolUser(Integer id_usuario, Integer id_rol);
     Integer autenticacion(String mail, String pass);
+
+    Integer seleccionarFiscal();
 }

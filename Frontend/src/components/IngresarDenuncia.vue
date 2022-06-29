@@ -1,6 +1,6 @@
 <style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
-<div v-if="activesec === ''">
+<div v-if="activesec !== ''">
 <div>
   <NavBar></NavBar>
 </div>

@@ -15,6 +15,7 @@ import org.sql2o.Sql2o;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Repository
 public class DenunciaRepositoryImp implements DenunciaRepository{
@@ -121,8 +122,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     public Integer postDenuncia(@RequestBody Denuncia denuncia){
         Connection conn = sql2o.open();
         int total = countDenuncias();
-        final String query = "insert into denuncia (id_denuncia,id_denunciante,id_denunciado,id_estamento_denunciado,descripcion,medidas,id_estado,fecha)"+
-                "values (:id_denuncia,:id_denunciante, :id_denunciado, :id_estamento_denunciado, :descripcion, :medidas, :id_estado, :fecha)";
+        final String query = "insert into denuncia (id_denuncia,id_denunciante,id_denunciado,id_estamento_denunciado,descripcion,medidas,id_estado,fecha, id_fiscal)"+
+                "values (:id_denuncia,:id_denunciante, :id_denunciado, :id_estamento_denunciado, :descripcion, :medidas, :id_estado, :fecha, :id_fiscal)";
         try (conn) {
             conn.createQuery(query)
                     .addParameter("id_denuncia",total)
@@ -133,6 +134,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                     .addParameter("medidas",denuncia.getMedidas())
                     .addParameter("id_estado",denuncia.getIdEstado())
                     .addParameter("fecha",denuncia.getFecha())
+                    .addParameter("id_fiscal",denuncia.getIdFiscal())
                     .executeUpdate();
             return 0;
         } catch (Exception e) {
@@ -214,7 +216,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                 System.out.println("Estamento invalido");
                 return -1;
             }
-            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,0);
+            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,userRepository.seleccionarFiscal());
             postDenuncia(newDen);
             System.out.println("Denuncia Ingresada Correctamente");
             return 0;
@@ -364,4 +366,5 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         System.out.println("Se muestran las denucias");
         return denuncia2;
     }
+
 }

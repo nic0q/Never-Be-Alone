@@ -1,4 +1,5 @@
 package com.example.fingeso.repositories;
+import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.User;
 import com.example.fingeso.models.Login;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import java.util.List;
+import java.util.Random;
 
 @Repository
 public class UserRepositoryImp implements UserRepository{
@@ -156,6 +158,25 @@ public class UserRepositoryImp implements UserRepository{
             return -1;
         }
         finally{
+            conn.close();
+        }
+    }
+
+    public Integer seleccionarFiscal(){
+        final String query = "SELECT * FROM usuario WHERE id_rol = '" + 1 + "'";
+        final List<User> fiscales;
+        Connection conn = sql2o.open();
+        try( conn ){
+            fiscales = conn.createQuery(query).executeAndFetch(User.class);
+            Random aleatorio = new Random();
+            User usuario = fiscales.get(aleatorio.nextInt(fiscales.size()));
+            Integer rol = usuario.getId();
+            return rol;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return -1;
+        }
+        finally {
             conn.close();
         }
     }
