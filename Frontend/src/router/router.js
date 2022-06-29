@@ -6,7 +6,6 @@ import MisDenuncias from '../components/MisDenuncias'
 import DenunciasRealizadas from '../components/DenunciasRealizadas'
 import DenunciasContra from '../components/DenunciasContra'
 import DenunciasFiscal from '../components/DenunciasFiscal'
-import VerDenuncia from '../components/VerDenuncia'
 import HomeUser from '../components/HomeUser'
 import BloqueoRol from '../components/BloqueoRol'
 import NavBar from '../components/NavBar'
@@ -59,11 +58,6 @@ export default new VueRouter({
       path: '/denuncias-fiscal',
       name: 'denuncias-fiscal',
       component: DenunciasFiscal
-    },
-    {
-      path: '/denuncia/:id',
-      name: 'ver-denuncia',
-      component: VerDenuncia
     }
   ]
 })
