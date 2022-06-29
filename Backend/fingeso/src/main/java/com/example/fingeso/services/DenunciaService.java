@@ -51,4 +51,6 @@ public class DenunciaService {
     public Integer crearDenuncia(@RequestBody IngresarDenuncia denuncia){return denunciaRepository.crearDenuncia(denuncia);}
     @GetMapping("/show-denuncia/{id}")
     public List<VerDenuncia>showDenuncia(@PathVariable("id") Integer id) {return denunciaRepository.showDenuncia(id);}
+    @GetMapping("/show-denuncia-fiscal/{id}")
+    public List<VerDenuncia>showDenunciaFiscal(@PathVariable("id") Integer id) {return denunciaRepository.showDenuncia(id);}
 }

@@ -4,9 +4,16 @@
   <h1>401</h1></div>
   <div><h2> Unauthorized Page</h2></div>
   <br>
-  <div><button type="button" onclick='(function(){location.href="/login"})();' class="btn btn-warning">Login</button></div>
+  <div><button type="button" onclick='(function(){location.href={{url}}})();' class="btn btn-warning">Login</button></div>
 </div>
 </template>
+<script>
+export default {
+  props: {
+    url: String
+  }
+}
+</script>
 <style scoped>
 .err{
   display: flex;

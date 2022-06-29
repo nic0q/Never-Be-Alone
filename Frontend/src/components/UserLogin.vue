@@ -50,8 +50,8 @@ export default {
   methods: {
     sendData () {
       const bodyFormData = new FormData()
-      bodyFormData.append('mail', this.mail.trim())
-      bodyFormData.append('pass', this.pass.trim())
+      bodyFormData.append('mail', this.mail.trim().toLowerCase())
+      bodyFormData.append('pass', this.pass.trim().toLowerCase())
       axios.post('http://localhost:8080/user/auth', bodyFormData)
         .then(data => {
           if (data.data === -1) {

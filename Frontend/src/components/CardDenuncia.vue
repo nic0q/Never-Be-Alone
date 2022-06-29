@@ -4,14 +4,13 @@
     <div>
     <h5 class="card-title">Dirigida a {{nombre}} {{apellido}}</h5>
     <h6>Correo {{mail}}</h6>
-    <div>
-      <a href="#" class="btn btn-primary">Actualizar el estado</a>
-    </div>
-    <p>{{id}}</p>
     <p>Medidas de Proteccion {{med}}</p>
     <h6>Fecha de Ingreso {{fecha}}</h6>
     <p>{{desc}}</p>
     <p>Estamento {{estamento}}</p>
+    </div>
+    <div v-if="this.rol === 'fiscal'">
+      <a href="#" class="btn btn-primary">Actualizar el estado</a>
     </div>
   </div>
 </div>
@@ -31,7 +30,20 @@
   }
 </style>
 <script>
+import axios from 'axios'
 export default {
+  data () {
+    return {
+      idUsr: localStorage.getItem('token'),
+      rol: ''
+    }
+  },
+  mounted () {
+    axios.get(`http://localhost:8080/rol/get-by-id/${this.idUsr}`)
+      .then(data => {
+        this.rol = data.data[0].nombre
+      })
+  },
   props: {
     id: Number,
     nombre: String,

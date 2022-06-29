@@ -18,6 +18,7 @@ public interface DenunciaRepository {
     List<Denuncia>getById(Integer id);
     List<Denuncia>getByEmail(String email);
     List<VerDenuncia>showDenuncia(Integer denuncia);
+    List<VerDenuncia>showDenunciaFiscal(Integer denuncia);
     Integer updateDenuncia(Integer id_denuncia, Integer id_estado);
     Integer crearDenuncia(IngresarDenuncia denuncia);
 }

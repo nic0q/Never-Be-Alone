@@ -9,7 +9,7 @@
   </div>
 </div>
 <div v-else>
-  <ErrorPage></ErrorPage>
+  <ErrorPage :url='"/login"'></ErrorPage>
 </div>
 </template>
 <script>
@@ -28,6 +28,7 @@ export default {
   data () {
     return {
       dens: [],
+      rol: '',
       len: '',
       nombreDenunciado: '',
       apellidosDenunciado: '',
@@ -38,10 +39,26 @@ export default {
     }
   },
   mounted () {
-    axios.get(`http://localhost:8080/denuncia/show-denuncia/${localStorage.getItem('token')}`)
-      .then(response => {
-        this.dens = response.data
-        this.len = this.dens.length
+    axios.get(`http://localhost:8080/user/get-by-id/${this.activesec}`)
+      .then(data => {
+        this.mail = data.data[0].correo
+        axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
+          .then(data => {
+            this.rol = data.data[0].nombre
+            if (this.rol === 'fiscal') {
+              console.log('soi fiscal')
+              axios.get(`http://localhost:8080/denuncia/show-denuncia-fiscal/${localStorage.getItem('token')}`).then(response => {
+                this.dens = response.data
+                this.len = this.dens.length
+              })
+            } else if (this.rol === 'user') {
+              console.log('soi user normal')
+              axios.get(`http://localhost:8080/denuncia/show-denuncia/${localStorage.getItem('token')}`).then(response => {
+                this.dens = response.data
+                this.len = this.dens.length
+              })
+            }
+          })
       })
   }
 }

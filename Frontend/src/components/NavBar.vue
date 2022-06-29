@@ -121,6 +121,9 @@ img{
   .br3{
     margin-top: 0;
   }
+  .nava{
+    border-radius: 10px;
+  }
 }
 @media(max-width: 435px){
   img{
