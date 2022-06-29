@@ -1,6 +1,6 @@
 <style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
-<div v-if="rol === 'dgde'">
+<div>
 <div>
   <NavBar></NavBar>
 </div>
@@ -70,11 +70,7 @@
     <div class="col">
       <div class="s">
       <label for="exampleFormControlTextarea1">Estamento</label></div>
-        <select required v-model="estamento" class="form-select" aria-label="Default select example">
-          <option value="0" selected>Profesor</option>
-          <option value="1">Estudiante</option>
-          <option value="2">Funcionario</option>
-        </select>
+      <input v-model="estamento" type="text" class="form-control">
     </div>
     <br>
   </div>
@@ -111,19 +107,14 @@
 <br>
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
-<div v-else>
-  <ErrorPage :url='"/home"'></ErrorPage>
-</div>
 </template>
 <script>
 import NavBar from '@/components/NavBar'
 import axios from 'axios'
-import ErrorPage from './ErrorPage.vue'
 export default {
   name: 'HomeView',
   components: {
-    NavBar,
-    ErrorPage
+    NavBar
   },
   data () {
     return {
@@ -138,41 +129,25 @@ export default {
       estamento: '',
       desc: '',
       medidas: '',
-      error: -1,
-      rol: '',
-      activesec: localStorage.getItem('token')
+      error: -1
     }
   },
   methods: {
-    mounted () {
-      axios.get(`http://localhost:8080/user/get-by-id/${this.activesec}`)
-        .then(data => {
-          this.mail = data.data[0].correo
-          axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
-            .then(data => {
-              this.rol = data.data[0].nombre
-            }
-            )
-        }
-        )
-    },
     sendData () {
-      console.log(this.estamento)
       axios.post('http://localhost:8080/denuncia/crear-denuncia', {
-        nombre1: this.nombre1.trim().toLowerCase(), // trim() elimina espacios en blanco al inicio y al final de la cadena y se pasa a minuscula
-        apellido11: this.apellido11.trim().toLowerCase(),
-        apellido12: this.apellido12.trim().toLowerCase(),
-        nombre2: this.nombre2.trim().toLowerCase(),
-        apellido21: this.apellido21.trim().toLowerCase(),
-        apellido22: this.apellido22.trim().toLowerCase(),
-        mail1: this.mail1.trim().toLowerCase(),
-        mail2: this.mail2.trim().toLowerCase(),
-        estamento: this.estamento.trim(),
+        nombre1: this.nombre1,
+        apellido11: this.apellido11,
+        apellido12: this.apellido12,
+        nombre2: this.nombre2,
+        apellido21: this.apellido21,
+        apellido22: this.apellido22,
+        mail1: this.mail1,
+        mail2: this.mail2,
+        estamento: this.estamento,
         desc: this.desc,
         medidas: this.medidas
       })
         .then(data => {
-          console.log(this.estamento)
           console.log(data)
           if (data.data === -1) {
             this.error = 1

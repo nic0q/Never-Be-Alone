@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserLogin from '../components/UserLogin'
 import IngresarDenuncia from '../components/IngresarDenuncia'
-import ActualizarDenuncia from '../components/ActualizarDenuncia'
 import MisDenuncias from '../components/MisDenuncias'
 import DenunciasRealizadas from '../components/DenunciasRealizadas'
 import DenunciasContra from '../components/DenunciasContra'
 import DenunciasFiscal from '../components/DenunciasFiscal'
+import VerDenuncia from '../components/VerDenuncia'
 import HomeUser from '../components/HomeUser'
 import BloqueoRol from '../components/BloqueoRol'
 import NavBar from '../components/NavBar'
@@ -41,12 +41,6 @@ export default new VueRouter({
       component: IngresarDenuncia
     },
     {
-      path: '/actualizar-denuncia',
-      name: 'actualizar-denuncia',
-      component: ActualizarDenuncia
-
-    },
-    {
       path: '/bloqueo-rol',
       name: 'bloqueo-rol',
       component: BloqueoRol
@@ -65,6 +59,11 @@ export default new VueRouter({
       path: '/denuncias-fiscal',
       name: 'denuncias-fiscal',
       component: DenunciasFiscal
+    },
+    {
+      path: '/denuncia/:id',
+      name: 'ver-denuncia',
+      component: VerDenuncia
     }
   ]
 })

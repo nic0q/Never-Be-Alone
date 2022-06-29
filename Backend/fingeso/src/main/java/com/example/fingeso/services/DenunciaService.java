@@ -2,6 +2,7 @@ package com.example.fingeso.services;
 
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.IngresarDenuncia;
+import com.example.fingeso.models.Rol;
 import com.example.fingeso.repositories.DenunciaRepository;
 import org.springframework.web.bind.annotation.*;
 import com.example.fingeso.models.VerDenuncia;
@@ -39,6 +40,10 @@ public class DenunciaService {
     public List<Denuncia> findDenunciaDenunciado(@PathVariable("id") Integer id){
         return denunciaRepository.findDenunciaDenunciado(id);
     }
+    @GetMapping(value = "/get-by-id/{id}")
+    public List<Denuncia> getById(@PathVariable("id") Integer id){
+        return denunciaRepository.getById(id);
+    }
     @PostMapping(value = "/post-denuncia")
     public Integer postDenuncia(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 
@@ -49,6 +54,8 @@ public class DenunciaService {
     }
     @PostMapping(value = "/crear-denuncia")
     public Integer crearDenuncia(@RequestBody IngresarDenuncia denuncia){return denunciaRepository.crearDenuncia(denuncia);}
+    @GetMapping("/show-denuncia/{id}")
+    public List<VerDenuncia> showDenuncia(@PathVariable("id") Integer id) {return denunciaRepository.showDenuncia(id);}
     @GetMapping("/show-denuncia-realizada/{id}")
     public List<VerDenuncia>showDenunciaRealizada(@PathVariable("id") Integer id) {return denunciaRepository.showDenunciaRealizada(id);}
     @GetMapping("/show-denuncia-contra/{id}")

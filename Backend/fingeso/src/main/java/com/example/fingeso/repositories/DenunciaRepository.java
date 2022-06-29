@@ -20,6 +20,8 @@ public interface DenunciaRepository {
     List<VerDenuncia>showDenunciaRealizada(Integer denuncia);
     List<VerDenuncia>showDenunciaContra(Integer denuncia);
     List<VerDenuncia>showDenunciaFiscal(Integer denuncia);
+    List<VerDenuncia> showDenuncia(Integer idDenucia);
     Integer updateDenuncia(Integer id_denuncia, Integer id_estado);
     Integer crearDenuncia(IngresarDenuncia denuncia);
+
 }

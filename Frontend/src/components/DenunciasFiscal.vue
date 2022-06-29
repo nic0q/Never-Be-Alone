@@ -3,9 +3,9 @@
   <NavBar></NavBar>
   <div class="container">
     <div v-if="this.len===0" class="alert alert-warning" role="alert">
-    <h1>Usted no posee denuncias</h1></div>
-  <div v-else v-for="den in dens" :key="den.idDenuncia">
-    <CardDenunciaVue :mail=den.mailDenunciado :id=den.idDenuncia :apellido=den.apellidosDenunciado :estamento=den.estamento :nombre=den.nombreDenunciado :desc=den.descripcion :med=den.medidas :fecha=den.fecha></CardDenunciaVue></div>
+    <h1>No se encontraron denuncias</h1><br><div><button type="button" v-on:click="()=>this.$router.push('/mis-denuncias')" class="btn btn-warning">Regresar</button></div></div>
+  <div v-else v-for="den in dens" :key="den.id">
+    <CardDenunciaVue :mail=den.mailDenunciado :id=den.id :apellido=den.apellidosDenunciado :estamento=den.estamento :nombre=den.nombreDenunciado :desc=den.descripcion :med=den.medidas :fecha=den.fecha></CardDenunciaVue></div>
   </div>
 </div>
 <div v-else>
@@ -31,6 +31,7 @@ export default {
       rol: '',
       len: '',
       nombreDenunciado: '',
+      id: '',
       apellidosDenunciado: '',
       mailDenunciado: '',
       estamento: '',
@@ -49,9 +50,11 @@ export default {
               console.log('soi fiscal')
               axios.get(`http://localhost:8080/denuncia/show-denuncia-fiscal/${localStorage.getItem('token')}`).then(response => {
                 this.dens = response.data
+                console.log(this.dens)
                 this.len = this.dens.length
               })
             } else {
+              console.log('no soi fiscal')
               this.error = 0
             }
           })

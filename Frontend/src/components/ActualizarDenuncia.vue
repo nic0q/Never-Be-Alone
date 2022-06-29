@@ -4,15 +4,26 @@
   <NavBar></NavBar>
 </div>
 <div class="contenedor">
-    <pr>Seleccione el codigo de la denuncia</pr>
+    <p>Seleccione el codigo de la denuncia</p>
     <br>
-<select name="codigo">
-</select>
+    <div class="s">
+      <label for="exampleFormControlTextarea1">Seleccione Denuncia</label></div>
+        <select v-for= "den in dens" :key="den.idDenuncia" v-model="estamento" class="form-select" aria-label="Default select example">
+          <option value="0" selected>Profesor</option>
+          <option value="1">Estudiante</option>
+          <option value="2">Funcionario</option>
+        </select>
 <br>
-<pr>Seleccione el nuevo estado de la denuncia</pr>
+<p>Seleccione el nuevo estado de la denuncia</p>
 <br>
-<select name="estado">
-</select>
+<div class="s">
+<label for="exampleFormControlTextarea1">Estado</label></div>
+  <select required v-model="estamento" class="form-select" aria-label="Default select example">
+    <option value="0" selected>Ingresada</option>
+    <option value="1">Asignada a Fiscal</option>
+    <option value="2">Investigando</option>
+    <option value="3">Finalizada</option>
+  </select>
 <br>
 </div>
 <br>
@@ -57,6 +68,8 @@ z-index: 2;
 }
 .contenedor{
   margin-top: 100px;
+  margin-left: 400px;
+  margin-right: 400px;
 }
 select{
   padding-right: 500px;
