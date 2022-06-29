@@ -9,33 +9,44 @@
     <h5 class="text-dark" ><p><strong>Dirigida a: </strong></p>{{nombre1}} {{apellido1}}</h5>
     <h6 class="text-dark">{{estamento}}</h6>
     <h6 class="text-dark">{{mail1}} </h6>
-        <div type="button" v-if="this.rol === 'fiscal'">
-        <h5 class="text-dark" ><p><strong>Actualizar estado: </strong></p></h5>
-        <select required v-model="state" class="form-select update" aria-label="Default select example">
-          <option class="update" value=0 selected>Ingresada</option>
+    <div type="button" v-if="this.rol === 'fiscal'">
+      <h5 class="text-dark" ><p><strong>Actualizar estado: </strong></p></h5>
+        <select required v-model="state" class="form-select updateS" aria-label="Default select example">
+          <option class="updateS" value=0 selected>Ingresada</option>
           <option value=1>Asignada a Fiscal</option>
           <option value=2>Investigando</option>
           <option value=3>Finalizada</option>
         </select>
     </div>
+    <div class="alert alert-danger" v-if="error === 1">
+      Ingrese un Nuevo Estado
+    </div>
+    <div class="alert alert-success" v-if="error === 0">
+      Estado de Denuncia Actualizado
+  </div>
     <br>
     <h5 class="text-dark"><p><strong>Descripcion:</strong></p></h5>
     <h6 class="text-dark">{{descripcion}}</h6>
     <h5 class="text-dark"><p><strong>Medidas de Protección:</strong></p></h5>
     <h6 class="text-dark">{{medidas}}</h6>
-    <div><button type="button" class="btn btn-primary">{{estado}}</button></div>
+    <div><button type="button" class="btn btn-dark">{{estado}}</button></div>
+    <br>
+    <div><button type="button" class="btn btn-primary" v-on:click='update' >Actualizar Estado</button></div>
     </div>
   </div>
 </div>
 </template>
 <style scoped>
+* {
+    color: black
+  }
   .card{
     margin: 5px;
     width: 18rem;
     background-color: #FF9900;
     z-index: 1;
   }
-  .update{
+  .updateS{
     z-index: 100;
     background-color: rgb(243, 238, 238);
   }
@@ -68,7 +79,7 @@ export default {
             console.error('Error')
           } else {
             this.error = 0
-            console.error('Exito')
+            console.log('Exito')
           }
         })
     }
