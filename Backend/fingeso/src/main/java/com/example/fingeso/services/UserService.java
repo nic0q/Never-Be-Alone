@@ -2,7 +2,6 @@ package com.example.fingeso.services;
 
 import com.example.fingeso.models.User;
 import com.example.fingeso.repositories.UserRepository;
-import com.example.fingeso.models.Login;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 

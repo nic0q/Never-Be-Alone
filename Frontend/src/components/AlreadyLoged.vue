@@ -2,18 +2,11 @@
 <div class="err">
   <div>
   <h1>401</h1></div>
-  <div><h2> Unauthorized Page</h2></div>
+  <div><h2>Ya Logeado</h2></div>
   <br>
-  <div><button type="button"  v-on:click="()=>this.$router.push(url)" class="btn btn-warning">Login</button></div>
+  <div><button type="button" onclick='(function(){location.href="/home"})();' class="btn btn-warning">Home</button></div>
 </div>
 </template>
-<script>
-export default {
-  props: {
-    url: String
-  }
-}
-</script>
 <style scoped>
 .err{
   display: flex;
