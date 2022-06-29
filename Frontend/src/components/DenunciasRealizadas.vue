@@ -9,7 +9,7 @@
   </div>
 </div>
 <div v-else>
-  <ErrorPage :url='"/login"'></ErrorPage>
+  <ErrorPage :name='"Login"' :url='"/login"'></ErrorPage>
 </div>
 </template>
 <script>

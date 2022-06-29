@@ -1,5 +1,5 @@
 <template>
-<div v-if="activesec !== null">
+<div v-if="id !== null">
   <NavBar></NavBar>
   <br><br><br><br> <br><br><br>
   <div class="row justify-content-around">
@@ -32,7 +32,7 @@
 </div>
   </div>
 <div v-else>
-  <ErrorPage :url='"/login"'></ErrorPage>
+  <ErrorPage :name="'Login'" :url='"/login"'></ErrorPage>
 </div>
 </template>
 <style scoped>

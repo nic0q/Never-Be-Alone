@@ -5,16 +5,16 @@
     <div v-if="this.len===0" class="alert alert-warning" role="alert">
     <h1>No se encontraron denuncias</h1><br><div><button type="button" v-on:click="()=>this.$router.push('/mis-denuncias')" class="btn btn-warning">Regresar</button></div></div>
   <div v-else v-for="den in dens" :key="den.id">
-    <CardDenunciaVue :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciantee :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
+    <CardDenunciaVue :id=den.id :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciantee :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
   </div>
 </div>
 <div v-else>
-  <ErrorPage :url='"/login"'></ErrorPage>
+  <ErrorPage :name='"Login"' :url='"/login"'></ErrorPage>
 </div>
 </template>
 <script>
-import NavBar from '@/components/NavBar'
 import CardDenunciaVue from './CardDenuncia.vue'
+import NavBar from '@/components/NavBar'
 import ErrorPage from './ErrorPage.vue'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'

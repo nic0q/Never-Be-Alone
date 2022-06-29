@@ -47,10 +47,9 @@ public class DenunciaService {
     @PostMapping(value = "/post-denuncia")
     public Integer postDenuncia(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 
-    @GetMapping("/update-denuncia")
-    @ResponseBody
-    int updateDenuncia(@RequestParam Integer id_denuncia, Integer id_estado){
-        return denunciaRepository.updateDenuncia(id_denuncia, id_estado);
+    @PutMapping(value = "/update-denuncia/{id}")
+    public Integer updateDenuncia(@PathVariable("id") Integer id, @RequestParam String id_estado){
+        return denunciaRepository.updateDenuncia(id, id_estado);
     }
     @PostMapping(value = "/crear-denuncia")
     public Integer crearDenuncia(@RequestBody IngresarDenuncia denuncia){return denunciaRepository.crearDenuncia(denuncia);}

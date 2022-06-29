@@ -232,7 +232,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     1 representa una actualizacion exitosa
      */
     @Override
-    public Integer updateDenuncia(Integer id_denuncia, Integer id_estado){
+    public Integer updateDenuncia(Integer id_denuncia, String id_estadoo){
+        Integer id_estado = Integer.parseInt(id_estadoo);
         if (!(id_estado.equals(1) || id_estado.equals(2))){
             if(!(id_estado.equals(3))){
                 return -1;
@@ -250,6 +251,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                     .addParameter( "id_denuncia", id_denuncia)
                     .addParameter("id_estado", id_estado)
                     .executeUpdate();
+            System.out.println("Success");
             return 1;
         }catch(Exception e){
             System.out.println(e.getMessage());

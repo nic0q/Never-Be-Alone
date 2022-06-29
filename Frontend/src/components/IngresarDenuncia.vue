@@ -112,7 +112,7 @@
     <ErrorPage :name = '"Login"' :url='"/login"'></ErrorPage>
   </div>
   <div v-else>
-    <ErrorPage :name = '"Home"' :url='"/home"'></ErrorPage>
+    <ErrorPage :name = '"Home"' :url='"/mis-denuncias"'></ErrorPage>
   </div>
 </div>
 </template>
