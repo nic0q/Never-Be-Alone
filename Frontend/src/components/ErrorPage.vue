@@ -10,7 +10,8 @@
 <script>
 export default {
   props: {
-    url: String
+    url: String,
+    name: String
   }
 }
 </script>

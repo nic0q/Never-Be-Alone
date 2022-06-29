@@ -108,7 +108,12 @@
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
 <div v-else>
-<ErrorPage :name = '"Home"' :url='"/home"'></ErrorPage>
+  <div v-if="this.rol === ''">
+    <ErrorPage :name = '"Login"' :url='"/login"'></ErrorPage>
+  </div>
+  <div v-else>
+    <ErrorPage :name = '"Home"' :url='"/home"'></ErrorPage>
+  </div>
 </div>
 </template>
 <script>
