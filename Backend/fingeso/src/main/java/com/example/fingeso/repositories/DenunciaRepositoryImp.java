@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
 import java.util.ArrayList;
 import java.util.List;
 

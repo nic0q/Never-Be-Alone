@@ -20,10 +20,10 @@
         </select>
     </div>
     <div class="alert alert-danger" v-if="error === 1">
-      Ingrese un Nuevo Estado
+      Ingrese un estado válido
     </div>
     <div class="alert alert-success" v-if="error === 0">
-      Estado de Denuncia Actualizado
+      Estado de denuncia actualizado
   </div>
     <br>
     <h5 class="text-dark"><p><strong>Descripcion:</strong></p></h5>
@@ -44,7 +44,7 @@
   .card{
     margin: 5px;
     width: 18rem;
-    background-color: #fcd18f;
+    background-color: #fee2b8;
     z-index: 1;
   }
   .updateS{
@@ -77,6 +77,7 @@ export default {
         .then(data => {
           if (data.data === -1) {
             this.error = 1
+            window.location.reload()
             console.error('Error')
           } else {
             this.error = 0
