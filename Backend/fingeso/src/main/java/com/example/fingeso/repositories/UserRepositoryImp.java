@@ -1,20 +1,26 @@
 package com.example.fingeso.repositories;
 
 import com.example.fingeso.models.User;
+import com.example.fingeso.models.VerDenuncia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 @Repository
 public class UserRepositoryImp implements UserRepository{
-
     @Autowired
     private Sql2o sql2o;
-
+    /*
+    D: Funcion que obtiene el numero de usuarios en la base de datos mediante una consulta
+    I: void
+    O: Numero de usuarios (Entero)
+    */
     @Override
     public int countUsers(){
         Integer total = 0;
@@ -31,7 +37,11 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
-
+    /*
+    D: Funcion que obtiene todos los usarios de la base de datos mediante una consulta
+    I: void
+    O: Lista de Objeto usuario
+    */
     @Override
     public List<User> getAllUsers(){
         final String query = "select * from usuario";
@@ -48,6 +58,11 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que obtiene a usarios de la base de datos mediante una consulta a traves de su rol
+    I: rol usuario (Entero)
+    O: Lista de Objeto usuario
+    */
     @Override
     public List<User> getByRol(Integer rol){
         final String query = "SELECT * FROM usuario WHERE id_rol = '" + rol + "'";
@@ -65,6 +80,12 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que obtiene a un usario de la base de datos mediante una consulta a traves de su correo
+    I: mail usuario (String)
+    O: Lista de Objeto usuario
+    */
+    @Override
     public List<User> getByEmail(String email){
         final String query = "SELECT * FROM usuario WHERE email = '" + email + "'";
         final List<User> usersMail;
@@ -80,6 +101,12 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que obtiene a un usario de la base de datos mediante una consulta a traves de su id
+    I: id usuario (Entero)
+    O: Lista de Objeto usuario
+    */
+    @Override
     public List<User> getById(Integer id){
         final String query = "SELECT * FROM usuario WHERE id_usuario = '" + id + "'";
         final List<User> usersRol;
@@ -95,9 +122,12 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
-    // Returns
-    // 0: Exito
-    // -1: Fallido
+    /*
+    D: Funcion que inserta en la base de datos un nuevo usuario
+    I: Objeto usuario
+    O: Entero que simboliza si hubo exito o fallo 0: Exito, -1: Fallo
+    */
+    @Override
     public Integer postUser(@RequestBody User user){
         Connection con = sql2o.open();
         final String query  =
@@ -124,7 +154,12 @@ public class UserRepositoryImp implements UserRepository{
             con.close();
         }
     }
-
+    /*
+    D: Funcion que autentica a un usuario mediante su correo y contraseña
+    I: Mail y password (String)
+    O: Entero que simboliza si hubo exito o fallo 0: Exito, -1: Fallo
+    */
+    @Override
     public Integer autenticacion(String mail, String pass){
         List<User> users = getByEmail(mail);
         if(users.isEmpty()){
@@ -140,8 +175,11 @@ public class UserRepositoryImp implements UserRepository{
             return -1;
         }
     }
-
-    @Override
+    /*
+    D: Funcion que determina un fiscal al azhar dentro de los disponibles
+    I: id Usuario, id Rol
+    O: Entero que simboliza si hubo exito o fallo 0: Exito, -1: Fallo
+    */
     public Integer updateRolUser(Integer id_usuario, Integer id_rol){
         //final String query = "update usuario set id_rol = '" + id_rol + "' where id_usuario = '" + id_usuario + "'";
         final String query = "update usuario set id_rol = :id_rol where id_usuario = :id_usuario";
@@ -160,7 +198,11 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
-
+    /*
+    D: Funcion que determina un fiscal al azhar dentro de los disponibles
+    I: void
+    O: Entero que simboliza el fiscal asignado
+    */
     public Integer seleccionarFiscal(){
         final String query = "SELECT * FROM usuario WHERE id_rol = '" + 1 + "'";
         final List<User> fiscales;
@@ -179,29 +221,27 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
-
-    @Override
+    /*
+    D: Funcion que filtra a todos los usuarios que no tengan rol de admin, devuelve una lista con estos
+    I: void
+    O: null: no hay usuarios, lista: usuarios sin admin
+    */
     public List<User> getAllUsersNoAdmin(){
-        final String query = "select * from usuario";
-        final List<User> usersTotal;
-        Connection conn = sql2o.open();
-        try( conn ){
-            usersTotal = conn.createQuery(query).executeAndFetch(User.class);
-            List<User> noAdmin = usersTotal;
-            for(int i = 0; i < usersTotal.size(); i++){
-                User usuario = usersTotal.get(i);
-                if(usuario.getRol() == 3){
-                    noAdmin.remove(usuario);
-                }
-            }
-            return noAdmin;
-        } catch (Exception e){
-            System.out.println(e.getMessage());
+        List <User> users = getAllUsers();
+        List <User> normalUsers = new ArrayList<User>();
+        if(users.isEmpty()){    // Si no hay usuarios
+            System.out.println ("No hay usuarios");
             return null;
         }
-        finally {
-            conn.close();
+        for(int i = 0; i < users.size();i++){
+            if(users.get(i).getRol() == 3){ // Si tiene el rol de admin se ignora
+                continue;
+            }
+            else{   // si no, se añade a una lista auxiliar
+                normalUsers.add(users.get(i));
+            }
         }
+        return normalUsers;
     }
 }
 

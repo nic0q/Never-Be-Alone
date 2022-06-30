@@ -74,7 +74,7 @@ export default {
   color: hsl(210,8%,35%);
 }
 img{
-  width: 160px;
+  width: 170px;
   height: 40px;
   left: 18px;
   position: absolute;

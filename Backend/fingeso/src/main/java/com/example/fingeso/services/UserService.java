@@ -36,16 +36,11 @@ public class UserService {
     }
     @PostMapping(value = "/post-user")
     public Integer postUser(@RequestBody User user){return userRepository.postUser(user);}
-
     @PutMapping(value = "/update-rol/{id}")
     Integer updateRolUser(@PathVariable("id") Integer id_usuario,@RequestParam Integer id_rol){
-        return userRepository.updateRolUser(id_usuario, id_rol);
-    }
+        return userRepository.updateRolUser(id_usuario, id_rol);}
     @PostMapping(value = "/auth")
     public Integer autenticacion(@RequestParam String mail, String pass){return userRepository.autenticacion(mail,pass);}
-
     @GetMapping("/getall-no-admin")
-    public List<User>getAllUsersNoAdmin() {
-        return userRepository.getAllUsersNoAdmin();
-    }
+    public List<User>getAllUsersNoAdmin() {return userRepository.getAllUsersNoAdmin();}
 }

@@ -3,21 +3,24 @@
 <div>
   <NavBar></NavBar>
 </div>
-<h5>Usuarios:</h5>
 <br>
 <div class="row justify-content-center">
-         <thead>
+  <table class="table table-striped">
+    <thead>
     <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Correo Electrónico</th>
+      <th scope="col">Rol Actual</th>
+      <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
-  <div v-for= "den in dens" :key="den.id" >
-  <CardRol :id = den.id :apellidos = den.apellidos :nombre = den.nombre :rol = den.rol></CardRol>
-  </div>
-
+  <tbody>
+  <CardRol v-for= "den in dens" :key="den.id" :id = den.id :apellidos = den.apellidos :nombre = den.nombre :rol = den.rol :mail = den.correo></CardRol>
+  </tbody>
+</table>
 </div>
-
-<p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </div>
 </template>
 <script>
@@ -56,7 +59,7 @@ export default {
           console.log(data)
           if (data.data === -1) {
             this.error = 1
-            console.error('Error')
+            console.error('No se actualizo el rol')
           } else {
             this.error = 0
             console.log('Rol actualizado')
