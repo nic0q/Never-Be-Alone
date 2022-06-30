@@ -1,5 +1,5 @@
 <template>
-<div class="">
+<div>
 <div>
   <NavBar></NavBar>
 </div>
@@ -39,6 +39,11 @@ export default {
   name: 'HomeView',
   components: {
     NavBar
+  },
+  mounted () {
+    if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
+      this.$router.push('login')
+    }
   }
 }
 </script>

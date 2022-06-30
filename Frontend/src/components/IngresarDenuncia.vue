@@ -145,15 +145,19 @@ export default {
     }
   },
   mounted () {
-    axios.get(`http://localhost:8080/user/get-by-id/${this.activesec}`)
-      .then(data => {
-        this.mail = data.data[0].correo
-        axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
-          .then(data => {
-            this.rol = data.data[0].nombre
-            console.log(this.rol)
-          })
-      })
+    if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
+      this.$router.push('login')
+    } else {
+      axios.get(`http://localhost:8080/user/get-by-id/${this.activesec}`)
+        .then(data => {
+          this.mail = data.data[0].correo
+          axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
+            .then(data => {
+              this.rol = data.data[0].nombre
+              console.log(this.rol)
+            })
+        })
+    }
   },
   methods: {
     sendData () {

@@ -30,12 +30,10 @@
 // @ is an alias to /src
 import ImagenLogo from '../components/ImagenLogo'
 import axios from 'axios'
-import AlreadyLogedVue from './AlreadyLoged.vue'
 export default {
   name: 'HomeView',
   components: {
-    ImagenLogo,
-    AlreadyLogedVue
+    ImagenLogo
   },
   data () {
     return {
@@ -45,6 +43,11 @@ export default {
       id: '',
       error: -1,
       activesec: localStorage.getItem('token')
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('token')) { // Si hay un token, hay alguien con seccion activa, entonces no se permite el acceso al login
+      this.$router.push('mis-denuncias')
     }
   },
   methods: {
@@ -63,9 +66,8 @@ export default {
               .then(data => {
                 this.id = data.data[0].id
                 this.rol = data.data[0].rol
-                window.localStorage.setItem('token', this.id)
-                window.localStorage.setItem('rol', this.rol)
-                console.log(this.rol)
+                localStorage.setItem('token', this.id)
+                localStorage.setItem('rol', this.rol)
                 this.$router.push('mis-denuncias')
                 console.log('Login Exitoso')
               })

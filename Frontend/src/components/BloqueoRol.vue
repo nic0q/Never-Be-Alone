@@ -1,5 +1,5 @@
 <template>
-<div class="">
+<div>
 <div>
   <NavBar></NavBar>
 </div>
@@ -43,7 +43,6 @@
 </div>
 </template>
 <script>
-// @ is an alias to /src
 import axios from 'axios'
 import NavBar from '@/components/NavBar'
 export default {
@@ -64,14 +63,18 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8080/user/getall-no-admin')
-      .then(data => {
-        console.log(data)
-        this.dens = data.data
-        this.len = this.dens.length
-        this.apellidos = data.data[0].apellidos
-        this.nombre = data.data[5].nombre
-      })
+    if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
+      this.$router.push('login')
+    } else {
+      axios.get('http://localhost:8080/user/getall-no-admin')
+        .then(data => {
+          console.log(data)
+          this.dens = data.data
+          this.len = this.dens.length
+          this.apellidos = data.data[0].apellidos
+          this.nombre = data.data[5].nombre
+        })
+    }
   }
 }
 </script>
