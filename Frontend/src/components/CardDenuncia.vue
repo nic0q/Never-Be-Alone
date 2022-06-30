@@ -2,9 +2,7 @@
 <div class="card">
   <div class="card-body">
     <div>
-    <h5 class="text-dark"><p class="font-weight-bold"><strong>Denuncia hecha por</strong></p>{{nombre2}} {{apellido2}}</h5>
-    <h6 class="text-dark">{{mail2}} </h6>
-    <h5 class="text-dark" ><p><strong>Dirigida a</strong></p>{{nombre1}} {{apellido1}}</h5>
+    <h5 class="text-dark"><p class="font-weight-bold"><strong>{{text}}</strong></p>{{nombre1}} {{apellido1}}</h5>
     <h6 class="text-dark">{{mail1}} </h6>
     <h5 class="text-dark" ><p><strong>Estamento</strong></p></h5>
     <h6 class="text-dark">{{estamento}}</h6>
@@ -20,7 +18,7 @@
 </div>
 </template>
 <style scoped>
-* {
+  * {
     color: black
   }
   .card{
@@ -70,6 +68,7 @@ export default {
   },
   props: {
     id: Number,
+    text: String,
     nombre1: String,
     apellido1: String,
     mail1: String,

@@ -37,25 +37,14 @@ export default {
   mounted () {
     if (!localStorage.getItem('token')) { // Si hay un token, hay alguien con seccion activa, entonces no se permite el acceso al login
       this.$router.push('login')
+    } else if (localStorage.getItem('rol') !== '1') {
+      this.$router.push('mis-denuncias')
     } else {
-      axios.get(`http://localhost:8080/user/get-by-id/${this.activesec}`)
-        .then(data => {
-          axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
-            .then(data => {
-              this.rol = data.data[0].nombre
-              if (this.rol === 'fiscal') {
-                console.log('soi fiscal')
-                axios.get(`http://localhost:8080/denuncia/show-denuncia-fiscal/${localStorage.getItem('token')}`).then(response => {
-                  this.dens = response.data
-                  console.log(this.dens)
-                  this.len = this.dens.length
-                })
-              } else {
-                console.log('no soi fiscal')
-                this.error = 0
-              }
-            })
-        })
+      axios.get(`http://localhost:8080/denuncia/show-denuncia-fiscal/${localStorage.getItem('token')}`).then(response => {
+        this.dens = response.data
+        console.log(this.dens)
+        this.len = this.dens.length
+      })
     }
   }
 }

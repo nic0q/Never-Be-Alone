@@ -148,6 +148,8 @@ export default {
   mounted () {
     if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
       this.$router.push('login')
+    } else if (localStorage.getItem('rol') !== '3') { // Si el rol no es 3, no es un usuario, entonces lo redirige a home
+      this.$router.push('mis-denuncias')
     } else {
       axios.get(`http://localhost:8080/rol/get-by-id/${this.rol}`)
         .then(data => {

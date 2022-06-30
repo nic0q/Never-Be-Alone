@@ -5,11 +5,12 @@
   <div class="row justify-content-around">
   <div class="card text-center">
   <div class="card-body">
-    <h5 class="text-dark">Denuncias Realizadas</h5>
+    <div>
+    <h5 class="text-dark " >Denuncias Realizadas </h5>
     <br>
     <div type="button" v-on:click="()=>this.$router.push('denuncias-realizadas')">
-      <a class="btn btn-primary">Ver</a>
-    </div>
+      <a class="btn btn-dark">Ver</a>
+    </div></div>
 </div>
 </div>
 <div class="card">
@@ -17,13 +18,13 @@
     <div v-if="this.rol === 'fiscal'" >
     <h5 class="text-dark">Denuncias Asignadas</h5><br>
         <div type="button" v-on:click="()=>this.$router.push('denuncias-fiscal')">
-      <a class="btn btn-primary">Ver</a>
+      <a class="btn btn-dark">Ver</a>
     </div>
     </div>
     <div v-else>
       <h5 class="text-dark">Denuncias en Contra</h5><br>
       <div type="button" v-on:click="()=>this.$router.push('denuncias-contra')">
-      <a class="btn btn-primary">Ver</a>
+      <a class="btn btn-dark">Ver</a>
     </div>
     </div>
     <br>
@@ -33,11 +34,28 @@
   </div>
 </template>
 <style scoped>
+  *{
+    overflow-x: hidden;
+  }
+  .btn{
+    width: 200px;
+  }
+  h5{
+    font-weight: bolder;
+    font-size: x-large;
+  }
   .card{
     margin: 5px;
-    width: 18rem;
+    width: 25rem;
     height: 10rem;
-    background-color: #FF9900;
+    background-color: #fbe4bf;
+    border-radius: 10px;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
   @media(max-width: 768px){
     .card{
