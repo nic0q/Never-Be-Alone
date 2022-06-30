@@ -1,6 +1,6 @@
 <style>@import '../assets/loginStyles.css';</style>
 <template>
-<div v-if="activesec === null">
+<div>
 <main class="form-signin">
 <form v-on:submit.prevent="login">
   <ImagenLogo></ImagenLogo>
@@ -24,7 +24,6 @@
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </main>
 </div>
-<AlreadyLogedVue v-else></AlreadyLogedVue>
 </template>
 <script>
 // @ is an alias to /src
@@ -41,8 +40,7 @@ export default {
       pass: '',
       rol: '',
       id: '',
-      error: -1,
-      activesec: localStorage.getItem('token')
+      error: -1
     }
   },
   mounted () {

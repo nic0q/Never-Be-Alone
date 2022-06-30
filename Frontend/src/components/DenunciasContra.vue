@@ -2,10 +2,10 @@
 <div>
 <NavBar></NavBar>
 <div class="container">
-  <div v-if="this.len===0" class="alert alert-warning" role="alert">
+  <div v-if="this.len === 0" class="alert alert-warning" role="alert">
   <h1>Usted no posee denuncias</h1></div>
-<div v-else v-for="den in dens" :key="den.id">
-  <CardDenunciaVue :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciantee :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
+<div v-else v-for="den in dens" :key='den.id'>
+  <CardDenunciaVue :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciante :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
 </div>
 </div>
 </template>
@@ -60,8 +60,8 @@ export default {
   }
   .container{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: stretch;
     flex-wrap: wrap;
     margin-top: 80px;
   }
