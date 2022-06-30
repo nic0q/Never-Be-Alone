@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import UserLogin from '../components/UserLogin'
-import IngresarDenuncia from '../components/IngresarDenuncia'
-import MisDenuncias from '../components/MisDenuncias'
 import DenunciasRealizadas from '../components/DenunciasRealizadas'
+import IngresarDenuncia from '../components/IngresarDenuncia'
 import DenunciasContra from '../components/DenunciasContra'
 import DenunciasFiscal from '../components/DenunciasFiscal'
+import MisDenuncias from '../components/MisDenuncias'
+import UserLogin from '../components/UserLogin'
 import BloqueoRol from '../components/BloqueoRol'
 
 Vue.use(VueRouter)
@@ -18,13 +18,8 @@ export default new VueRouter({
       component: UserLogin
     },
     {
-      path: '/login',
-      name: 'login',
-      component: UserLogin
-    },
-    {
       path: '/mis-denuncias',
-      name: '/mis-denuncias',
+      name: 'mis-denuncias',
       component: MisDenuncias
     },
     {

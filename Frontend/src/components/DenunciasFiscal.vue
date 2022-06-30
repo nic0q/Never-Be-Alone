@@ -36,7 +36,7 @@ export default {
   },
   mounted () {
     if (!localStorage.getItem('token')) { // Si hay un token, hay alguien con seccion activa, entonces no se permite el acceso al login
-      this.$router.push('login')
+      this.$router.push('/')
     } else if (localStorage.getItem('rol') !== '1') {
       this.$router.push('mis-denuncias')
     } else {
@@ -58,7 +58,7 @@ export default {
     justify-content: space-evenly;
     align-items: stretch;
     flex-wrap: wrap;
-    margin-top: 80px;
+    margin-top: 50px;
   }
     @media(max-width: 768px){
     .container{

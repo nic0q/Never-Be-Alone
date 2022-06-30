@@ -1,6 +1,5 @@
-<style>@import '../assets/ingresarDenunciaStyles.css';</style>
 <template>
-<div v-if="this.rol === 'dgde'">
+<div>
 <div>
   <NavBar></NavBar>
 </div>
@@ -107,24 +106,14 @@
 <br>
 <p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
-<div v-else>
-  <div v-if="this.rol === ''">
-    <ErrorPage :name = '"Login"' :url='"/login"'></ErrorPage>
-  </div>
-  <div v-else>
-    <ErrorPage :name = '"Home"' :url='"/mis-denuncias"'></ErrorPage>
-  </div>
-</div>
 </template>
 <script>
 import NavBar from '@/components/NavBar'
-import ErrorPage from '@/components/ErrorPage'
 import axios from 'axios'
 export default {
   name: 'HomeView',
   components: {
-    NavBar,
-    ErrorPage
+    NavBar
   },
   data () {
     return {
@@ -147,15 +136,9 @@ export default {
   },
   mounted () {
     if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
-      this.$router.push('login')
-    } else if (localStorage.getItem('rol') !== '3') { // Si el rol no es 3, no es un usuario, entonces lo redirige a home
+      this.$router.push('/')
+    } else if (localStorage.getItem('rol') !== '2') { // Si el rol no es 2, no es un usuario, entonces lo redirige a home
       this.$router.push('mis-denuncias')
-    } else {
-      axios.get(`http://localhost:8080/rol/get-by-id/${this.rol}`)
-        .then(data => {
-          this.rol = data.data[0].nombre
-          console.log(this.rol)
-        })
     }
   },
   methods: {

@@ -42,7 +42,7 @@ export default {
   },
   mounted () {
     if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
-      this.$router.push('login')
+      this.$router.push('/')
     }
   }
 }

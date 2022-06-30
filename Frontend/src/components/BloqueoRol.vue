@@ -40,8 +40,8 @@
 </div>
 </template>
 <script>
-import axios from 'axios'
 import NavBar from '@/components/NavBar'
+import axios from 'axios'
 export default {
   name: 'HomeView',
   components: {
@@ -62,6 +62,8 @@ export default {
   mounted () {
     if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
       this.$router.push('login')
+    } else if (localStorage.getItem('rol') !== '3') { // Si el rol no es 3, no es un usuario, entonces lo redirige a home
+      this.$router.push('mis-denuncias')
     } else {
       axios.get('http://localhost:8080/user/getall-no-admin')
         .then(data => {
@@ -73,6 +75,7 @@ export default {
           this.nombre = data.data[5].nombre
           this.rol = data.data[6].rol
         })
+      this.$router.push('/')
     }
   },
   methods: {

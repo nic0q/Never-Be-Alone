@@ -1,8 +1,7 @@
 <template>
 <div>
   <NavBar></NavBar>
-  <br><br><br><br> <br><br><br>
-  <div class="row justify-content-around">
+  <div class="cardss row justify-content-around">
   <div class="card text-center">
   <div class="card-body">
     <div>
@@ -44,7 +43,11 @@
     font-weight: bolder;
     font-size: x-large;
   }
+  .cardss{
+    margin-top: 13%;
+  }
   .card{
+    overflow-x: hidden;
     margin: 5px;
     width: 25rem;
     height: 10rem;
@@ -61,7 +64,10 @@
     .card{
       width: 24rem;
       margin: 10px;
-      height: 24rem;
+      height: 10rem;
+    }
+    .cardss{
+      margin-top: 1%;
     }
   }
 </style>
@@ -82,7 +88,7 @@ export default {
   },
   mounted () {
     if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
-      this.$router.push('login')
+      this.$router.push('/')
     } else {
       axios.get(`http://localhost:8080/user/get-by-id/${this.id}`)
         .then(data => {

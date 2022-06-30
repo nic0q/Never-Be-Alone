@@ -33,7 +33,7 @@ export default {
   },
   mounted () {
     if (!localStorage.getItem('token')) { // Si no hay un token,no hay alguien con seccion activa, entonces lo redirige al login
-      this.$router.push('login')
+      this.$router.push('/')
     } else {
       axios.get(`http://localhost:8080/denuncia/show-denuncia-contra/${localStorage.getItem('token')}`).then(response => {
         this.dens = response.data
@@ -52,7 +52,7 @@ export default {
     justify-content: space-evenly;
     align-items: stretch;
     flex-wrap: wrap;
-    margin-top: 80px;
+    margin-top: 50px;
   }
     @media(max-width: 768px){
     .container{
