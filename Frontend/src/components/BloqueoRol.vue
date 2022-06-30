@@ -3,43 +3,40 @@
 <div>
   <NavBar></NavBar>
 </div>
-<div class="contenedor">
-    <pr>Seleccione el correo a bloquear</pr>
-    <br>
-<select name="codigo">
-</select>
-<div class = "row justify-content-center">
-    <div class=" m-2">
-    <label for="floatingUsername">Nombres</label>
-   <input type="text" class="form-control" id="name" name="name">
-   <br>
-   <div>
-    <label for="floatingUsername">Rol</label>
-    <input type="text" class="form-control px-5 " id="rol" name="rol">
+<div class="row justify-content-center">
+       <thead>
+    <tr>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <div v-for= "den in dens" :key="den.id" >
+  <tr>
+     <th scope="row">1</th>
+     <td>Nombre: </td>
+      <td>{{den.nombre}}</td>
+      <td>{{den.apellidos}}</td>
+      <td>Rol actual: </td>
+      <td>{{den.rol}}</td>
+     <td>Rol: </td>
+     <td>
+      <select class="form-select" aria-label="newRol">
+          <option value="0" selected>Usuario</option>
+          <option value="1" >Fiscal</option>
+          <option value="2">Funcionario DGDE</option>
+          <option value="3">Administrador DGDE</option>
+        </select>
+        </td>
+      <td><button class="w-90 s-30 btn btn-lg btn-primary" v-on:click='sendData' type="submit">Modificar</button></td>
+      <br>
+      <br>
+      <div>
     </div>
-  <br>
+      </tr>
+  </div>
+
 </div>
-<div class="m-2">
-  <label for="floatingUsername">Apellido Paterno</label>
-  <input type="text" class="form-control " id="last_name_one" name="last_name_one">
-</div>
-<div class=" m-2">
-<label for="floatingUsername">Apellido Materno</label>
-<input type="text" class="form-control" id="last_name_two" name="last_name_two">
-<br>
-<br>
-<div>
-</div>
-</div>
-</div>
-</div>
-<div class="container">
-  <select v-for= "den in dens" :key="den.id" class="form-select" aria-label="Default select example">
-   <option value="den.id">{{den.apellidos}}</option>
-  </select>
-<button class="w-90 s-30 btn btn-lg btn-primary" type="submit">Bloquear</button>
+
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
-</div>
 </div>
 </template>
 <script>
@@ -57,9 +54,9 @@ export default {
       mail: '',
       estamento: '',
       dens: [],
-      estado: '',
       rol: '',
-      len: ''
+      len: '',
+      newRol: ''
     }
   },
   mounted () {
@@ -72,7 +69,26 @@ export default {
           this.dens = data.data
           this.len = this.dens.length
           this.apellidos = data.data[0].apellidos
+          this.mail = data.data[2].mail
           this.nombre = data.data[5].nombre
+          this.rol = data.data[6].rol
+        })
+    }
+  },
+  methods: {
+    sendData () {
+      axios.update('http://localhost:8080/user/update-rol/0', {
+
+      })
+        .then(data => {
+          console.log(data)
+          if (data.data === -1) {
+            this.error = 1
+            console.error('Error')
+          } else {
+            this.error = 0
+            console.log('Rol actualizado')
+          }
         })
     }
   }
