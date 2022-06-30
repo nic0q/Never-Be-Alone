@@ -43,4 +43,9 @@ public class UserService {
     }
     @PostMapping(value = "/auth")
     public Integer autenticacion(@RequestParam String mail, String pass){return userRepository.autenticacion(mail,pass);}
+
+    @GetMapping("/getall-no-admin")
+    public List<User>getAllUsersNoAdmin() {
+        return userRepository.getAllUsersNoAdmin();
+    }
 }

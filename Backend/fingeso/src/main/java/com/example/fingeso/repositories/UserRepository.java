@@ -17,4 +17,5 @@ public interface UserRepository{
     Integer autenticacion(String mail, String pass);
 
     Integer seleccionarFiscal();
+    List<User>getAllUsersNoAdmin();
 }

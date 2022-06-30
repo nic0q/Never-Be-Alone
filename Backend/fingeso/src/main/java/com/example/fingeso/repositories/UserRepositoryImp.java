@@ -180,5 +180,29 @@ public class UserRepositoryImp implements UserRepository{
             conn.close();
         }
     }
+
+    @Override
+    public List<User> getAllUsersNoAdmin(){
+        final String query = "select * from usuario";
+        final List<User> usersTotal;
+        Connection conn = sql2o.open();
+        try( conn ){
+            usersTotal = conn.createQuery(query).executeAndFetch(User.class);
+            List<User> noAdmin = usersTotal;
+            for(int i = 0; i < usersTotal.size(); i++){
+                User usuario = usersTotal.get(i);
+                if(usuario.getRol() == 3){
+                    noAdmin.remove(usuario);
+                }
+            }
+            return noAdmin;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+        finally {
+            conn.close();
+        }
+    }
 }
 
