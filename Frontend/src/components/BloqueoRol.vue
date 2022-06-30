@@ -46,7 +46,22 @@ export default {
           console.log(data)
           this.dens = data.data
         })
-      this.$router.push('/')
+    }
+  },
+  methods: {
+    sendData () {
+      axios.update('http://localhost:8080/user/update-rol/0', {
+      })
+        .then(data => {
+          console.log(data)
+          if (data.data === -1) {
+            this.error = 1
+            console.error('Error')
+          } else {
+            this.error = 0
+            console.log('Rol actualizado')
+          }
+        })
     }
   }
 }

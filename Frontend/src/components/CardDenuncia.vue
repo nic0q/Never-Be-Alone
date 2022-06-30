@@ -24,7 +24,7 @@
   .card{
     margin-bottom: 30px;
     width: 18rem;
-    background-color: #fee2b8;
+    background-color: #fde5c1;
     z-index: 1;
   }
   .updateS{

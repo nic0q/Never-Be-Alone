@@ -20,7 +20,7 @@
   Ingreso Exitoso
 </div>
 </form>
-<button class="w-100 btn btn-lg btn-primary" v-on:click='submit' type="submit" >Sign in</button>
+<button class="w-100 btn btn-lg btn-primary" v-on:click='submit' type="submit" >Ingresar</button>
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </main>
 </div></div>
@@ -72,7 +72,7 @@ export default {
 </script>
 <style scoped>
 img {
-  width: 300px;
+  width: 350px;
   height: 70px;
 }
 .centere{

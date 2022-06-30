@@ -7,7 +7,6 @@ import org.sql2o.Sql2o;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class DatabaseContext {
     @Configuration
     public class DataBaseContext {

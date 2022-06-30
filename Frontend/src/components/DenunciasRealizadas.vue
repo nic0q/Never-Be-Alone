@@ -48,6 +48,7 @@ export default {
 <style scoped>
   .alert{
     padding: 50px;
+    margin-top: 3%;
   }
   .container{
     display: flex;

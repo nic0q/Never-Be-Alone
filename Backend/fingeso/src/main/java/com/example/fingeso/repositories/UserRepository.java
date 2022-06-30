@@ -1,9 +1,7 @@
 package com.example.fingeso.repositories;
 
 import com.example.fingeso.models.User;
-import com.example.fingeso.models.Login;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 @Repository
 public interface UserRepository{

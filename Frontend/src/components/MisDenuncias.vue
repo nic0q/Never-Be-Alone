@@ -6,6 +6,7 @@
   <div class="card-body">
     <div>
     <h5 class="text-dark " >Denuncias Realizadas </h5>
+    <p>Ingrese aquí para ver las denuncias que usted ha realizado</p>
     <br>
     <div type="button" v-on:click="()=>this.$router.push('denuncias-realizadas')">
       <a class="btn btn-dark">Ver</a>
@@ -15,13 +16,17 @@
 <div class="card">
   <div class="card-body">
     <div v-if="this.rol === 'fiscal'" >
-    <h5 class="text-dark">Denuncias Asignadas</h5><br>
-        <div type="button" v-on:click="()=>this.$router.push('denuncias-fiscal')">
+    <h5 class="text-dark">Denuncias Asignadas</h5>
+      <p>Ingrese aquí para ver las denuncias que le han sido asignadas</p>
+      <br>
+      <div type="button" v-on:click="()=>this.$router.push('denuncias-fiscal')">
       <a class="btn btn-dark">Ver</a>
     </div>
     </div>
     <div v-else>
       <h5 class="text-dark">Denuncias en Contra</h5><br>
+      <p>Ingrese aquí para ver las denuncias que se le han presentado en su contra</p>
+      <br>
       <div type="button" v-on:click="()=>this.$router.push('denuncias-contra')">
       <a class="btn btn-dark">Ver</a>
     </div>
@@ -30,6 +35,7 @@
   </div>
 </div>
 </div>
+<br><br>
   </div>
 </template>
 <style scoped>
@@ -44,13 +50,15 @@
     font-size: x-large;
   }
   .cardss{
-    margin-top: 13%;
+    margin-top: 11%;
+    margin-left: 200px;
+    margin-right: 200px;
   }
   .card{
     overflow-x: hidden;
-    margin: 5px;
+    margin-top: 10px;
     width: 25rem;
-    height: 10rem;
+    height: 15rem;
     background-color: #fbe4bf;
     border-radius: 10px;
   }
@@ -61,14 +69,11 @@
     justify-content: center;
   }
   @media(max-width: 768px){
-    .card{
-      width: 24rem;
-      margin: 10px;
-      height: 10rem;
-    }
     .cardss{
-      margin-top: 1%;
-    }
+      margin-top: 13%;
+      margin-left: 0px;
+      margin-right: 0px;
+  }
   }
 </style>
 <script>

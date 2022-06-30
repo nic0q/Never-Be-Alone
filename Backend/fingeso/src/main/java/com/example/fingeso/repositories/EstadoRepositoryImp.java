@@ -1,7 +1,6 @@
 package com.example.fingeso.repositories;
 
 import com.example.fingeso.models.Estado;
-import com.example.fingeso.models.Estamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;

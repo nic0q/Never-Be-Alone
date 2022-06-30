@@ -1,4 +1,5 @@
 package com.example.fingeso.repositories;
+
 import com.example.fingeso.models.Estamento;
 import org.springframework.stereotype.Repository;
 import java.util.List;

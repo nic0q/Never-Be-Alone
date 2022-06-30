@@ -48,7 +48,7 @@ public class DenunciaService {
     public Integer postDenuncia(@RequestBody Denuncia denuncia){return denunciaRepository.postDenuncia(denuncia);}
 
     @PutMapping(value = "/update-denuncia/{id}")
-    public Integer updateDenuncia(@PathVariable("id") Integer id, @RequestParam String id_estado){
+    public Integer updateDenuncia(@PathVariable("id") Integer id, @RequestParam Integer id_estado){
         return denunciaRepository.updateDenuncia(id, id_estado);
     }
     @PostMapping(value = "/crear-denuncia")

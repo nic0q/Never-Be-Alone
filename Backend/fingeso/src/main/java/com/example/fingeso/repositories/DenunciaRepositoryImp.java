@@ -1,4 +1,5 @@
 package com.example.fingeso.repositories;
+
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.IngresarDenuncia;
 import com.example.fingeso.models.VerDenuncia;
@@ -105,11 +106,9 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
     /*
-     * Se establece codigos de validez
-     * 0 : correcto ingreso
-     * 1: error en correo denunciante
-     * 2: error en correo denunciado
-     * -1: error al ingreso en la base de datos
+     * Codigos de respuesta
+     * 0 : Denuncia ingresada correctamente
+     * -1: Denuncia no ingresda
      * */
     @Override
     public Integer postDenuncia(@RequestBody Denuncia denuncia){
@@ -220,13 +219,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
     /*
-    -1 representa ID de estado erroneo
-    0 implica que hubo un error
-    1 representa una actualizacion exitosa
+    -1 representa que hubo un error
+    0 representa una actualizacion exitosa
      */
     @Override
-    public Integer updateDenuncia(Integer id_denuncia, String id_estadoo){
-        Integer id_estado = Integer.parseInt(id_estadoo);
+    public Integer updateDenuncia(Integer id_denuncia, Integer id_estado){
         if (!(id_estado.equals(1) || id_estado.equals(2))){
             if(!(id_estado.equals(3))){
                 return -1;
@@ -235,6 +232,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         List<Denuncia> verificacion_denuncia = getById(id_denuncia);
         Integer estado_actual = verificacion_denuncia.get(0).getIdEstado();
         if(estado_actual == 3 || estado_actual > id_estado){
+            System.out.println("No es posible actualizar la denuncia");
             return -1;
         }
         final String query =  "update denuncia set id_estado = :id_estado where id_denuncia = :id_denuncia";
@@ -244,8 +242,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                     .addParameter( "id_denuncia", id_denuncia)
                     .addParameter("id_estado", id_estado)
                     .executeUpdate();
-            System.out.println("Success");
-            return 1;
+            System.out.println("Denuncia Actualizada Correctamente");
+            return 0;
         }catch(Exception e){
             System.out.println(e.getMessage());
             return -1;
@@ -361,5 +359,4 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         System.out.println("Se muestran las denucias");
         return denuncia2;
     }
-
 }

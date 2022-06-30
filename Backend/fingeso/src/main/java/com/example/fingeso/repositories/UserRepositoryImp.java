@@ -1,7 +1,6 @@
 package com.example.fingeso.repositories;
-import com.example.fingeso.models.Denuncia;
+
 import com.example.fingeso.models.User;
-import com.example.fingeso.models.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
