@@ -3,7 +3,7 @@
   <NavBar></NavBar>
   <div class="container">
     <div v-if="this.len===0" class="alert alert-warning" role="alert">
-    <h2>Usted no posee denuncias</h2></div>
+    <h2>Usted no ha realizado denuncias</h2></div>
   <div v-else v-for="den in dens" :key="den.id">
     <CardDenunciaVue :text="'Dirigida a'" :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciante :nombre2=den.nombreDenunciante :apellido2=den.apellidosDenunciante :mail2=den.mailDenunciante :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
   </div>

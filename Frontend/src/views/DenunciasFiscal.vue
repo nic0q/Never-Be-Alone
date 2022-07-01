@@ -3,7 +3,7 @@
   <NavBar></NavBar>
   <div class="container">
     <div v-if="this.len===0" class="alert alert-warning" role="alert">
-    <h2>No se encontraron denuncias</h2><br><div><button type="button" v-on:click="()=>this.$router.push('/mis-denuncias')" class="btn btn-warning">Regresar</button></div></div>
+    <h2>No se le ha sigo asignada ninguna denuncia</h2><div></div></div>
   <div v-else v-for="den in dens" :key="den.id">
     <CardDenunciaVue :id=den.id :nombre1=den.nombreDenunciante :apellido1=den.apellidosDenunciante :mail1=den.mailDenunciante :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
   </div>
