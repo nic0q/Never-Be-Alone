@@ -230,8 +230,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     public Integer crearDenuncia(IngresarDenuncia denuncia){
         String mixApellidos1 = denuncia.getApellido11().toLowerCase().trim();
         String mixApellidos2 = denuncia.getApellido21().toLowerCase().trim();
-        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),mixApellidos1) &&
-                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2(),mixApellidos2)){
+        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1().toLowerCase().trim(),mixApellidos1) &&
+                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2().toLowerCase().trim(),mixApellidos2)){
             String mail = denuncia.getMail1();
             String mail2 = denuncia.getMail2();
             if(mail.equals(mail2)){

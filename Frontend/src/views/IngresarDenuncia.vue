@@ -137,7 +137,7 @@ export default {
         .then(data => {
           if (data.data === -1) {
             this.error = 1
-            console.error('Error')
+            console.error('Error al crear la denuncia')
           } else {
             this.error = 0
             console.log('Denuncia creada')
