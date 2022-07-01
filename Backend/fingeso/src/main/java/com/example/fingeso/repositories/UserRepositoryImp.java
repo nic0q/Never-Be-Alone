@@ -181,8 +181,19 @@ public class UserRepositoryImp implements UserRepository{
     public Integer updateRolUser(Integer id_usuario, Integer id_rol){
         //final String query = "update usuario set id_rol = '" + id_rol + "' where id_usuario = '" + id_usuario + "'";
         final String query = "update usuario set id_rol = :id_rol where id_usuario = :id_usuario";
+        final String query2 = "SELECT * FROM usuario WHERE id_usuario = '" + id_usuario + "'";
+        final List<User> users;
         Connection conn = sql2o.open();
         try (conn) {
+            // Si el rol es el mismo al actual
+            users = conn.createQuery(query2).executeAndFetch(User.class);
+            User user = users.get(0);
+            Integer rolActual = user.getRol();
+            if(rolActual == id_rol){
+                System.out.println ("El rol ingresado es el actual");
+                return -1;
+            }
+
             conn.createQuery(query)
                     .addParameter("id_rol", id_rol)
                     .addParameter("id_usuario", id_usuario)
