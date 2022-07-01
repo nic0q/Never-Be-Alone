@@ -28,7 +28,6 @@
 </div>
 <br>
 <button class="w-90 s-30 btn btn-lg btn-primary" type="submit">Actualizar</button>
-<p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </div>
 
 </template>

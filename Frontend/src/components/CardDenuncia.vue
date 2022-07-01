@@ -24,12 +24,8 @@
   .card{
     margin-bottom: 30px;
     width: 18rem;
-    background-color: #fde5c1;
+    background-color: #ffecd0;
     z-index: 1;
-  }
-  .updateS{
-    z-index: 100;
-    background-color: rgb(243, 238, 238);
   }
   @media(max-width: 768px){
     .card{

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="owo">
 <div>
   <NavBar></NavBar>
 </div>
@@ -9,7 +9,7 @@
     <thead>
     <tr>
       <th scope="col">Nombre</th>
-      <th scope="col">Apellidos</th>
+      <th scope="col">Apellido</th>
       <th scope="col">Correo Electrónico</th>
       <th scope="col">Rol Actual</th>
       <th scope="col"></th>
@@ -26,7 +26,7 @@
 <script>
 import axios from 'axios'
 import NavBar from '@/components/NavBar'
-import CardRol from '@/components/CardRol'
+import CardRol from '@/components/RoleRow'
 export default {
   name: 'HomeView',
   components: {
@@ -46,7 +46,6 @@ export default {
     } else {
       axios.get('http://localhost:8080/user/getall-no-admin')
         .then(data => {
-          console.log(data)
           this.dens = data.data
         })
     }
@@ -56,7 +55,6 @@ export default {
       axios.update('http://localhost:8080/user/update-rol/0', {
       })
         .then(data => {
-          console.log(data)
           if (data.data === -1) {
             this.error = 1
             console.error('No se actualizo el rol')
@@ -71,36 +69,10 @@ export default {
 </script>
 
 <style scoped>
-.topBar{
-background-color: #00bcd4;
-height: 50px;
-}
-body {
-align-items: center;
-padding-top: 40px;
-padding-bottom: 40px;
-background-color: #f5f5f5;
-}
-.form-control {
-width: 100%;
-max-width: 500px;
-padding: 8px;
-margin: auto;
-}
-.form-signin .checkbox {
-font-weight: 400;
-}
-.form-signin .form-floating:focus-within {
-z-index: 2;
-}
-.contenedor{
-  margin-top: 80px;
-}
 select{
   padding-right: 500px;
 }
-.container{
-    display: flex;
-    margin-top: 30px;
+.owo{
+  overflow-x: hidden;
 }
 </style>

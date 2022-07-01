@@ -11,18 +11,13 @@
   <div class="row">
     <div class="col">
       <div class="s">
-      <label for="exampleFormControlTextarea1">Primer Nombre</label></div>
+      <label for="exampleFormControlTextarea1">Nombre</label></div>
       <input v-model="nombre1" type="text" class="form-control">
     </div>
     <div class="col">
       <div class="s">
-      <label for="exampleFormControlTextarea1">Primer Apellido</label></div>
+      <label for="exampleFormControlTextarea1">Apellido</label></div>
       <input v-model="apellido11" type="text" class="form-control">
-    </div>
-    <div class="col">
-      <div class="s">
-      <label for="exampleFormControlTextarea1">Segundo Apellido</label></div>
-      <input v-model="apellido12" type="text" class="form-control">
     </div>
   </div>
   <br>
@@ -42,18 +37,13 @@
       <div class="row">
     <div class="col">
       <div class="s">
-      <label for="exampleFormControlTextarea1">Primer Nombre</label></div>
+      <label for="exampleFormControlTextarea1">Nombre</label></div>
       <input v-model="nombre2" type="text" class="form-control">
     </div>
     <div class="col">
       <div class="s">
-      <label for="exampleFormControlTextarea1">Primer Apellido</label></div>
+      <label for="exampleFormControlTextarea1">Apellido</label></div>
       <input v-model="apellido21" type="text" class="form-control">
-    </div>
-    <div class="col">
-      <div class="s">
-      <label for="exampleFormControlTextarea1">Segundo Apellido</label></div>
-      <input v-model="apellido22" type="text" class="form-control">
     </div>
   </div>
 </form>
@@ -65,11 +55,6 @@
       <label for="exampleFormControlTextarea1">Email</label>
       </div>
       <input v-model="mail2" type="text" class="form-control">
-    </div>
-    <div class="col">
-      <div class="s">
-      <label for="exampleFormControlTextarea1">Estamento</label></div>
-      <input v-model="estamento" type="text" class="form-control">
     </div>
     <br>
   </div>
@@ -104,7 +89,6 @@
 </div>
 </div>
 <br>
-<p class="mt-5 mb-3 text-muted">&copy;Never Be Alone</p>
 </div>
 </template>
 <script>
@@ -119,13 +103,10 @@ export default {
     return {
       nombre1: '',
       apellido11: '',
-      apellido12: '',
       nombre2: '',
       apellido21: '',
-      apellido22: '',
       mail1: '',
       mail2: '',
-      estamento: '',
       desc: '',
       medidas: '',
       error: -1,
@@ -146,21 +127,17 @@ export default {
       axios.post('http://localhost:8080/denuncia/crear-denuncia', {
         nombre1: this.nombre1,
         apellido11: this.apellido11,
-        apellido12: this.apellido12,
         nombre2: this.nombre2,
         apellido21: this.apellido21,
-        apellido22: this.apellido22,
         mail1: this.mail1,
         mail2: this.mail2,
-        estamento: this.estamento,
         desc: this.desc,
         medidas: this.medidas
       })
         .then(data => {
-          console.log(data)
           if (data.data === -1) {
             this.error = 1
-            console.error('Error')
+            console.error('Error al crear la denuncia')
           } else {
             this.error = 0
             console.log('Denuncia creada')
@@ -178,7 +155,7 @@ export default {
 }
 .f{
   margin-top: 50px;
-  border: 1px solid rgb(200, 198, 198);
+  border: 1px solid rgb(162, 161, 161);
   padding: 30px;
   padding-top: 10px;
   border-radius: 30px;

@@ -228,10 +228,10 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     */
     @Override
     public Integer crearDenuncia(IngresarDenuncia denuncia){
-        String mixApellidos1 = denuncia.getApellido11()+denuncia.getApellido12();
-        String mixApellidos2 = denuncia.getApellido21()+denuncia.getApellido22();
-        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1(),mixApellidos1) &&
-                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2(),mixApellidos2)){
+        String mixApellidos1 = denuncia.getApellido11().toLowerCase().trim();
+        String mixApellidos2 = denuncia.getApellido21().toLowerCase().trim();
+        if(verificaCorreo(denuncia.getMail1(),denuncia.getNombre1().toLowerCase().trim(),mixApellidos1) &&
+                verificaCorreo(denuncia.getMail2(),denuncia.getNombre2().toLowerCase().trim(),mixApellidos2)){
             String mail = denuncia.getMail1();
             String mail2 = denuncia.getMail2();
             if(mail.equals(mail2)){
@@ -244,11 +244,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             User user2 = usuario2.get(0);
             Integer usuarioId = user1.getId();
             Integer usuarioId2 = user2.getId();
-            if(denuncia.getEstamento() != user2.getEstamento()){
-                System.out.println("Estamento invalido");
-                return -1;
-            }
-            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,userRepository.seleccionarFiscal());
+            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user2.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,userRepository.seleccionarFiscal());
             postDenuncia(newDen);
             System.out.println("Denuncia Ingresada Correctamente");
             return 0;

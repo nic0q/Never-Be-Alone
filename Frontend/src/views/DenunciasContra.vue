@@ -3,7 +3,7 @@
 <NavBar></NavBar>
 <div class="container">
   <div v-if="this.len === 0" class="alert alert-warning" role="alert">
-  <h1>Usted no posee denuncias</h1></div>
+  <h2>Usted no posee denuncias</h2></div>
 <div v-else v-for="den in dens" :key='den.id'>
   <CardDenunciaVue :text="'Hecha por'" :nombre1=den.nombreDenunciado :apellido1=den.apellidosDenunciado :mail1=den.mailDenunciado :nombre2=den.nombreDenunciado :apellido2=den.apellidosDenunciado :mail2=den.mailDenunciado :medidas=den.medidas :estamento=den.estamento :estado=den.estado :descripcion=den.descripcion :fecha=den.fecha></CardDenunciaVue></div>
 </div>
@@ -22,12 +22,7 @@ export default {
   data () {
     return {
       activesec: localStorage.getItem('token'),
-      apellidosDenunciado: '',
-      nombreDenunciado: '',
-      mailDenunciado: '',
-      estamento: '',
       dens: [],
-      estado: '',
       len: ''
     }
   },
