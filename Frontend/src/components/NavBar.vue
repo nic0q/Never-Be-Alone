@@ -67,6 +67,7 @@ export default {
 </script>
 <style scoped>
 *{
+  zoom: 97%;
   font-family: sans-serif;
   overflow-x: hidden;
   max-width: 100%;
