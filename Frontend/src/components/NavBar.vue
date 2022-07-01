@@ -7,10 +7,8 @@
 </div>
 <div class="nbb">
 <div class="nava">
-  <div type="button" v-on:click="()=>this.$router.push('mis-denuncias')">
-  <img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
-  </div>
-      <div class="nav-button"> <button  v-if= "this.rol === 'dgde'" class="nv-btn" v-on:click="()=>this.$router.push('ingresar-denuncia')" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+    <div class="www nav-button"><button class="nv-btn" v-on:click="()=>this.$router.push('mis-denuncias')" type="button"> <img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png"></button></div>
+  <div class="nav-button"> <button  v-if= "this.rol === 'dgde'" class="nv-btn" v-on:click="()=>this.$router.push('ingresar-denuncia')" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
 </svg> Ingresar Denuncia</button>
@@ -61,7 +59,7 @@ export default {
     logout () {
       localStorage.removeItem('token')
       localStorage.removeItem('rol')
-      console.error('Logout exitoso')
+      console.log('Logout exitoso')
       this.$router.push('/')
     }
   }
@@ -74,37 +72,27 @@ export default {
   max-width: 100%;
   color: hsl(210,8%,35%);
 }
-img{
-  width: 170px;
-  height: 40px;
-  left: 18px;
-  position: absolute;
-}
 .br {
   position: absolute;
-  height: 5px;
+  height: 7px;
   width: 100%;
   background: #FF9900;
 }
+.br2 {
+  position: absolute;
+  height: 7px;
+  width: 400px;
+  background: blue;
+}
 .nava{
-  border: 2px solid #8d8eaf;
+  border: 2px solid #b9b9b9;
   margin-top: 10px;
-  border-radius: 100px;
-  margin-left: 3px;
-  margin-right: 3px;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   padding: 4px;
   font-size: medium;
   background-color: rgb(244, 245, 247);
-}
-.br2 {
-  position: absolute;
-  height: 5px;
-  width: 500px;
-  background: blue;
-}
-.nav-buttons{
-  justify-content: center;
-  display: flex;
 }
 .nav-button{
   display: inline-block;
@@ -114,7 +102,6 @@ img{
   padding: 2px;
   border: transparent;
   background-color: transparent;
-  border-radius: 100px;
   width: 240px;
   padding-top: 6px;
   padding-bottom: 2px;
@@ -124,25 +111,25 @@ img{
 :hover.nv-btn{
   color: rgba(0, 0, 0, 0.961);
 }
+img{
+  width: 400px;
+}
 @media(max-width: 1300px){
-  img{
-    visibility: hidden;
-  }
-  .br3{
-    margin-top: 0;
-  }
+.www{
+  display: none;
+}
   .nava{
     border-radius: 10px;
   }
 }
 @media(max-width: 435px){
-  img{
-    visibility: hidden;
-  }
-  .br2 {
-  position: absolute;
-  width: 100px;
-  background: blue;
-  }
+img{
+  display: none;
+}
+.br2 {
+position: absolute;
+width: 100px;
+background: blue;
+}
 }
 </style>

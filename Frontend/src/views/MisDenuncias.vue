@@ -5,7 +5,7 @@
   <div class="card text-center">
   <div class="card-body">
     <div>
-    <h5 class="text-dark " >Denuncias Realizadas </h5>
+    <h5 class="text-dark " >Denuncias Realizadas </h5><br>
     <p>Ingrese aquí para ver las denuncias que usted ha realizado</p>
     <br>
     <div type="button" v-on:click="()=>this.$router.push('denuncias-realizadas')">
@@ -16,7 +16,7 @@
 <div class="card">
   <div class="card-body">
     <div v-if="this.rol === 'fiscal'" >
-    <h5 class="text-dark">Denuncias Asignadas</h5>
+    <h5 class="text-dark">Denuncias Asignadas</h5><br>
       <p>Ingrese aquí para ver las denuncias que le han sido asignadas</p>
       <br>
       <div type="button" v-on:click="()=>this.$router.push('denuncias-fiscal')">
@@ -35,7 +35,6 @@
   </div>
 </div>
 </div>
-<br><br>
   </div>
 </template>
 <style scoped>
@@ -74,6 +73,10 @@
       margin-left: 0px;
       margin-right: 0px;
   }
+  .bot{
+    position: absolute;
+    bottom: 0;
+  }
   }
 </style>
 <script>
@@ -101,7 +104,6 @@ export default {
           axios.get(`http://localhost:8080/rol/get-by-id/${data.data[0].rol}`)
             .then(data => {
               this.rol = data.data[0].nombre
-              console.log(this.rol)
             })
         })
     }
