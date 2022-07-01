@@ -34,13 +34,13 @@ public class UserService {
     public List<User> getById(@PathVariable("id") Integer id){
         return userRepository.getById(id);
     }
+    @GetMapping("/getall-no-admin")
+    public List<User>getAllUsersNoAdmin() {return userRepository.getAllUsersNoAdmin();}
     @PostMapping(value = "/post-user")
     public Integer postUser(@RequestBody User user){return userRepository.postUser(user);}
-
-    @GetMapping(value = "/update-rol")
-    Integer updateRolUser(@RequestParam Integer id_usuario, Integer id_rol){
-        return userRepository.updateRolUser(id_usuario, id_rol);
-    }
     @PostMapping(value = "/auth")
     public Integer autenticacion(@RequestParam String mail, String pass){return userRepository.autenticacion(mail,pass);}
+    @PutMapping(value = "/update-rol/{id}")
+    Integer updateRolUser(@PathVariable("id") Integer id_usuario,@RequestParam Integer id_rol){
+        return userRepository.updateRolUser(id_usuario, id_rol);}
 }

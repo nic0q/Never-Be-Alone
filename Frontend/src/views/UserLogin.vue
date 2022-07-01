@@ -1,9 +1,9 @@
-<style>@import '../assets/loginStyles.css';</style>
 <template>
-<div v-if="activesec === null">
+<div class="centere">
+  <div>
 <main class="form-signin">
-<form v-on:submit.prevent="login">
-  <ImagenLogo></ImagenLogo>
+<form>
+  <img src="https://direcciondegenero.usach.cl/sites/direccion_genero/files/dg.png">
 <h1 class="h3 mt-4 mb-3 fw-normal">Iniciar Sesión</h1>
 <div class="form-floating">
   <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" v-model="mail">
@@ -20,35 +20,31 @@
   Ingreso Exitoso
 </div>
 </form>
-<button class="w-100 btn btn-lg btn-primary" v-on:click='sendData' type="submit" >Sign in</button>
+<button class="w-100 btn btn-lg btn-primary" v-on:click='submit' type="submit" >Ingresar</button>
 <p class="mt-5 mb-3 text-muted">&copy;  Never Be Alone</p>
 </main>
-</div>
-<AlreadyLogedVue v-else></AlreadyLogedVue>
+</div></div>
 </template>
 <script>
-// @ is an alias to /src
-import ImagenLogo from '../components/ImagenLogo'
 import axios from 'axios'
-import AlreadyLogedVue from './AlreadyLoged.vue'
 export default {
   name: 'HomeView',
-  components: {
-    ImagenLogo,
-    AlreadyLogedVue
-  },
   data () {
     return {
       mail: '',
       pass: '',
       rol: '',
       id: '',
-      error: -1,
-      activesec: localStorage.getItem('token')
+      error: -1
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('token')) { // Si hay un token, hay alguien con seccion activa, entonces no se permite el acceso al login
+      this.$router.push('mis-denuncias')
     }
   },
   methods: {
-    sendData () {
+    submit () {
       const bodyFormData = new FormData()
       bodyFormData.append('mail', this.mail.trim().toLowerCase())
       bodyFormData.append('pass', this.pass.trim().toLowerCase())
@@ -62,8 +58,10 @@ export default {
             axios.get(`http://localhost:8080/user/get-by-email/${this.mail}`)
               .then(data => {
                 this.id = data.data[0].id
-                window.localStorage.setItem('token', this.id)
-                this.$router.push('home')
+                this.rol = data.data[0].rol
+                localStorage.setItem('token', this.id)
+                localStorage.setItem('rol', this.rol)
+                this.$router.push('mis-denuncias')
                 console.log('Login Exitoso')
               })
           }
@@ -73,31 +71,20 @@ export default {
 }
 </script>
 <style scoped>
-.rol{
-  display: flex;
-  justify-content: start;
+img {
+  width: 350px;
+  height: 70px;
 }
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+.centere{
+  margin-top: 8%;
 }
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
-  font-size: 3.5rem;
+    font-size: 3.5rem;
   }
 }
 select{
   color: hsl(210,8%,35%);
-}
-body {
-  display: inline;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
 }
 .form-signin {
   width: 100%;
@@ -108,21 +95,18 @@ body {
 .form-signin .checkbox {
   font-weight: 400;
 }
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
 .form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 img {
   width: 300px;
-  height: 80px;
+  height: 77px;
 }
 </style>

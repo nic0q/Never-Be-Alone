@@ -1,50 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import UserLogin from '../components/UserLogin'
-import IngresarDenuncia from '../components/IngresarDenuncia'
-import ActualizarDenuncia from '../components/ActualizarDenuncia'
-import MisDenuncias from '../components/MisDenuncias'
-import DenunciasRealizadas from '../components/DenunciasRealizadas'
-import DenunciasContra from '../components/DenunciasContra'
-import DenunciasFiscal from '../components/DenunciasFiscal'
-import HomeUser from '../components/HomeUser'
-import BloqueoRol from '../components/BloqueoRol'
-import NavBar from '../components/NavBar'
+import DenunciasRealizadas from '../views/DenunciasRealizadas'
+import IngresarDenuncia from '../views/IngresarDenuncia'
+import DenunciasContra from '../views/DenunciasContra'
+import DenunciasFiscal from '@/views/DenunciasFiscal'
+import MisDenuncias from '../views/MisDenuncias'
+import UserLogin from '../views/UserLogin'
+import BloqueoRol from '../views/BloqueoRol'
 
 Vue.use(VueRouter)
 export default new VueRouter({
   mode: 'history',
   routes: [
     {
-      path: '/nv',
-      name: 'nv',
-      component: NavBar
-    },
-    {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: UserLogin
     },
     {
-      path: '/home',
-      name: 'home',
-      component: HomeUser
-    },
-    {
       path: '/mis-denuncias',
-      name: '/mis-denuncias',
+      name: 'mis-denuncias',
       component: MisDenuncias
     },
     {
       path: '/ingresar-denuncia',
       name: 'ingresar-denuncia',
       component: IngresarDenuncia
-    },
-    {
-      path: '/actualizar-denuncia',
-      name: 'actualizar-denuncia',
-      component: ActualizarDenuncia
-
     },
     {
       path: '/bloqueo-rol',

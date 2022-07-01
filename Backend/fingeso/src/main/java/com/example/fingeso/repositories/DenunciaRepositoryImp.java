@@ -1,18 +1,13 @@
 package com.example.fingeso.repositories;
+
 import com.example.fingeso.models.Denuncia;
 import com.example.fingeso.models.IngresarDenuncia;
 import com.example.fingeso.models.VerDenuncia;
 import com.example.fingeso.models.User;
-import com.example.fingeso.models.Estamento;
-import com.example.fingeso.repositories.UserRepository;
-import com.example.fingeso.repositories.EstamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +17,17 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
     private Sql2o sql2o;
     private UserRepository userRepository;
     private EstamentoRepository estamentoRepository;
-    DenunciaRepositoryImp(UserRepository userRepository, EstamentoRepositoryImp estamentoRepository){
+    private EstadoRepository estadoRepository;
+    DenunciaRepositoryImp(UserRepository userRepository, EstamentoRepositoryImp estamentoRepository, EstadoRepositoryImp estadoRepository){
         this.userRepository=userRepository;
         this.estamentoRepository=estamentoRepository;
+        this.estadoRepository = estadoRepository;
     }
-    //@Override
+    /*
+    D: Funcion que obtiene el numero de denucias en la base de datos mediante una consulta
+    I: void
+    O: Numero de denuncias (Entero)
+    */
     public int countDenuncias(){
         Integer total = 0;
         Connection conn = sql2o.open();
@@ -42,7 +43,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
-
+    /*
+    D: Funcion que obtiene todos las denucias de la base de datos mediante una consulta
+    I: void
+    O: Lista de Objeto denuncia
+    */
     @Override
     public List<Denuncia> getAllDenuncias(){
         final String query = "select * from denuncia";
@@ -59,9 +64,13 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que busca y entrega una denuncia en base al id del fiscal
+    I: id fiscal (Entero)
+    O: Lista de Objeto Denuncia
+    */
     @Override
     public List<Denuncia> getByFiscal(Integer fiscalID){
-        // ARREGLAR COLUMNA ID FISCAL
         final String query = "select * from denuncia where id_fiscal = '" + fiscalID +"'";
         final List<Denuncia> denuncias;
         Connection conn = sql2o.open();
@@ -76,6 +85,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que busca y entrega una denuncia en base al id del denunciante
+    I: id denunciante (Entero)
+    O: Lista de Objeto Denuncia
+    */
     @Override
     public List<Denuncia> findDenunciaDenunciante(Integer userID){
         final String query = "select * from denuncia where id_denunciante = '" + userID + "'";
@@ -92,6 +106,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que busca y entrega una denuncia en base al id del denunciado
+    I: id denunciado (Entero)
+    O: Lista de Objeto Denuncia
+    */
     @Override
     public List<Denuncia> findDenunciaDenunciado(Integer userID){
         final String query = "select * from denuncia where id_denunciado = '" + userID + "'";
@@ -109,18 +128,16 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
     /*
-     * Se establece codigos de validez
-     * 0 : correcto ingreso
-     * 1: error en correo denunciante
-     * 2: error en correo denunciado
-     * -1: error al ingreso en la base de datos
-     * */
+    D: Funcion que ingresa una denuncia a la base de datos
+    I: Objeto denuncia
+    O: Entero que simboliza si hubo exito o fallo 0: Exito, -1: Fallo
+    */
     @Override
-    public Integer postDenuncia(@RequestBody Denuncia denuncia){
+    public Integer postDenuncia(Denuncia denuncia){
         Connection conn = sql2o.open();
         int total = countDenuncias();
-        final String query = "insert into denuncia (id_denuncia,id_denunciante,id_denunciado,id_estamento_denunciado,descripcion,medidas,id_estado,fecha)"+
-                "values (:id_denuncia,:id_denunciante, :id_denunciado, :id_estamento_denunciado, :descripcion, :medidas, :id_estado, :fecha)";
+        final String query = "insert into denuncia (id_denuncia,id_denunciante,id_denunciado,id_estamento_denunciado,descripcion,medidas,id_estado,fecha, id_fiscal)"+
+                "values (:id_denuncia,:id_denunciante, :id_denunciado, :id_estamento_denunciado, :descripcion, :medidas, :id_estado, :fecha, :id_fiscal)";
         try (conn) {
             conn.createQuery(query)
                     .addParameter("id_denuncia",total)
@@ -131,6 +148,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                     .addParameter("medidas",denuncia.getMedidas())
                     .addParameter("id_estado",denuncia.getIdEstado())
                     .addParameter("fecha",denuncia.getFecha())
+                    .addParameter("id_fiscal",denuncia.getIdFiscal())
                     .executeUpdate();
             return 0;
         } catch (Exception e) {
@@ -141,6 +159,12 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que obtiene a una denuncia de la base de datos mediante una consulta a traves del correo denunciante
+    I: mail denunciante (String)
+    O: Lista de Objeto denuncia
+    */
+    @Override
     public List<Denuncia> getByEmail(String email){
         final String query = "SELECT * FROM denuncia WHERE email = '" + email + "'";
         final List<Denuncia> usersMail;
@@ -156,6 +180,12 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que obtiene a una denuncia de la base de datos mediante una consulta a traves de su id
+    I: id denuncia (Entero)
+    O: Lista de Objeto denuncia
+    */
+    @Override
     public List<Denuncia> getById(Integer id){
         final String query = "SELECT * FROM denuncia WHERE id_denuncia = '" + id + "'";
         final List<Denuncia> usersRol;
@@ -171,6 +201,11 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que verifica si nombre, apellido y correo coinciden con un usuario de la base de datos
+    I: correoE, nombre, apellido (String,String,String)
+    O: boolean
+    */
     @Override
     public Boolean verificaCorreo(String correo, String nombre, String apellido1){
         List<User> users = this.userRepository.getByEmail(correo);
@@ -186,11 +221,12 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             return false;
         }
     }
-    /**
-     * Se ingresa la denuncia verificando si el correo y los nombre y apellido ingresados existen
-     * -1: error
-     * 0: exitoso
-     */
+    /*
+    D: Funcion que da el formato para ingresar una nueva denuncia
+    I: Objeto denuncia
+    O: Entero que simboliza si hubo exito o fallo 0: Exito, -1: Fallo
+    */
+    @Override
     public Integer crearDenuncia(IngresarDenuncia denuncia){
         String mixApellidos1 = denuncia.getApellido11()+denuncia.getApellido12();
         String mixApellidos2 = denuncia.getApellido21()+denuncia.getApellido22();
@@ -212,7 +248,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                 System.out.println("Estamento invalido");
                 return -1;
             }
-            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,0);
+            Denuncia newDen = new Denuncia(countDenuncias(),usuarioId,usuarioId2,user1.getEstamento(),denuncia.getDesc(),denuncia.getMedidas(),0,userRepository.seleccionarFiscal());
             postDenuncia(newDen);
             System.out.println("Denuncia Ingresada Correctamente");
             return 0;
@@ -223,10 +259,10 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         }
     }
     /*
-    -1 representa ID de estado erroneo
-    0 implica que hubo un error
-    1 representa una actualizacion exitosa
-     */
+    D: Funcion que acutaliza el estado de una denuncia
+    I: id denuncia, id estado (Entero,Entero)
+    O: Entero que simboliza si hubo exito o fallo 0: Exito, -1: Fallo
+    */
     @Override
     public Integer updateDenuncia(Integer id_denuncia, Integer id_estado){
         if (!(id_estado.equals(1) || id_estado.equals(2))){
@@ -237,6 +273,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
         List<Denuncia> verificacion_denuncia = getById(id_denuncia);
         Integer estado_actual = verificacion_denuncia.get(0).getIdEstado();
         if(estado_actual == 3 || estado_actual > id_estado){
+            System.out.println("No es posible actualizar la denuncia");
             return -1;
         }
         final String query =  "update denuncia set id_estado = :id_estado where id_denuncia = :id_denuncia";
@@ -246,7 +283,8 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
                     .addParameter( "id_denuncia", id_denuncia)
                     .addParameter("id_estado", id_estado)
                     .executeUpdate();
-            return 1;
+            System.out.println("Denuncia Actualizada Correctamente");
+            return 0;
         }catch(Exception e){
             System.out.println(e.getMessage());
             return -1;
@@ -255,70 +293,106 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             conn.close();
         }
     }
+    /*
+    D: Funcion que obtiene las denuncias que un usuario ha realizado
+    I: id denuncia (Entero)
+    O: Lista Denuncias
+    */
+    @Override
     public List<VerDenuncia>showDenunciaRealizada(Integer idDenuncia){
         List <Denuncia> denuncia = findDenunciaDenunciante(idDenuncia);
         if(denuncia.isEmpty()){
             System.out.println("No fue posible mostrar las denuncias");
             return null;
         }
-        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        List <VerDenuncia> denuncia2 = new ArrayList<>();
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
-            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
-            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
-            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
-            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
-            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            Integer id = denuncia.get(i).getIdDenuncia();
+            String name1 = userRepository.getById(den.getIdDenunciante()).get(0).getNombre();
+            String apellidos1 = userRepository.getById(den.getIdDenunciante()).get(0).getApellidos();
+            String mail1 = userRepository.getById(den.getIdDenunciante()).get(0).getCorreo();
+            String name2 = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos2 = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail2 = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer estamentoID = userRepository.getById(den.getIdDenunciado()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+            Integer estadoID = denuncia.get(i).getIdEstado();
+            String estado = estadoRepository.getById(estadoID).get(0).getNombre();
             String date = denuncia.get(i).getFecha();
             String desc = denuncia.get(i).getDescripcion();
             String med = denuncia.get(i).getMedidas();
-            VerDenuncia den2 = new VerDenuncia(name,apellidos,mail,estamento,"est",date,desc,med);
+            VerDenuncia den2 = new VerDenuncia(id,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
             denuncia2.add(den2);
         }
         System.out.println("Se muestran las denucias");
         return denuncia2;
     }
+    /*
+    D: Funcion que obtiene las denuncias que un usuario tiene en contra
+    I: id denuncia (Entero)
+    O: Lista Denuncias
+    */
+    @Override
     public List<VerDenuncia>showDenunciaContra(Integer idDenuncia){
         List <Denuncia> denuncia = findDenunciaDenunciado(idDenuncia);
         if(denuncia.isEmpty()){
             System.out.println("No fue posible mostrar las denuncias");
             return null;
         }
-        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        List <VerDenuncia> denuncia2 = new ArrayList<>();
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
-            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
-            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
-            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
-            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
-            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            Integer id = denuncia.get(i).getIdDenuncia();
+            String name1 = userRepository.getById(den.getIdDenunciante()).get(0).getNombre();
+            String apellidos1 = userRepository.getById(den.getIdDenunciante()).get(0).getApellidos();
+            String mail1 = userRepository.getById(den.getIdDenunciante()).get(0).getCorreo();
+            String name2 = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos2 = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail2 = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer estamentoID = userRepository.getById(den.getIdDenunciado()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+            Integer estadoID = denuncia.get(i).getIdEstado();
+            String estado = estadoRepository.getById(estadoID).get(0).getNombre();
             String date = denuncia.get(i).getFecha();
             String desc = denuncia.get(i).getDescripcion();
             String med = denuncia.get(i).getMedidas();
-            VerDenuncia den2 = new VerDenuncia(name,apellidos,mail,estamento,"est",date,desc,med);
+            VerDenuncia den2 = new VerDenuncia(id,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
             denuncia2.add(den2);
         }
         System.out.println("Se muestran las denucias");
         return denuncia2;
     }
+    /*
+    D: Funcion que obtiene las denuncias que un fiscal tiene asignado
+    I: id denuncia (Entero)
+    O: Lista Denuncias
+    */
+    @Override
     public List<VerDenuncia>showDenunciaFiscal(Integer idDenuncia){
         List <Denuncia> denuncia = getByFiscal(idDenuncia);
         if(denuncia.isEmpty()){
             System.out.println("No fue posible mostrar las denuncias");
             return null;
         }
-        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        List <VerDenuncia> denuncia2 = new ArrayList<>();
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
-            String name = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
-            String apellidos = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
-            String mail = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
-            Integer est = userRepository.getById(den.getIdDenunciante()).get(0).getEstamento();
-            String estamento = estamentoRepository.getById(est).get(0).getNombre();
+            Integer id = denuncia.get(i).getIdDenuncia();
+            String name1 = userRepository.getById(den.getIdDenunciante()).get(0).getNombre();
+            String apellidos1 = userRepository.getById(den.getIdDenunciante()).get(0).getApellidos();
+            String mail1 = userRepository.getById(den.getIdDenunciante()).get(0).getCorreo();
+            String name2 = userRepository.getById(den.getIdDenunciado()).get(0).getNombre();
+            String apellidos2 = userRepository.getById(den.getIdDenunciado()).get(0).getApellidos();
+            String mail2 = userRepository.getById(den.getIdDenunciado()).get(0).getCorreo();
+            Integer estamentoID = userRepository.getById(den.getIdDenunciado()).get(0).getEstamento();
+            String estamento = estamentoRepository.getById(estamentoID).get(0).getNombre();
+            Integer estadoID = denuncia.get(i).getIdEstado();
+            String estado = estadoRepository.getById(estadoID).get(0).getNombre();
             String date = denuncia.get(i).getFecha();
             String desc = denuncia.get(i).getDescripcion();
             String med = denuncia.get(i).getMedidas();
-            VerDenuncia den2 = new VerDenuncia(name,apellidos,mail,estamento,"est",date,desc,med);
+            VerDenuncia den2 = new VerDenuncia(id,name1,apellidos1,mail1,name2,apellidos2,mail2,estamento,estado,date,desc,med);
             denuncia2.add(den2);
         }
         System.out.println("Se muestran las denucias");
