@@ -76,7 +76,9 @@
   <textarea v-model='medidas' class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
 </div>
 <br><br>
-<button class="w-90 s-30 btn btn-lg btn-primary" v-on:click='sendData' type="submit">Crear Denuncia</button>
+<button class="w-90 s-30 btn btn-lg btn-primary" v-on:click='sendData' type="submit">
+  Crear Denuncia
+</button>
 </div>
 </div>
 <div class = "alerts">

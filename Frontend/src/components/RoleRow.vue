@@ -5,13 +5,13 @@
     <td>{{mail}}</td>
     <td v-if="this.rol === 0" >Usuario</td>
     <td v-else-if="this.rol === 1" >Fiscal</td>
-    <td v-else-if="this.rol === 2" >Funcionario DGDE</td>
+    <td v-else-if="this.rol === 2" >Equipo Psicojurídico</td>
     <td v-else>Admin DGDE</td>
     <td>
       <select class="form-select" v-model="newRol">
         <option value="0" selected>Usuario</option>
         <option value="1" >Fiscal</option>
-        <option value="2">Funcionario DGDE</option>
+        <option value="2">Equipo Psicojurídico</option>
         <option value="3">Administrador DGDE</option>
       </select>
     </td>
