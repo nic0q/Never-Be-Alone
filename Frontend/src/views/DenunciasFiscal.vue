@@ -10,7 +10,7 @@
 </div>
 </template>
 <script>
-import CardDenunciaVue from './CardDenunciaFiscal.vue'
+import CardDenunciaVue from '@/components/CardDenunciaFiscal.vue'
 import NavBar from '@/components/NavBar'
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'

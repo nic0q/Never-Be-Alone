@@ -20,7 +20,6 @@
     </td>
   </tr>
 </template>
-
 <script>
 import axios from 'axios'
 export default {

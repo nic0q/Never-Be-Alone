@@ -61,6 +61,7 @@ export default {
     logout () {
       localStorage.removeItem('token')
       localStorage.removeItem('rol')
+      console.error('Logout exitoso')
       this.$router.push('/')
     }
   }

@@ -11,7 +11,7 @@
 </template>
 <script>
 import NavBar from '@/components/NavBar'
-import CardDenunciaVue from './CardDenuncia.vue'
+import CardDenunciaVue from '@/components/CardDenuncia.vue'
 import axios from 'axios'
 export default {
   name: 'HomeView',

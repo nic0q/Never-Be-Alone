@@ -76,12 +76,11 @@ img {
   height: 70px;
 }
 .centere{
-
   margin-top: 8%;
 }
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
-  font-size: 3.5rem;
+    font-size: 3.5rem;
   }
 }
 select{

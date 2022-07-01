@@ -1,13 +1,11 @@
 package com.example.fingeso.repositories;
 
 import com.example.fingeso.models.User;
-import com.example.fingeso.models.VerDenuncia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -228,7 +226,7 @@ public class UserRepositoryImp implements UserRepository{
     */
     public List<User> getAllUsersNoAdmin(){
         List <User> users = getAllUsers();
-        List <User> normalUsers = new ArrayList<User>();
+        List <User> normalUsers = new ArrayList<>();
         if(users.isEmpty()){    // Si no hay usuarios
             System.out.println ("No hay usuarios");
             return null;
@@ -241,7 +239,7 @@ public class UserRepositoryImp implements UserRepository{
                 normalUsers.add(users.get(i));
             }
         }
+        System.out.println ("Se muestran los usuarios no administradores");
         return normalUsers;
     }
 }
-

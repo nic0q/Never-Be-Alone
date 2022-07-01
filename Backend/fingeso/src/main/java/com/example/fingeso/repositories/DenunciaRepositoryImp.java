@@ -6,7 +6,6 @@ import com.example.fingeso.models.VerDenuncia;
 import com.example.fingeso.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import java.util.ArrayList;
@@ -306,7 +305,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             System.out.println("No fue posible mostrar las denuncias");
             return null;
         }
-        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        List <VerDenuncia> denuncia2 = new ArrayList<>();
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
             Integer id = denuncia.get(i).getIdDenuncia();
@@ -341,7 +340,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             System.out.println("No fue posible mostrar las denuncias");
             return null;
         }
-        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        List <VerDenuncia> denuncia2 = new ArrayList<>();
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
             Integer id = denuncia.get(i).getIdDenuncia();
@@ -376,7 +375,7 @@ public class DenunciaRepositoryImp implements DenunciaRepository{
             System.out.println("No fue posible mostrar las denuncias");
             return null;
         }
-        List <VerDenuncia> denuncia2 = new ArrayList<VerDenuncia>();
+        List <VerDenuncia> denuncia2 = new ArrayList<>();
         for(int i = 0; i < denuncia.size();i++){
             Denuncia den = denuncia.get(i);
             Integer id = denuncia.get(i).getIdDenuncia();

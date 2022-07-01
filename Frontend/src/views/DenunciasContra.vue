@@ -12,7 +12,7 @@
 <script>
 import NavBar from '@/components/NavBar'
 import axios from 'axios'
-import CardDenunciaVue from './CardDenuncia.vue'
+import CardDenunciaVue from '@/components/CardDenuncia.vue'
 export default {
   name: 'HomeView',
   components: {
